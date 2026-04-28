@@ -13,6 +13,7 @@ class Oficinas extends Model
     public $timestamps = true;
     protected $fillable = [ 'nombre_oficina'];
 
+    // Relación con el modelo Personas
     public function persona()
     {
         return $this->hasMany(Personas::class, 'id_oficina');

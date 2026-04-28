@@ -79,6 +79,10 @@ class SeederTablaPermisos extends Seeder
             'crear-asignacion',
             'editar-asignacion',
 
+            //Operaciones sobre tabla Incorporar
+            'ver-incorporar',
+            'crear-incorporar',
+            'editar-incorporar',
 
         ];
 

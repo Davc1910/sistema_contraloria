@@ -18,6 +18,8 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\TipoPerifericoController;
 use App\Http\Controllers\PerifericoController;
+use App\Http\Controllers\AsignacionesController;
+use App\Http\Controllers\IncorporarController;
 
 
 
@@ -105,6 +107,16 @@ Route::get('/periferico/create', [PerifericoController::class, 'create'])->name(
 Route::get('/periferico/pdf',  [PerifericoController::class,'pdf'])->name('periferico.pdf')->middleware('auth');
 Route::resource('periferico', PerifericoController::class)->middleware('auth');
 // Route::get('/periferico/detalles/{id}', [PerifericoController::class, 'getPerifericoDetalles']);
+
+/* Ruta Asignaciones */
+Route::get('/asignacion/create', [AsignacionesController::class, 'create'])->name('asignacion.create')->middleware('auth');
+Route::get('/asignacion/pdf',  [AsignacionesController::class,'pdf'])->name('asignacion.pdf')->middleware('auth');
+Route::resource('asignacion', AsignacionesController::class)->middleware('auth');
+
+/* Ruta Incorporar */
+Route::get('/incorporar', [IncorporarController::class, 'index'])->name('incorporar')->middleware('auth');
+Route::get('/incorporar/create', [IncorporarController::class, 'create'])->name('incorporar.create')->middleware('auth');
+Route::resource('incorporar', IncorporarController::class)->middleware('auth');
 
 /* Ruta Estadistica*/
 Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');

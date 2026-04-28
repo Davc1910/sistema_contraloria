@@ -12,29 +12,28 @@ class Asignaciones extends Model
     protected $table = 'asignaciones';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = [ 'id_evaluacion','id_vocero','id_comunidad', 'id_ayuda', 'descri_alcance', 'moneda_presu', 'presupuesto',
-    'impacto_ambiental', 'impacto_social', 'imagenes','latitud','longtud','direccion', 'fecha_inicio', 'duracion_estimada'];
+    protected $fillable = [ 'id_persona','id_mobiliario','id_periferico', 'fecha',];
 
     // // Relaciones (si es necesario)
-    // public function evaluacion()
-    // {
-    //     return $this->belongsTo(Evaluaciones::class, 'id_evaluacion');
-    // }
+    public function persona()
+    {
+        return $this->belongsTo(Personas::class, 'id_persona');
+    }
 
-    // public function vocero()
-    // {
-    //     return $this->belongsTo(Voceros::class, 'id_vocero');
-    // }
+    public function mobiliario()
+    {
+        return $this->belongsTo(Mobiliarios::class, 'id_mobiliario');
+    }
 
-    // public function comunidad()
-    // {
-    //     return $this->belongsTo(Comunidades::class, 'id_comunidad');
-    // }
+    public function periferico()
+    {
+        return $this->belongsTo(Perifericos::class, 'id_periferico');
+    }
 
-    // public function ayuda()
-    // {
-    //     return $this->belongsTo(Ayudas::class, 'id_ayuda');
-    // }
+     public function incorporar()
+    {
+        return $this->hasMany(Incorporar::class, 'id_asignacion');
+    }
 
     // public function control_seguimiento()
     // {

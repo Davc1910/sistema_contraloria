@@ -159,21 +159,21 @@
                 </a>
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
-                    {{-- <li>
+                    <li>
                       @can('crear-asignacion')
                       <a class="sidebar-link" href="{{ route('asignacion.create')}}" aria-expanded="false">
                         <span class="sub-item">Asignaciones</span>
                       </a>
                       @endcan
-                    </li> --}}
-                    {{-- <li>
-                      @can('ver-asignacion')
-                      <a class="sidebar-link"  href="{{ url('asignacion') }}" aria-expanded="false">
-                        <span class="sub-item">Planificaciones</span>
+                    </li>
+                    <li>
+                      @can('ver-incorporar')
+                      <a class="sidebar-link"  href="{{ url('incorporar') }}" aria-expanded="false">
+                        <span class="sub-item">Incorporaciones</span>
                       </a>
                       @endcan
                     </li>
-                    <li>
+                    {{-- <li>
                        @can('ver-seguimiento')
                       <a class="sidebar-link"  href="{{ url('seguimiento')}}" aria-expanded="false">
                         <span class="sub-item">Seguimiento</span>
