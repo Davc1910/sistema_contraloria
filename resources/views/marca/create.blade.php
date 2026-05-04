@@ -14,7 +14,7 @@
 
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
 
-                    <h2 class="font-weight-bold text-dark">Registrar Marca</h2>
+                    <h2 class="font-weight-bold text-dark">Registrar Marcasdsadsadas</h2>
 
                 </div>
 
