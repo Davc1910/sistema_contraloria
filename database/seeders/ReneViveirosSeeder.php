@@ -8,7 +8,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class SuperAdminSeeder extends Seeder
+class ReneViveirosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,23 +17,16 @@ class SuperAdminSeeder extends Seeder
      */
     public function run()
     {
-        /*
-        * Este seeder ahora es "Idempotente".
-        * Usará 'firstOrCreate' para buscar primero al usuario y al rol.
-        * Si no los encuentra, los creará.
-        * Si ya existen, simplemente los obtendrá sin lanzar un error.
-        */
-
-        // 1. Crea o encuentra al usuario 'Alvaro Valero'
+        // 1. Crea o encuentra al usuario
         $usuario = User::firstOrCreate(
-            ['email' => 'superadmin@gmail.com'], // Columna única para buscar
+            ['email' => 'reneviveiros@gmail.com'], // Columna única para buscar
             [
-                'name' => 'Super Admin',
-                'username' => 'admin',
-                'password' => '123456',
+                'name' => 'Rene Viveiros',
+                'username' => 'reneviveiros',
+                'password' =>'123456', 
             ]
         );
-
+        
         // 2. Crea o encuentra el rol 'Administrador'
         $rol = Role::firstOrCreate(
             ['name' => 'Administrador', 'guard_name' => 'web'] // Columna única para buscar
@@ -46,6 +39,14 @@ class SuperAdminSeeder extends Seeder
         $rol->syncPermissions($permisos);
 
         // 5. Asigna el rol al usuario (esto también es idempotente)
-        $usuario->assignRole($rol); // Puedes pasar el objeto $rol directamente
+        $usuario->assignRole($rol); // Puedes pasar el objeto $rol directamenteÑ
+
+        // // 2. Busca el rol 'Administrador' (que ya fue creado por AlvaroValeroSeeder)
+        // $rol = Role::firstOrCreate(
+        //     ['name' => 'Administrador', 'guard_name' => 'web']
+        // );
+
+        // // 3. Asigna el rol al usuario
+        // $usuario->assignRole($rol);
     }
 }
