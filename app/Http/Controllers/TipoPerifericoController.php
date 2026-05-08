@@ -15,10 +15,10 @@ class TipoPerifericoController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:ver-tipo_periferico|crear-tipo_periferico|editar-tipo_periferico|borrar-tipo_periferico', ['only' => ['index']]);
-         $this->middleware('permission:crear-tipo_periferico', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-tipo_periferico', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-tipo_periferico', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-tipo_periferico|crear-tipo_periferico|editar-tipo_periferico|borrar-tipo_periferico', ['only' => ['index']]);
+        $this->middleware('permission:crear-tipo_periferico', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-tipo_periferico', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-tipo_periferico', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -40,8 +40,8 @@ class TipoPerifericoController extends Controller
 
         $tipos_perifericos->save();
 
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect()->route('tipo_periferico.index')->with('success', '✅ El tipo de periférico ha sido guardado exitosamente.');
@@ -65,8 +65,8 @@ class TipoPerifericoController extends Controller
 
         $tipo_periferico->save();
 
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect ('tipo_periferico')->with('success', '✅ El tipo de periférico ha sido Actualizado exitosamente.');
@@ -79,8 +79,8 @@ class TipoPerifericoController extends Controller
     public function destroy($id)
     {
        TipoPerifericos::find($id)->delete();
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
         return redirect()->route('tipo_periferico.index')->with('eliminar', 'ok');
     }
 }

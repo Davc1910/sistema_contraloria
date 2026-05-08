@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
 
                             <h2 class="font-weight-bold text-dark">Bitacora</h2>
 
@@ -55,7 +55,7 @@
             </div>
     </div>
 
-    @endsection 
+    @endsection
 
 @section('datatable')
 
@@ -66,12 +66,12 @@
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
-                
+
                 responsive: true,
                 autoWidth: false,
-    
-                "language": {       
-                    "lengthMenu": "Mostrar " + 
+
+                "language": {
+                    "lengthMenu": "Mostrar " +
                                     `<select class = 'form-select'>
                                         <option value = '5'>5</option>
                                         <option value = '10'>10</option>
@@ -95,30 +95,6 @@
                     thousands: '.',
                 },
             });
-
-            // function updatePdfLink() {
-            //     var searchTerm = table.search();
-            //     var pdfUrl = `{{ url('ayuda/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
-            //     $('#pdfButton').attr('href', pdfUrl);
-            // }
-
-            // table.on('search.dt', function () {
-            //     var searchTerm = table.search();
-            //     $.ajax({
-            //         url: '{{ url('ayuda/pdf') }}',
-            //         method: 'GET',
-            //         data: { search: searchTerm },
-            //         success: function(response) {
-            //             // Aquí puedes manejar la respuesta, si necesitas hacer algo con ella
-            //             console.log('PDF generado con éxito');
-            //         },
-            //         error: function(xhr) {
-            //             console.error('Error al generar el PDF:', xhr);
-            //         }
-            //     });
-            //     updatePdfLink();
-            // });
-            // updatePdfLink();
 
         });
     </script>

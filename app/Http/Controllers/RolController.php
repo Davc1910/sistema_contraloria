@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 
 //agregamos
 use Spatie\Permission\Models\Role;
-use App\Http\Controllers\BitacoraController;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BitacoraController;
 
 class RolController extends Controller
 {
 
     function __construct()
     {
-         $this->middleware('permission:ver-rol|crear-rol|editar-rol|borrar-rol', ['only' => ['index']]);
-         $this->middleware('permission:crear-rol', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-rol', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-rol', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-rol|crear-rol|editar-rol|borrar-rol', ['only' => ['index']]);
+        $this->middleware('permission:crear-rol', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-rol', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-rol', ['only' => ['destroy']]);
     }
 
     /**
@@ -61,8 +61,9 @@ class RolController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
 
@@ -120,8 +121,9 @@ class RolController extends Controller
         $role->save();
 
         $role->syncPermissions($request->input('permission'));
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
 
@@ -143,8 +145,8 @@ class RolController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $bitacora = new BitacoraController;
+        $bitacora->update();
         return redirect()->route('roles.index')->with('eliminar', 'ok');
     }
 }

@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Personas;
 use App\Models\Oficinas;
-use App\Http\Controllers\BitacoraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\BitacoraController;
 use Carbon\Carbon;
 
 class PersonaController extends Controller
@@ -28,50 +28,6 @@ class PersonaController extends Controller
         $personas = Personas::with('oficina')->get();
         return view('persona.index', compact('personas'));
     }
-
-    //  public function pdf(Request $request)
-    // {
-    //     $search = $request->input('search');
-
-    //     if ($search) {
-    //         // Filtrar los bancos según la consulta de búsqueda
-    //         $proyectos = Proyectos::where('nombre_pro', 'LIKE', '%' . $search . '%')
-    //                        ->orWhere('descripcion_pro', 'LIKE', '%' . $search . '%')
-    //                        ->orWhere('tipo_pro', 'LIKE', '%' . $search . '%')
-    //                        ->orWhere('fecha_inicial', 'LIKE', '%' . $search . '%')
-    //                        ->orWhere('fecha_final', 'LIKE', '%' . $search . '%')
-    //                        ->orWhere('prioridad', 'LIKE', '%' . $search . '%')
-    //                        ->get();
-    //     } else {
-    //         // Obtener todos los bancos si no hay término de búsqueda
-    //         $proyectos = Proyectos::all();
-    //     }
-
-    //     // Generar el PDF, incluso si no se encuentran bancos
-    //     $pdf = Pdf::loadView('proyecto.pdf', compact('proyectos'));
-    //     return $pdf->stream('proyecto.pdf');
-    // }
-
-    // public function getproyectoDetalles($id)
-    // {
-    //     // Recupera el Proyecto por su ID
-    //     $proyecto = Proyectos::find($id);
-
-    //     if (!$proyecto) {
-    //         // Maneja el caso en que no se encuentre la persona
-    //         return response()->json(['error' => 'Persona no encontrada'], 404);
-    //     }
-
-    //     // Devuelve los datos relevantes en formato JSON
-    //     return response()->json([
-    //         'actividades' => $proyecto->actividades,
-    //         'acta_conformidad' => $proyecto->acta_conformidad,
-    //         'nombre_ayuda' => $proyecto->ayuda->nombre_ayuda,
-    //         'tipo_ayuda' => $proyecto->ayuda->tipo_ayuda,
-    //         'cantidad_bene' => $proyecto->cantidad_bene,
-    //     ]);
-
-    // }
 
     public function create()
     {
@@ -97,8 +53,8 @@ class PersonaController extends Controller
         $personas->save();
 
         // Registrar en bitácora
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect()->route('persona.index')->with('success', '✅ La persona ha sido Guardada exitosamente.');
@@ -163,8 +119,8 @@ class PersonaController extends Controller
         $persona->save();
 
         // Registrar en bitácora
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
 
         try {
@@ -183,8 +139,8 @@ class PersonaController extends Controller
             $persona = Personas::findOrFail($id);
 
             $persona->delete();
-            // $bitacora = new BitacoraController;
-            // $bitacora->update();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
             return redirect('persona')->with('eliminar', 'ok');
 
         } catch (QueryException $exception) {

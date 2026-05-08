@@ -14,10 +14,10 @@ class MobiliarioController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:ver-mobiliario|crear-mobiliario|editar-mobiliario|borrar-mobiliario', ['only' => ['index']]);
-         $this->middleware('permission:crear-mobiliario', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-mobiliario', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-mobiliario', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-mobiliario|crear-mobiliario|editar-mobiliario|borrar-mobiliario', ['only' => ['index']]);
+        $this->middleware('permission:crear-mobiliario', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-mobiliario', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-mobiliario', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -41,8 +41,10 @@ class MobiliarioController extends Controller
 
         $mobiliarios = Mobiliarios::create($request->all());
 
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $mobiliarios->save();
+
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
             return redirect('mobiliario.index')->with('success', '✅ El mobiliario ha sido Guardado exitosamente.');
@@ -70,8 +72,8 @@ class MobiliarioController extends Controller
 
         $mobiliario->save();
 
-        /* $bitacora = new BitacoraController;
-        $bitacora->update(); */
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
             return redirect('mobiliario')->with('success', '✅ El mobiliario ha sido Actualizado exitosamente.');
@@ -87,8 +89,8 @@ class MobiliarioController extends Controller
             $mobiliario = Mobiliario::findOrFail($id);
 
             $mobiliario->delete();
-            // $bitacora = new BitacoraController;
-            // $bitacora->update();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
             return redirect('mobiliario')->with('success', '✅ El mobiliario ha sido eliminado exitosamente.');
 
         } catch (QueryException $exception) {

@@ -41,8 +41,8 @@ class OficinaController extends Controller
 
         $oficinas->save();
 
-        //$bitacora = new BitacoraController();
-        //$bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect('oficina')->with('success', '✅ La oficina ha sido Guardada exitosamente.');
@@ -67,8 +67,8 @@ class OficinaController extends Controller
 
         $oficina->save();
 
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
        try {
 
@@ -83,8 +83,8 @@ class OficinaController extends Controller
     public function destroy($id)
     {
         Oficinas::find($id)->delete();
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
         return redirect('oficina')->with('eliminar', 'ok');
     }
 }

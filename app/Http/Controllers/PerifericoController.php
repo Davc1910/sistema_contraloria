@@ -54,8 +54,8 @@ class PerifericoController extends Controller
 
         $periferico->save();
 
-        //$bitacora = new BitacoraController();
-        //$bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect()->route('periferico.index')->with('success', '✅ El periférico ha sido guardado exitosamente.');
@@ -85,8 +85,8 @@ class PerifericoController extends Controller
 
         $periferico->save();
 
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
             return redirect ('periferico')->with('success', '✅ El periférico ha sido Actualizado exitosamente.');
@@ -99,8 +99,8 @@ class PerifericoController extends Controller
     public function destroy($id)
     {
         Perifericos::find($id)->delete();
-        // $bitacora = new BitacoraController();
-        // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
         return redirect()->route('periferico.index')->with('eliminar', 'ok');
     }
 }

@@ -40,8 +40,8 @@ class MarcaController extends Controller
 
         $marcas->save();
 
-        //$bitacora = new BitacoraController();
-        //$bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
 
@@ -72,8 +72,8 @@ class MarcaController extends Controller
         // Guardar los cambios en la base de datos
         $marca->save();
 
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
 
@@ -89,8 +89,8 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         Marcas::find($id)->delete();
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $bitacora = new BitacoraController;
+        $bitacora->update();
         return redirect('marca.index')->with('eliminar', 'ok');
     }
 }

@@ -13,10 +13,10 @@ class ModeloController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:ver-modelo|crear-modelo|editar-modelo|borrar-modelo', ['only' => ['index']]);
-         $this->middleware('permission:crear-modelo', ['only' => ['create','store']]);
-         $this->middleware('permission:editar-modelo', ['only' => ['edit','update']]);
-         $this->middleware('permission:borrar-modelo', ['only' => ['destroy']]);
+        $this->middleware('permission:ver-modelo|crear-modelo|editar-modelo|borrar-modelo', ['only' => ['index']]);
+        $this->middleware('permission:crear-modelo', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-modelo', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-modelo', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -39,8 +39,8 @@ class ModeloController extends Controller
 
         $modelos->save();
 
-        //$bitacora = new BitacoraController();
-       // $bitacora->update();
+        $bitacora = new BitacoraController();
+        $bitacora->update();
 
         try {
 
@@ -68,8 +68,8 @@ class ModeloController extends Controller
 
         $modelo->save();
 
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $bitacora = new BitacoraController;
+        $bitacora->update();
 
         try {
 
@@ -90,8 +90,8 @@ class ModeloController extends Controller
     public function destroy($id)
     {
         Modelos::find($id)->delete();
-        // $bitacora = new BitacoraController;
-        // $bitacora->update();
+        $bitacora = new BitacoraController;
+        $bitacora->update();
         return redirect()->route('modelo.index')->with('eliminar', 'ok');
     }
 }

@@ -5,7 +5,7 @@
     <title>Inicio</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    {{-- <link rel="icon" href="{{asset ('img/icon.png') }}" type="image/x-icon"/> --}}
+    <link rel="icon" href="{{asset ('img/logo.png') }}" type="image/x-icon"/>
 
     <!-- Fonts and icons -->
     <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>:
@@ -41,11 +41,11 @@
       <div class="sidebar" data-background-color="dark">
         <div class="sidebar-logo">
           <!-- Logo Header -->
-          <div class="logo-header" data-background-color="dark">
-            <a href="/home" class="logo">
+          <div class="logo-header align-items-center justify-content-center" data-background-color="dark">
+            <a href="/home" class="logo" >
               <img
-                src="{{asset('img/logo6.png')}}"
-                width="150px"
+                src="{{asset('img/logo.png')}}"
+                width="80px"
                 height="80px"/>
             </a>
             <div class="nav-toggle">
@@ -204,15 +204,17 @@
                 </a>
                 <div class="collapse" id="charts">
                   <ul class="nav nav-collapse">
-                    <li>
+                    {{-- <li>
                       <a href="{{ url('estadistica')}}">
                         <span class="sub-item">Estadística</span>
                       </a>
-                    </li>
+                    </li> --}}
                     <li>
-                      <a href="{{ url('bitacora')}}">
-                        <span class="sub-item">Bitacora</span>
-                      </a>
+                        @if(auth()->user()->hasRole('Administrador'))
+                            <a href="{{ url('bitacora')}}">
+                                <span class="sub-item">Bitacora</span>
+                            </a>
+                        @endif
                     </li>
                   </ul>
                 </div>
@@ -282,8 +284,8 @@
           <!-- Navbar Header -->
           <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
             <div class="container-fluid">
-              <MARQUEE style="color: black;">BIENVENID@ {{ Auth::user()->name }} al Implementacion de Sistema de Gestion Control de Inventarios para Bienes Nacionales de la
-                Contraloria de Edo. Yaracuy. (SGCIBNCY) </MARQUEE>
+              <MARQUEE style="color: black;">BIENVENID@ {{ Auth::user()->name }} al Implementacion de SISTEMA INFORMÁTICO PARA EL CONTROL Y ASIGNACIÓN DE BIENES NACIONALES
+                 EN LA CONTRALORÍA DEL ESTADO YARACUY. (SGCIBNCY) </MARQUEE>
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                 <li class="nav-item topbar-user dropdown hidden-caret">
                   <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown"href="#"aria-expanded="false"><i class="fas fa-user fs-5"></i>
@@ -313,16 +315,17 @@
                           <i class="fas fa-table fs-5"></i>
                           <p class="mb-0 fs-6">Gestion de Perfil</p>
                         </a>
+                        @if(auth()->user()->hasRole('Administrador'))
+                            <a class="d-flex align-items-center gap-2 dropdown-item" href="{{ url('roles')}}">
+                            <i class="fas fa-list fs-5"></i>
+                            <p class="mb-0 fs-6">Roles</p>
+                            </a>
 
-                        <a class="d-flex align-items-center gap-2 dropdown-item" href="{{ url('roles')}}">
-                          <i class="fas fa-list fs-5"></i>
-                          <p class="mb-0 fs-6">Roles</p>
-                        </a>
-
-                        <a class="d-flex align-items-center gap-2 dropdown-item" href="/usuarios">
-                          <i class="fas fa-user fs-5"></i>
-                          <p class="mb-0 fs-6">Usuario</p>
-                        </a>
+                            <a class="d-flex align-items-center gap-2 dropdown-item" href="/usuarios">
+                            <i class="fas fa-user fs-5"></i>
+                            <p class="mb-0 fs-6">Usuario</p>
+                            </a>
+                        @endif
 
                         <a class="btn btn-outline-primary mx-3 mt-2 d-block" href="/logout">Cerrar Sension</a>
 

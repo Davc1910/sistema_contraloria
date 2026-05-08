@@ -17,7 +17,7 @@
 	<!-- Google Web Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 
 	<!-- Icon Font Stylesheet -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="js/validaciones.js"></script>
-	
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </head>
@@ -41,7 +41,7 @@
 	<body>
 		@include('partials.messages')
     <!-- Formulario de Registar -->
-    
+
     <div class="container" id="container">
         <div class="form-container sign-up">
 		<form method="POST" action="{{ route('password.email') }}" enctype="multipart/form-data" onsubmit="return Email(this)">
@@ -60,7 +60,7 @@
                 <input type="text" id="username" name="username" placeholder="Usuario"  autocomplete="off">
                 <input type="password" id="contraseña" name="password" placeholder="Contraseña"  autocomplete="off" >
                 <input type="submit" value="ENTRAR" id="log-in-button">
-                
+
         </form>
         </div>
 
@@ -74,8 +74,8 @@
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>¡Hola Amigo(a)!</h1>
-                    <p>Bienvenido al Sistema de  Información para la Gestión de Infogobierno en la Sala Situacional de la Alcaldía de San Felipe </p>
-                    <a href="#" id="register" class="hidden"> Restablecer Contraseña </a> 
+                    <p> SISTEMA INFORMÁTICO PARA EL CONTROL Y ASIGNACIÓN DE BIENES NACIONALES EN LA CONTRALORÍA DEL ESTADO YARACUY </p>
+                    <a href="#" id="register" class="hidden"> Restablecer Contraseña </a>
                     {{-- <button class="hidden" id="register">Crear una cuenta</button>  --}}
                 </div>
             </div>
