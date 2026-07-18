@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-<title>@yield('title') Registrar Periférico</title>
+<title>@yield('title') Registrar Periferico</title>
 <script src="{{ asset('js/validaciones.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -25,7 +25,7 @@
                     <div class="card-body">
 
                         <div class="row">
-
+                            
                             <div class="col-4">
                                 <label class="font-weight-bold text-dark">Tipo de Periférico</label>
                                 <select class="form-select" id="id_tipo" name="id_tipo">

@@ -18,4 +18,9 @@ class Marcas extends Model
     {
         return $this->hasMany(Perifericos::class, 'id_marca');
     }
+
+    public function articulo()
+    {
+        return $this->hasMany(Articulo::class, 'id_marca');
+    }
 }

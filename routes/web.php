@@ -13,13 +13,15 @@ use App\Http\Controllers\UserSettingsController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\OficinaController;
 use App\Http\Controllers\PersonaController;
-use App\Http\Controllers\MobiliarioController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\MobiliarioController;
 use App\Http\Controllers\TipoPerifericoController;
 use App\Http\Controllers\PerifericoController;
-use App\Http\Controllers\AsignacionesController;
-use App\Http\Controllers\IncorporarController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\TipoSolicitudController;
 use App\Http\Controllers\ReporteController;
 
 
@@ -73,12 +75,6 @@ Route::get('/persona/create', [PersonaController::class, 'create'])->name('perso
 Route::get('/persona/pdf',  [PersonaController::class,'pdf'])->name('persona.pdf')->middleware('auth');
 Route::resource('persona', PersonaController::class)->middleware('auth');
 
-/* Ruta Mobiliario */
-Route::get('/mobiliario',  [MobiliarioController::class,'index'])->name('mobiliario')->middleware('auth');
-Route::get('/mobiliario/create', [MobiliarioController::class, 'create'])->name('mobiliario.create')->middleware('auth');
-Route::get('/mobiliario/pdf',  [MobiliarioController::class,'pdf'])->name('mobiliario.pdf')->middleware('auth');
-Route::resource('mobiliario', MobiliarioController::class)->middleware('auth');
-
 /* Ruta Marca */
 Route::get('/marca',  [MarcaController::class,'index'])->name('marca')->middleware('auth');
 Route::get('/marca/create', [MarcaController::class, 'create'])->name('marca.create')->middleware('auth');
@@ -90,6 +86,18 @@ Route::get('/modelo',  [ModeloController::class,'index'])->name('modelo')->middl
 Route::get('/modelo/create', [ModeloController::class, 'create'])->name('modelo.create')->middleware('auth');
 Route::get('/modelo/pdf',  [ModeloController::class,'pdf'])->name('modelo.pdf')->middleware('auth');
 Route::resource('modelo', ModeloController::class)->middleware('auth');
+
+/* Ruta Articulo*/
+Route::get('/articulo',  [ArticuloController::class,'index'])->name('articulo')->middleware('auth');
+Route::get('/articulo/create', [ArticuloController::class, 'create'])->name('articulo.create')->middleware('auth');
+Route::get('/articulo/pdf',  [ArticuloController::class,'pdf'])->name('articulo.pdf')->middleware('auth');
+Route::resource('articulo', ArticuloController::class)->middleware('auth');
+
+/* Ruta Mobiliario */
+Route::get('/mobiliario',  [MobiliarioController::class,'index'])->name('mobiliario')->middleware('auth');
+Route::get('/mobiliario/create', [MobiliarioController::class, 'create'])->name('mobiliario.create')->middleware('auth');
+Route::get('/mobiliario/pdf',  [MobiliarioController::class,'pdf'])->name('mobiliario.pdf')->middleware('auth');
+Route::resource('mobiliario', MobiliarioController::class)->middleware('auth');
 
 /* Ruta Tipo de Periférico */
 Route::get('/tipo_periferico',  [TipoPerifericoController::class,'index'])->name('tipo_periferico')->middleware('auth');
@@ -103,13 +111,19 @@ Route::get('/periferico/create', [PerifericoController::class, 'create'])->name(
 Route::get('/periferico/pdf',  [PerifericoController::class,'pdf'])->name('periferico.pdf')->middleware('auth');
 Route::resource('periferico', PerifericoController::class)->middleware('auth');
 
-/* Ruta Asignaciones */
-Route::get('/asignacion/create', [AsignacionesController::class, 'create'])->name('asignacion.create')->middleware('auth');
-Route::get('/asignacion/pdf',  [AsignacionesController::class,'pdf'])->name('asignacion.pdf')->middleware('auth');
-Route::resource('asignacion', AsignacionesController::class)->middleware('auth');
+/* Ruta Equipo*/
+Route::get('/equipo',  [EquipoController::class,'index'])->name('equipo')->middleware('auth');
+Route::get('/equipo/create', [EquipoController::class, 'create'])->name('equipo.create')->middleware('auth');
+Route::get('/equipo/pdf',  [EquipoController::class,'pdf'])->name('equipo.pdf')->middleware('auth');
+Route::resource('equipo', EquipoController::class)->middleware('auth');
 
-/* Ruta Incorporar */
-Route::get('/incorporar', [IncorporarController::class, 'index'])->name('incorporar')->middleware('auth');
+/* Ruta Solicitud */
+Route::get('/solicitud/create', [SolicitudController::class, 'create'])->name('solicitud.create')->middleware('auth');
+Route::get('/solicitud/pdf',  [SolicitudController::class,'pdf'])->name('solicitud.pdf')->middleware('auth');
+Route::resource('solicitud', SolicitudController::class)->middleware('auth');
+
+/* Ruta Tipo de Solicitud */
+Route::get('/incorporar', [Controller::class, 'index'])->name('incorporar')->middleware('auth');
 Route::get('/incorporar/create', [IncorporarController::class, 'create'])->name('incorporar.create')->middleware('auth');
 Route::resource('incorporar', IncorporarController::class)->middleware('auth');
 

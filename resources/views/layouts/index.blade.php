@@ -94,13 +94,6 @@
                       @endcan
                     </li>
                     <li>
-                        @can('ver-mobiliario')
-                      <a class="sidebar-link"  href="{{ url('mobiliario')}}" aria-expanded="false">
-                        <span class="sub-item">Mobiliarios</span>
-                      </a>
-                        @endcan
-                    </li>
-                    <li>
                       @can('ver-marca')
                       <a class="sidebar-link"  href="{{ url('marca')}}" aria-expanded="false">
                         <span class="sub-item">Marcas</span>
@@ -128,20 +121,13 @@
                       </a>
                       @endcan
                     </li>
-                    {{-- <li>
-                       @can('ver-r')
-                      <a class="sidebar-link"  href="{{ url('resposanble')}}" aria-expanded="false">
-                        <span class="sub-item">Responsable</span>
-                      </a>
-                       @endcan
-                    </li>
                     <li>
-                       @can('ver-visita')
-                      <a class="sidebar-link"  href="{{ url('visita')}}" aria-expanded="false">
-                        <span class="sub-item">Visitas</span>
+                      @can('ver-articulo')
+                      <a class="sidebar-link"  href="{{ url('articulo')}}" aria-expanded="false">
+                        <span class="sub-item">Articulos</span>
                       </a>
-                       @endcan
-                    </li> --}}
+                      @endcan
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -160,33 +146,19 @@
                 <div class="collapse" id="sidebarLayouts">
                   <ul class="nav nav-collapse">
                     <li>
-                      @can('crear-asignacion')
-                      <a class="sidebar-link" href="{{ route('asignacion.create')}}" aria-expanded="false">
-                        <span class="sub-item">Asignaciones</span>
+                      @can('crear-solicitud')
+                      <a class="sidebar-link" href="{{ route('solicitud.create')}}" aria-expanded="false">
+                        <span class="sub-item">Solicitudes</span>
                       </a>
                       @endcan
                     </li>
                     <li>
-                      @can('ver-incorporar')
-                      <a class="sidebar-link"  href="{{ url('incorporar') }}" aria-expanded="false">
-                        <span class="sub-item">Incorporaciones</span>
+                      @can('ver-tipo_solicitud')
+                      <a class="sidebar-link"  href="{{ url('tipo_solicitud') }}" aria-expanded="false">
+                        <span class="sub-item">Tipo de Solicitudes</span>
                       </a>
                       @endcan
                     </li>
-                    {{-- <li>
-                       @can('ver-seguimiento')
-                      <a class="sidebar-link"  href="{{ url('seguimiento')}}" aria-expanded="false">
-                        <span class="sub-item">Seguimiento</span>
-                      </a>
-                      @endcan
-                    </li>
-                    <li>
-                       @can('ver-controlseguimiento')
-                      <a class="sidebar-link"  href="{{ url('controlseguimiento')}}" aria-expanded="false">
-                        <span class="sub-item">Control de Seguimiento</span>
-                      </a>
-                      @endcan
-                    </li> --}}
                   </ul>
                 </div>
               </li>

@@ -44,12 +44,6 @@ class SeederTablaPermisos extends Seeder
             'editar-persona',
             'borrar-persona',
 
-            //Operaciones sobre tabla Mobilarios
-            'ver-mobiliario',
-            'crear-mobiliario',
-            'editar-mobiliario',
-            'borrar-mobiliario',
-
             //Operaciones sobre tabla Marcas
             'ver-marca',
             'crear-marca',
@@ -74,15 +68,21 @@ class SeederTablaPermisos extends Seeder
             'editar-periferico',
             'borrar-periferico',
 
-            //Operaciones sobre tabla Asignaciones
-            'ver-asignacion',
-            'crear-asignacion',
-            'editar-asignacion',
+            //Operaciones sobre tabla Articulos
+            'ver-articulo',
+            'crear-articulo',
+            'editar-articulo',
+            'borrar-articulo',
 
-            //Operaciones sobre tabla Incorporar
-            'ver-incorporar',
-            'crear-incorporar',
-            'editar-incorporar',
+            //Operaciones sobre tabla Solicitudes
+            'ver-solicitud',
+            'crear-solicitud',
+            'editar-solicitud',
+
+            //Operaciones sobre tabla Tipo Solicitudes
+            'ver-tipo_solicitud',
+            'crear-tipo_solicitud',
+            'editar-tipo_solicitud',
 
         ];
 

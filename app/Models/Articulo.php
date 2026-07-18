@@ -5,33 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Perifericos extends Model
+class Articulo extends Model
 {
     use HasFactory;
 
-    protected $table = 'perifericos';
+    protected $table = 'articulos';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = [ 'id_tipo', 'id_marca', 'id_modelo', 'serial' ];
-
-    public function tipo_periferico()
-    {
-        return $this->belongsTo(TipoPerifericos::class, 'id_tipo');
-    }
+    protected $fillable = ['articulo_especifico_id', 'articulo_especifico_type', 'id_marca', 'id_modelo', 'tipo_biene'];
 
     public function marca()
     {
         return $this->belongsTo(Marcas::class, 'id_marca');
     }
 
+
     public function modelo()
     {
         return $this->belongsTo(Modelos::class, 'id_modelo');
     }
 
-    public function equipo()
+
+    public function articuloEspecifico()
     {
-        return $this->hasMany(Equipo::class, 'id_periferico');
+        return $this->morphTo();
     }
 
 }

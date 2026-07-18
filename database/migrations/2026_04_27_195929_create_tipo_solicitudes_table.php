@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('incorporars', function (Blueprint $table) {
+        Schema::create('tipo_solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_asignacion');
-            // $table->unsignedBigInteger('id_mobiliario');
-            // $table->unsignedBigInteger('id_periferico');
-            // $table->date('fecha');
+            // $table->unsignedBigInteger('id_asignacion');
+            // // $table->unsignedBigInteger('id_mobiliario');
+            // // $table->unsignedBigInteger('id_periferico');
+            // // $table->date('fecha');
 
-            // // Establecer relaciones con las tablas correspondientes
-            $table->foreign('id_asignacion')->references('id')->on('asignaciones');
+            // // // Establecer relaciones con las tablas correspondientes
+            // $table->foreign('id_asignacion')->references('id')->on('asignaciones');
 
             // $table->foreign('id_mobiliario')->references('id')->on('mobiliarios');
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('incorporars');
+        Schema::dropIfExists('tipo_solicitudes');
     }
 };
