@@ -11,7 +11,7 @@ class Oficinas extends Model
     protected $table = 'oficinas';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = [ 'nombre_oficina'];
+    protected $fillable = [ 'encargado_cedula', 'nombre_encargado', 'nombre_oficina' ];
 
     // Relación con el modelo Personas
     public function persona()

@@ -43,9 +43,6 @@
                         </div>
                     </div>
 
-                    <hr class="sidebar-divider">
-                    <div class="sidebar-heading">
-
                     <form method="post" action="{{ route('articulo.store') }}" enctype="multipart/form-data" onsubmit="return articulo(this)" id="Mobiliario" style="" class="formulario active">
                         @csrf
 
@@ -60,23 +57,8 @@
                                 <input type="hidden" id="tipo-mobiliario" name="tipo_biene" value="">
 
                                 <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Marca</label>
-                                    <select class="form-select" id="id_marca" name="id_marca">
-                                        <option value="">Seleccione una Marca</option>
-                                        @foreach($marcas as $marca)
-                                            <option value="{{ $marca->id }}"> {{ $marca->nombre_marca }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Modelo</label>
-                                    <select class="form-select" id="id_modelo" name="id_modelo">
-                                        <option value="">Seleccione un Modelo</option>
-                                        @foreach($modelos as $modelo)
-                                            <option value="{{ $modelo->id }}"> {{ $modelo->nombre_modelo }} </option>
-                                        @endforeach
-                                    </select>
+                                    <label  class="font-weight-bold text-dark">Codigo Mobiliario</label>
+                                    <input type="text" class="form-control" id="codigo_mobiliario" name="codigo_mobiliario" value="{{ $codigo_mobiliario }}" oninput="capitalizarInput('')" readonly></input>
                                 </div>
 
                                 <div class="col-4">
@@ -97,6 +79,11 @@
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Serial de Mobiliario</label>
                                     <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese el serial del mobiliario" autocomplete="off" oninput="capitalizarInput('apellido')">
+                                </div>
+
+                                <div class="col-4">
+                                    <label  class="font-weight-bold text-dark">Descripcion de Mobiliario</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion_mobiliario" style="background: white;" value="" placeholder="Ingrese la descripcion del mobiliario" autocomplete="off" oninput="capitalizarInput('apellido')"></textarea>
                                 </div>
 
                             </div>
@@ -129,23 +116,8 @@
                                 <input type="hidden" id="tipo-Equipo" name="tipo_biene" value="">
 
                                 <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Marca</label>
-                                    <select class="form-select" id="id_marca" name="id_marca">
-                                        <option value="">Seleccione una Marca</option>
-                                        @foreach($marcas as $marca)
-                                            <option value="{{ $marca->id }}"> {{ $marca->nombre_marca }} </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Modelo</label>
-                                    <select class="form-select" id="id_modelo" name="id_modelo">
-                                        <option value="">Seleccione un Modelo</option>
-                                        @foreach($modelos as $modelo)
-                                            <option value="{{ $modelo->id }}"> {{ $modelo->nombre_modelo }} </option>
-                                        @endforeach
-                                    </select>
+                                    <label  class="font-weight-bold text-dark">Codigo Equipo</label>
+                                    <input type="text" class="form-control" id="codigo_equipo" name="codigo_equipo" value="{{ $codigo_equipo }}" oninput="capitalizarInput('')" readonly></input>
                                 </div>
 
                                 <div class="col-4">
@@ -181,6 +153,11 @@
                                             <option value="{{ $periferico->id }}">Tipo: {{ $periferico->tipo_periferico->tipo }}/ Serial: {{ $periferico->serial }}  </option>
                                         @endforeach
                                     </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label  class="font-weight-bold text-dark">Descripcion del Equipo</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion_equipo" style="background: white;" value="" placeholder="Ingrese la descripcion del equipo" autocomplete="off" oninput="capitalizarInput('apellido')"></textarea>
                                 </div>
 
                             </div>

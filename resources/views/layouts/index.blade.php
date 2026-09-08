@@ -176,11 +176,11 @@
                 </a>
                 <div class="collapse" id="charts">
                   <ul class="nav nav-collapse">
-                    {{-- <li>
-                      <a href="{{ url('estadistica')}}">
-                        <span class="sub-item">Estadística</span>
+                    <li>
+                      <a href="{{ url('inventario')}}">
+                        <span class="sub-item">Inventario</span>
                       </a>
-                    </li> --}}
+                    </li>
                     <li>
                         @if(auth()->user()->hasRole('Administrador'))
                             <a href="{{ url('bitacora')}}">

@@ -27,6 +27,16 @@
                             <div class="row">
 
                                 <div class="col-4">
+                                    <label class="font-weight-bold text-dark">Cedula de El Encargado</label>
+                                    <input type="text" class="form-control" id="encargado_cedula" name="encargado_cedula" style="background: white;" value="{{ $oficina->encargado_cedula }}" placeholder="Ingrese la cedula del encargado" autocomplete="off" oninput="capitalizarInput('encargado cedula')">
+                                </div>
+
+                                <div class="col-4">
+                                    <label class="font-weight-bold text-dark">Nombre del Encargado</label>
+                                    <input type="text" class="form-control" id="nombre_encargado" name="nombre_encargado" style="background: white;" value="{{ $oficina->nombre_encargado }}" placeholder="Ingrese el nombre del encargado" autocomplete="off" oninput="capitalizarInput('nombre encargado')">
+                                </div>
+
+                                <div class="col-4">
                                     <label class="font-weight-bold text-dark">Nombre de la Oficina</label>
                                     <input type="text" class="form-control" id="nombre_oficina" name="nombre_oficina" style="background: white;" value="{{ $oficina->nombre_oficina }}" placeholder="Ingrese El Nombre de la Oficina" autocomplete="off" onkeypress="return soloLetras(event);">
                                 </div>

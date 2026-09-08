@@ -18,13 +18,6 @@ return new class extends Migration
             $table->string('tipo_biene');
             $table->unsignedBigInteger('articulo_especifico_id')->nullable(); // Cambia a snake case
             $table->string('articulo_especifico_type')->nullable(); // Cambia a snake case
-            $table->unsignedBigInteger('id_marca'); // Agregar columna de clave foránea
-            $table->unsignedBigInteger('id_modelo'); // Agregar columna de clave foránea
-
-            // Establecer relación con la tabla de marca
-            $table->foreign('id_marca')->references('id')->on('marcas');
-            // Establecer relación con la tabla de modelo
-            $table->foreign('id_modelo')->references('id')->on('modelos');
 
             $table->timestamps();
         });

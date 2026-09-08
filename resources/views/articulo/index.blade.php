@@ -39,10 +39,10 @@
                         <table class="table align-items-center table-flush" id="dataTable">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="font-weight-bold text-dark">ID</th>
+                                    <th class="font-weight-bold text-dark">Codigo</th>
                                     <th class="font-weight-bold text-dark">Tipo de Bienes</th>
-                                    <th class="font-weight-bold text-dark">Marca/Modelo</th>
                                     <th class="font-weight-bold text-dark">Especificaciones Técnicas / Detalles</th>
+                                    <th class="font-weight-bold text-dark">Descripcion</th>
                                     <th class="font-weight-bold text-dark">Fecha Registro</th>
                                     <th class="font-weight-bold text-dark"><center>Acciones</center></th>
                                 </tr>
@@ -50,7 +50,14 @@
                             <tbody>
                                 @forelse($articulos as $articulo)
                                     <tr>
-                                        <td><strong>#{{ $articulo->id }}</strong></td>
+                                        {{-- <td><strong>#{{ $articulo->id }}</strong></td> --}}
+                                        <td>
+                                            @if($articulo->tipo_biene === 'Mobiliario')
+                                                {{ $articulo->articuloEspecifico->codigo_mobiliario }}
+                                            @elseif($articulo->tipo_biene === 'Equipo')
+                                                {{ $articulo->articuloEspecifico->codigo_equipo }}
+                                            @endif
+                                        </td>
                                         <td>
                                             @if($articulo->tipo_biene === 'Mobiliario')
                                                 <span class="badge bg-info text-dark">
@@ -66,14 +73,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <span class="d-block fw-bold text-secondary">
-                                                {{ $articulo->marca->nombre_marca ?? 'Sin Marca' }}
-                                            </span>
-                                            <small class="text-muted">
-                                                {{ $articulo->modelo->nombre_modelo ?? 'Sin Modelo' }}
-                                            </small>
-                                        </td>
+
                                         <td>
                                             @if($articulo->articuloEspecifico)
                                                 @if($articulo->tipo_biene === 'Mobiliario')
@@ -110,6 +110,13 @@
                                                 <span class="text-danger fw-bold">
                                                     <i class="fas fa-exclamation-triangle me-1"></i> Sin datos específicos registrados
                                                 </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($articulo->tipo_biene === 'Mobiliario')
+                                                {{ $articulo->articuloEspecifico->descripcion_mobiliario }}
+                                            @elseif($articulo->tipo_biene === 'Equipo')
+                                                {{ $articulo->articuloEspecifico->descripcion_equipo }}
                                             @endif
                                         </td>
                                         <td>

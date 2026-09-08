@@ -37,7 +37,10 @@ class OficinaController extends Controller
     {
 
         $oficinas = new Oficinas();
+        $oficinas->nombre_encargado = $request->input('nombre_encargado');
+        $oficinas->encargado_cedula = $request->input('encargado_cedula');
         $oficinas->nombre_oficina = $request->input('nombre_oficina');
+
 
         $oficinas->save();
 
@@ -63,6 +66,8 @@ class OficinaController extends Controller
     public function update(Request $request, $id)
     {
         $oficina = Oficinas::find($id);
+        $oficina->nombre_encargado = $request->input('nombre_encargado');
+        $oficina->encargado_cedula = $request->input('encargado_cedula');
         $oficina->nombre_oficina = $request->input('nombre_oficina');
 
         $oficina->save();

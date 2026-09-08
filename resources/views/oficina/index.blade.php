@@ -43,6 +43,8 @@
                         <table class="table align-items-center table-flush" id="dataTable">
                             <thead class="thead-light">
                                 <tr>
+                                    <th class="font-weight-bold text-dark">Cédula Encargado</th>
+                                    <th class="font-weight-bold text-dark">Nombre Encargado</th>
                                     <th class="font-weight-bold text-dark">Nombre Oficina</th>
                                     <th class="font-weight-bold text-dark"><center>Acciones</center></th>
                                 </tr>
@@ -50,6 +52,8 @@
                             <tbody>
                                 @foreach ($oficinas as $oficina)
                                     </tr>
+                                        <td class="font-weight-bold text-dark">{{ $oficina->encargado_cedula}}</td>
+                                        <td class="font-weight-bold text-dark">{{ $oficina->nombre_encargado}}</td>
                                         <td class="font-weight-bold text-dark">{{ $oficina->nombre_oficina}}</td>
 
                                         <td>

@@ -16,6 +16,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\ArticuloController;
+use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\MobiliarioController;
 use App\Http\Controllers\TipoPerifericoController;
 use App\Http\Controllers\PerifericoController;
@@ -92,6 +93,9 @@ Route::get('/articulo',  [ArticuloController::class,'index'])->name('articulo')-
 Route::get('/articulo/create', [ArticuloController::class, 'create'])->name('articulo.create')->middleware('auth');
 Route::get('/articulo/pdf',  [ArticuloController::class,'pdf'])->name('articulo.pdf')->middleware('auth');
 Route::resource('articulo', ArticuloController::class)->middleware('auth');
+
+/* Ruta Inventario */
+Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index')->middleware('auth');
 
 /* Ruta Mobiliario */
 Route::get('/mobiliario',  [MobiliarioController::class,'index'])->name('mobiliario')->middleware('auth');

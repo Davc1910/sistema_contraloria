@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulo;
 use App\Models\Equipo;
-use App\Models\Marcas;
-use App\Models\Modelos;
 use App\Models\Mobiliarios;
 use App\Models\Perifericos;
 use App\Http\Controllers\Controller;
@@ -14,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\BitacoraController;
 
@@ -30,7 +29,7 @@ class ArticuloController extends Controller
     public function index()
     {
         // Usamos Eager Loading para evitar el problema de consultas N+1
-        $articulos = Articulo::with(['marca', 'modelo', 'articuloEspecifico'])->get();
+        $articulos = Articulo::with(['articuloEspecifico'])->get();
         return view('articulo.index', compact('articulos'));
     }
 
@@ -41,12 +40,20 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        //
-        $marcas = Marcas::all();
-        $modelos = Modelos::all();
+
         $perifericos = Perifericos::all();
-        // return view('articulo.create', compact('marcas', 'modelos'));
-        return view('articulo.create', compact('marcas', 'modelos', 'perifericos'), ['previous_url' => url()->previous()]); // Al cargar esta vista se le envia la url anterior a la vista solicitante/create.blade.php.
+
+        $mobiliariosRegistrados = Articulo::where('tipo_biene', 'Mobiliario')->count();
+        $equiposRegistrados = Articulo::where('tipo_biene', 'Equipo')->count();
+
+        $codigo_mobiliario = '2-01-02-' . str_pad($mobiliariosRegistrados + 1, 4, '0', STR_PAD_LEFT);
+        $codigo_equipo = '2-01-04-' . str_pad($equiposRegistrados + 1, 4, '0', STR_PAD_LEFT);
+
+        return view('articulo.create', compact(
+            'perifericos',
+            'codigo_mobiliario',
+            'codigo_equipo'
+        ), ['previous_url' => url()->previous()]);
     }
 
     /**
@@ -79,8 +86,6 @@ class ArticuloController extends Controller
         $articulo = new Articulo;
 
         // Asigna los valores del formulario de solicitud a las propiedades del objeto Articulo
-        $articulo->id_marca = $request->id_marca;
-        $articulo->id_modelo = $request->id_modelo;
         // dd($request->id_marca, $request->id_modelo);
         $articulo->tipo_biene = $request->tipo_biene;
 
@@ -99,9 +104,11 @@ class ArticuloController extends Controller
 
             // Asigna los valores del formulario de solicitud a las propiedades del objeto articuloMobiliario
             $articuloMobiliario->tipo_mobiliario = $request->tipo_mobiliario;
+            $articuloMobiliario->codigo_mobiliario = $request->codigo_mobiliario;
             $articuloMobiliario->altura = $request->altura;
             $articuloMobiliario->anchura = $request->anchura;
             $articuloMobiliario->serial = $request->serial;
+            $articuloMobiliario->descripcion_mobiliario = $request->descripcion_mobiliario;
 
             // Guarda el objeto PersonaNatural en la base de datos
             $articuloMobiliario->save();
@@ -126,12 +133,14 @@ class ArticuloController extends Controller
             $articuloEquipo->articulo_id = $articulo->id;
 
             // Asigna los valores del formulario de solicitud a las propiedades del objeto articuloEquipo
+            $articuloEquipo->codigo_equipo = $request->codigo_equipo;
             $articuloEquipo->cpu = $request->cpu;
             $articuloEquipo->ram = $request->ram;
             $articuloEquipo->disco_duro = $request->disco_duro;
             $articuloEquipo->sistema_operativo = $request->sistema_operativo;
             $articuloEquipo->serial = $request->serial;
             $articuloEquipo->id_periferico = $request->id_periferico;
+            $articuloEquipo->descripcion_equipo = $request->descripcion_equipo;
 
             // Guarda el objeto articuloEquipo en la base de datos
             $articuloEquipo->save();
@@ -158,27 +167,6 @@ class ArticuloController extends Controller
 
     }
 
-    public function modal(Request $marca)
-    {
-        $articulo = Articulo::with('marca')->get(); // Cargar la relación con "marca"
-        $articulo = Articulo::with('modelo')->get(); // Cargar la relación con "modelo"
-        $marcas = request()->except('_token');
-        Marcas::create($marcas);
-
-        $modelos = request()->except('_token');
-        Modelos::create($modelos);
-
-        return redirect()->back();
-
-        // $sqlBD = DB::table('marcas')->get();
-        // $sqlBD->save($marcas);
-
-        // $sqlBD = DB::table('marcas');
-        // $sqlBD::insert($datosModal);
-
-        // return view('equipo.create', compact('marcas','modelos')); // Pasar los cargos a la vista "form.blade.php"
-    }
-
     /**
      * Display the specified resource.
      *
@@ -196,14 +184,45 @@ class ArticuloController extends Controller
      * @param  \App\Models\Articulo  $articulo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articulo $articulo)
+    public function edit($id)
     {
-        //
-        $articulo = articulo::with('articuloEspecifico')->find($id);
-        $marcas = Marcas::all();
-        $modelos = Modelos::all();
+        $articulo = Articulo::with('articuloEspecifico')->findOrFail($id);
+        $especifico = $articulo->articuloEspecifico;
+
+        $codigo_mobiliario = $especifico->codigo_mobiliario ?? null;
+        $tipo_mobiliario = $especifico->tipo_mobiliario ?? null;
+        $altura = $especifico->altura ?? null;
+        $anchura = $especifico->anchura ?? null;
+        $serial = $especifico->serial ?? null;
+        $descripcion_mobiliario = $especifico->descripcion_mobiliario ?? null;
+
+        $codigo_equipo = $especifico->codigo_equipo ?? null;
+        $cpu = $especifico->cpu ?? null;
+        $ram = $especifico->ram ?? null;
+        $disco_duro = $especifico->disco_duro ?? null;
+        $sistema_operativo = $especifico->sistema_operativo ?? null;
+        $id_periferico = $especifico->id_periferico ?? null;
+        $descripcion_equipo = $especifico->descripcion_equipo ?? null;
+
         $perifericos = Perifericos::all();
-        return view('articulo.edit',compact('articulo', 'marcas', 'modelos', 'perifericos'));
+
+        return view('articulo.edit', compact(
+            'articulo',
+            'perifericos',
+            'codigo_mobiliario',
+            'tipo_mobiliario',
+            'altura',
+            'anchura',
+            'serial',
+            'descripcion_mobiliario',
+            'codigo_equipo',
+            'cpu',
+            'ram',
+            'disco_duro',
+            'sistema_operativo',
+            'id_periferico',
+            'descripcion_equipo'
+        ));
     }
 
     /**
@@ -215,8 +234,70 @@ class ArticuloController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        
+        $articulo = Articulo::with('articuloEspecifico')->findOrFail($id);
+        $articuloEspecifico = $articulo->articuloEspecifico;
+
+        if ($request->tipo_biene == 'Mobiliario') {
+            $request->validate([
+                'tipo_mobiliario' => 'required|string|max:15',
+                'codigo_mobiliario' => 'required|string',
+                'serial' => ['nullable', Rule::unique('mobiliarios', 'serial')->ignore($articuloEspecifico instanceof Mobiliarios ? $articuloEspecifico->id : null)],
+            ], [
+                'tipo_mobiliario.required' => 'El tipo de mobiliario es obligatorio.',
+                'codigo_mobiliario.required' => 'El código del mobiliario es obligatorio.',
+                'serial.unique' => 'Este serial de mobiliario ya existe en la base de datos.',
+            ]);
+        } elseif ($request->tipo_biene == 'Equipo') {
+            $request->validate([
+                'codigo_equipo' => 'required|string',
+                'cpu' => 'required|string',
+                'serial' => ['nullable', Rule::unique('equipos', 'serial')->ignore($articuloEspecifico instanceof Equipo ? $articuloEspecifico->id : null)],
+            ], [
+                'codigo_equipo.required' => 'El código del equipo es obligatorio.',
+                'cpu.required' => 'La CPU es obligatoria.',
+                'serial.unique' => 'Este serial de equipo ya existe en la base de datos.',
+            ]);
+        }
+
+        $articulo->tipo_biene = $request->tipo_biene;
+        $articulo->save();
+
+        if ($request->tipo_biene == 'Mobiliario') {
+            $mobiliario = $articuloEspecifico instanceof Mobiliarios ? $articuloEspecifico : new Mobiliarios();
+            $mobiliario->articulo_id = $articulo->id;
+            $mobiliario->codigo_mobiliario = $request->codigo_mobiliario;
+            $mobiliario->tipo_mobiliario = $request->tipo_mobiliario;
+            $mobiliario->altura = $request->altura;
+            $mobiliario->anchura = $request->anchura;
+            $mobiliario->serial = $request->serial;
+            $mobiliario->descripcion_mobiliario = $request->descripcion_mobiliario;
+            $mobiliario->save();
+
+            $articulo->articuloEspecifico()->associate($mobiliario);
+            $articulo->save();
+        } elseif ($request->tipo_biene == 'Equipo') {
+            $equipo = $articuloEspecifico instanceof Equipo ? $articuloEspecifico : new Equipo();
+            $equipo->articulo_id = $articulo->id;
+            $equipo->codigo_equipo = $request->codigo_equipo;
+            $equipo->cpu = $request->cpu;
+            $equipo->ram = $request->ram;
+            $equipo->disco_duro = $request->disco_duro;
+            $equipo->sistema_operativo = $request->sistema_operativo;
+            $equipo->serial = $request->serial;
+            $equipo->id_periferico = $request->id_periferico;
+            $equipo->descripcion_equipo = $request->descripcion_equipo;
+            $equipo->save();
+
+            $articulo->articuloEspecifico()->associate($equipo);
+            $articulo->save();
+        }
+
+        try {
+            return redirect()->route('articulo.index')->with('success', '✅ El artículo ha sido actualizado exitosamente.');
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: ' . $exception->getMessage();
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 
     /**

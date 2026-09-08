@@ -19,7 +19,7 @@ function login(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return false;
     }
@@ -36,7 +36,7 @@ function login(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return (false);
     }
@@ -54,7 +54,7 @@ function login(obj) {
             this.submit();
         }
         })
-        
+
         obj.contraseña.focus();
         return false;
     }
@@ -71,11 +71,11 @@ function login(obj) {
             this.submit();
         }
         })
-        
+
 		obj.contraseña.focus();
 		return (false);
 	}
-    
+
 }
 
 //Validar Login boton del correo
@@ -94,7 +94,7 @@ function Email(obj) {
             this.submit();
         }
         })
- 
+
         obj.email_login.focus();
         return false;
     }
@@ -130,11 +130,11 @@ function Email(obj) {
             this.submit();
         }
         })
-        
+
         obj.email_login.focus();
         return false;
     }
-    
+
 }
 
 //Validar Registro de USUARIO
@@ -153,7 +153,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return false;
     }
@@ -170,7 +170,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return (false);
     }
@@ -187,7 +187,7 @@ function registrousuario(obj) {
            this.submit();
        }
        })
-      
+
        obj.name.focus();
        return false;
     }
@@ -204,7 +204,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-       
+
         obj.name.focus();
         return false;
     }
@@ -221,7 +221,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-       
+
         obj.name.focus();
         return false;
     }
@@ -239,7 +239,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.nameA.focus();
         return false;
     }
@@ -256,7 +256,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.nameA.focus();
         return (false);
     }
@@ -273,7 +273,7 @@ function registrousuario(obj) {
            this.submit();
        }
        })
-      
+
        obj.nameA.focus();
        return false;
     }
@@ -290,7 +290,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-       
+
         obj.nameA.focus();
         return false;
     }
@@ -307,7 +307,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-       
+
         obj.nameA.focus();
         return false;
     }
@@ -342,7 +342,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.email.focus();
         return (false);
     }
@@ -360,7 +360,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return false;
     }
@@ -377,7 +377,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return (false);
     }
@@ -400,7 +400,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.password.focus();
         return false;
     }
@@ -417,7 +417,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-		
+
 		obj.password.focus();
 		return (false);
 	}
@@ -435,7 +435,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.password_confirmation.focus();
         return false;
     }
@@ -452,7 +452,7 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-	
+
 		obj.password_confirmation.focus();
 		return (false);
 	}
@@ -469,11 +469,11 @@ function registrousuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.password_confirmation.focus();
         return false;
     }
-    
+
 }
 
 //Validar Roles
@@ -492,7 +492,7 @@ function roles(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return false;
     }
@@ -509,7 +509,7 @@ function roles(obj) {
             this.submit();
         }
         })
-        
+
 		obj.name.focus();
 		return (false);
 	}
@@ -526,7 +526,7 @@ function roles(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return false;
     }
@@ -544,7 +544,7 @@ function roles(obj) {
             this.submit();
         }
         })
-        
+
         obj.nombre.focus();
         return false;
     }
@@ -567,7 +567,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return false;
     }
@@ -584,7 +584,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
 		obj.name.focus();
 		return (false);
 	}
@@ -601,7 +601,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.name.focus();
         return false;
     }
@@ -619,7 +619,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.nombre.focus();
         return false;
     }
@@ -638,7 +638,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-    
+
         obj.email.focus();
         return false;
     }
@@ -655,7 +655,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
 		obj.email.focus();
 		return (false);
 	}
@@ -672,7 +672,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.email.focus();
         return false;
     }
@@ -689,7 +689,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.version.focus();
         return false;
     }
@@ -707,7 +707,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return false;
     }
@@ -724,7 +724,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
 		obj.username.focus();
 		return (false);
 	}
@@ -741,7 +741,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return false;
     }
@@ -758,7 +758,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.username.focus();
         return false;
     }
@@ -776,7 +776,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.password.focus();
         return false;
     }
@@ -793,7 +793,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
 		obj.password.focus();
 		return (false);
 	}
@@ -810,7 +810,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.password.focus();
         return false;
     }
@@ -850,7 +850,7 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
 		obj.confirm_password.focus();
 		return (false);
 	}
@@ -867,107 +867,23 @@ function usuario(obj) {
             this.submit();
         }
         })
-        
+
         obj.confirm_password.focus();
         return false;
     }
 }
 
-//VALIDAR CARGO
-function Cargo(obj) {
-
-
-// Obtén el campo de la cargo para aplicar la validación en tiempo real.
-var nombre_cargoInput = obj.nombre_cargo ;
-
-// Agrega un evento de teclado que se activa cada vez que se presiona una tecla.
-nombre_cargoInput.onkeydown = function(e) {
-    // Definimos una expresión regular que coincide con cualquier caracter que no sea una letra, un número o un espacio.
-    // Esto es una forma más amplia de bloquear caracteres especiales que solo . * /
-    var regex = /[^a-zA-Z0-9\s]/; 
-
-    // Obtiene el caracter de la tecla presionada.
-    // var caracterPresionado = String.fromCharCode(e.keyCode);
-
-    // Si el caracter de la tecla coincide con nuestra expresión regular, lo bloqueamos.
-    if (regex.test(caracterPresionado)) {
-        // Muestra una alerta para informar al usuario.
-        Swal.fire({
-            title: 'Cargo',
-            text: 'El nombre de la cargo no puede contener caracteres especiales.',
-            icon: 'error',
-            confirmButtonColor: '#d33',
-        });
-        
-        // Evita que el caracter se escriba en el campo.
-        return false;
-    }
-};
-
-// --- Tu validación para el envío del formulario, ahora con todas las validaciones ---
-
-var nombre_cargo  = obj.nombre_cargo .value;
-
-// 1. Validar que el campo no esté vacío o contenga solo espacios en blanco.
-if (nombre_cargo .trim() === "") {
-    Swal.fire({
-        title: 'Cargo',
-        text: "Debe de ingresar el nombre de la Cargo, no puede estar vacío o contener solo espacios en blanco.",
-        icon: 'warning',
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            this.submit();
-        }
-    });
-
-    obj.nombre_cargo .focus();
-    return false;
-}
-// 2. Validar que no contenga los caracteres especiales (esta es una segunda capa de seguridad).
-else if (/[^a-zA-Z0-9\s]/.test(nombre_cargo )) {
-    Swal.fire({
-        title: 'Error de formato',
-        text: "El nombre de la cargo no puede contener caracteres especiales.",
-        icon: 'error',
-        confirmButtonColor: '#d33',
-    });
-
-    obj.nombre_cargo .focus();
-    return false;
-}
-     var categoria = obj.categoria.value;
-   if (!categoria) {
-       Swal.fire({
-           title: 'Cargo',
-           text: "Seleccione el cargo.",
-           icon: 'warning',
-           confirmButtonColor: '#3085d6',
-           cancelButtonColor: '#d33',
-           }).then((result) => {
-       if (result.isConfirmed) {
-
-           this.submit();
-       }
-       })
-
-       obj.categoria.focus();
-       return false;
-    }
-
-}
-//VALIDAR VOCEROS
-function  Voceros(obj) {
-    var cedula = obj.cedula.value;
+//VALIDAR OFICINA
+function Oficina(obj) {
+    var encargado_cedula = obj.encargado_cedula.value;
 
 // Expresión regular para detectar los caracteres especiales
 var caracteresEspeciales = /[.*\/]/;
 
-if (!cedula) {
+if (!encargado_cedula) {
     Swal.fire({
-        title: 'Voceros',
-        text: "Debe de ingresar la cédula.",
+        title: 'Oficina',
+        text: "Debe de ingresar la cédula del encargado.",
         icon: 'warning',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -977,9 +893,9 @@ if (!cedula) {
         }
     });
 
-    obj.cedula.focus();
+    obj.encargado_cedula.focus();
     return false;
-} else if (caracteresEspeciales.test(cedula)) {
+} else if (caracteresEspeciales.test(encargado_cedula)) {
     // Si la cédula contiene alguno de los caracteres especiales
     Swal.fire({
         title: 'Error de formato',
@@ -988,14 +904,14 @@ if (!cedula) {
         confirmButtonColor: '#d33',
     });
 
-    obj.cedula.focus();
+    obj.encargado_cedula.focus();
     return false;
 }
 
 // Si la validación pasa, el código continuará su ejecución
-   if (cedula.length < 7 || cedula.length > 8){
+   if (encargado_cedula.length < 7 || encargado_cedula.length > 8){
     Swal.fire({
-        title: 'Voceros',
+        title: 'Oficina',
         text: "La cédula no puede tener más de 8 dígitos.",
         icon: 'warning',
         confirmButtonColor: '#3085d6',
@@ -1006,22 +922,22 @@ if (!cedula) {
         this.submit();
     }
     })
-    
-    obj.cedula.focus();
+
+    obj.encargado_cedula.focus();
     return (false);
     }
 
 
   // Obtén el campo de nombre para aplicar la validación en tiempo real
-var nombreInput = obj.nombre;
+var nombre_encargado = obj.nombre;
 
 // Agrega un evento de teclado para bloquear caracteres no deseados mientras se escriben
-nombreInput.onkeydown = function(e) {
+nombre_encargado.onkeydown = function(e) {
     // Definimos los códigos de teclado para los caracteres especiales que queremos bloquear
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -1032,7 +948,7 @@ nombreInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -1040,13 +956,13 @@ nombreInput.onkeydown = function(e) {
 
 // --- Tu validación para el envío del formulario ---
 
-var nombre = obj.nombre.value;
+var nombre_encargado = obj.nombre_encargado.value;
 
 // 1. Validar que el campo no esté vacío
-if (!nombre) {
+if (!nombre_encargado) {
     Swal.fire({
-        title: 'Voceros',
-        text: "Debe de ingresar un nombre.",
+        title: 'Oficina',
+        text: "Debe de ingresar el nombre del encargado.",
         icon: 'warning',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -1056,23 +972,23 @@ if (!nombre) {
         }
     });
 
-    obj.nombre.focus();
+    obj.nombre_encargado.focus();
     return false;
-} 
+}
 // 2. Validar que el campo no contenga los caracteres especiales
-else if (/[.*\/]/.test(nombre)) {
+else if (/[.*\/]/.test(nombre_encargado)) {
     Swal.fire({
         title: 'Error en el Nombre',
-        text: "El nombre del vocero no puede contener caracteres especiales como punto (.), asterisco (*) o barra diagonal (/).",
+        text: "El nombre del encargado no puede contener caracteres especiales como punto (.), asterisco (*) o barra diagonal (/).",
         icon: 'error',
         confirmButtonColor: '#d33',
     });
 
-    obj.nombre.focus();
+    obj.nombre_encargado.focus();
     return false;
 }
-var nombre = obj.nombre.value;
-   if (nombre.length < 3){
+var nombre_encargado = obj.nombre_encargado.value;
+   if (nombre_encargado.length < 3){
        Swal.fire({
            title: 'Voceros',
            text: "Faltan dígitos en este campo de nombre.",
@@ -1085,7 +1001,7 @@ var nombre = obj.nombre.value;
            this.submit();
        }
        })
-       
+
        obj.nombre.focus();
        return (false);
    }
@@ -1103,7 +1019,7 @@ var nombre = obj.nombre.value;
            this.submit();
        }
        })
-       
+
        obj.nombre.focus();
        return false;
    }
@@ -1116,7 +1032,7 @@ apellido.onkeydown = function(e) {
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -1127,7 +1043,7 @@ apellido.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -1148,7 +1064,7 @@ if (!apellido) {
 
     obj.apellido.focus();
     return false;
-} 
+}
 // 2. Validar que no contenga los caracteres especiales
 else if (/[.*\/]/.test(apellido)) {
     Swal.fire({
@@ -1177,7 +1093,7 @@ else if (apellido.length < 4){
 
     obj.apellido.focus();
     return false;
-} 
+}
 // 4. Validar que no contenga solo espacios en blanco
 else if (apellido.trim() === "") {
     Swal.fire({
@@ -1191,7 +1107,7 @@ else if (apellido.trim() === "") {
             this.submit();
         }
     });
-    
+
     obj.apellido.focus();
     return false;
 }
@@ -1267,7 +1183,7 @@ telefonoInput.onkeydown = function(e) {
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -1278,7 +1194,7 @@ telefonoInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -1304,7 +1220,7 @@ if (!telefono) {
 
     obj.telefono.focus();
     return false;
-} 
+}
 // 2. Validar que no contenga los caracteres especiales
 else if (/[.*\/]/.test(telefono)) {
     Swal.fire({
@@ -1424,7 +1340,7 @@ else if (/[.*\/]/.test(telefono)) {
             this.submit();
         }
         })
-        
+
         obj.direccion.focus();
         return false;
     }
@@ -1442,7 +1358,7 @@ else if (/[.*\/]/.test(telefono)) {
             this.submit();
         }
         })
-       
+
         obj.direccion.focus();
         return (false);
     }
@@ -1462,7 +1378,7 @@ var nom_comuniInput = obj.nom_comuni;
 nom_comuniInput.onkeydown = function(e) {
     // Definimos una expresión regular que coincide con cualquier caracter que no sea una letra, un número o un espacio.
     // Esto es una forma más amplia de bloquear caracteres especiales que solo . * /
-    var regex = /[^a-zA-Z0-9\s]/; 
+    var regex = /[^a-zA-Z0-9\s]/;
 
     // Obtiene el caracter de la tecla presionada.
     // var caracterPresionado = String.fromCharCode(e.keyCode);
@@ -1476,7 +1392,7 @@ nom_comuniInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // Evita que el caracter se escriba en el campo.
         return false;
     }
@@ -1516,7 +1432,7 @@ else if (/[^a-zA-Z0-9\s]/.test(nom_comuni)) {
     return false;
 }
 
-   
+
 
     // Obtén el campo de la dirección para aplicar la validación en tiempo real.
 var direccionInput = obj.direccion;
@@ -1548,7 +1464,7 @@ direccionInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // Evita que el carácter se escriba en el campo.
         return false;
     }
@@ -1601,7 +1517,7 @@ var direccion = obj.direccion.value;
             this.submit();
         }
         })
-       
+
         obj.direccion.focus();
         return (false);
     }
@@ -1741,7 +1657,7 @@ function  ConsejoComunal(obj) {
             this.submit();
         }
         })
-        
+
         obj.id_vocero.focus();
         return (false);
     }
@@ -1759,7 +1675,7 @@ function  ConsejoComunal(obj) {
            this.submit();
        }
        })
-       
+
        obj.nom_consej.focus();
        return false;
    }
@@ -1778,13 +1694,13 @@ function  ConsejoComunal(obj) {
            this.submit();
        }
        })
-       
+
        obj.situr.focus();
        return false;
    }
 
    var rif = obj.rif.value;
-// Expresión regular modificada: 
+// Expresión regular modificada:
 // ^C       -> Debe empezar con la letra 'C' mayúscula.
 // -?       -> Puede tener un guion opcional.
 // \d{9,10}$ -> Debe tener entre 9 y 10 dígitos numéricos al final.
@@ -1802,14 +1718,14 @@ if (!rif) {
             this.submit();
         }
     });
-    
+
     obj.rif.focus();
     return false;
 } else if (!regex.test(rif)) {
     Swal.fire({
         title: 'Consejo comunal',
         // Mensaje de error más específico
-        text: "El RIF debe comenzar **SOLO** con la letra 'C' mayúscula, seguido de 9 o 10 dígitos numéricos (ejemplo: C-123456789).", 
+        text: "El RIF debe comenzar **SOLO** con la letra 'C' mayúscula, seguido de 9 o 10 dígitos numéricos (ejemplo: C-123456789).",
         icon: 'warning',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -1832,7 +1748,7 @@ if (rif.trim() == "") {
             this.submit();
         }
     });
-    
+
     obj.rif.focus();
     return false;
 }
@@ -1906,7 +1822,7 @@ var id_comunidad = obj.id_comunidad.value;
             this.submit();
         }
         })
-        
+
         obj.dire_consejo.focus();
         return false;
     }
@@ -1924,7 +1840,7 @@ var id_comunidad = obj.id_comunidad.value;
             this.submit();
         }
         })
-       
+
         obj.dire_consejo.focus();
         return (false);
     }
@@ -1943,12 +1859,12 @@ var id_comunidad = obj.id_comunidad.value;
             this.submit();
         }
         })
-        
+
         obj.id_comunidad.focus();
         return (false);
     }
 
-    
+
 }
 
 //VALIDAR COMUNA
@@ -1969,7 +1885,7 @@ function Comuna(obj) {
             this.submit();
         }
         })
-        
+
         obj.id_vocero.focus();
         return (false);
     }
@@ -1989,7 +1905,7 @@ nom_comunasInput.onkeydown = function(e) {
     }
 
     // Definimos una expresión regular que coincide con cualquier carácter que no sea una letra, un número o un espacio.
-    var regex = /[^a-zA-Z0-9\s]/; 
+    var regex = /[^a-zA-Z0-9\s]/;
 
     // Obtiene el carácter de la tecla presionada.
     //var caracterPresionado = String.fromCharCode(e.keyCode);
@@ -2003,7 +1919,7 @@ nom_comunasInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // Evita que el carácter se escriba en el campo.
         return false;
     }
@@ -2044,7 +1960,7 @@ else if (/[^a-zA-Z0-9\s]/.test(nom_comunas)) {
 }
 
 var rif_comuna = obj.rif_comuna.value;
-// Expresión regular modificada: 
+// Expresión regular modificada:
 // ^C       -> Debe empezar con la letra 'C' mayúscula.
 // -?       -> Puede tener un guion opcional.
 // \d{9,10}$ -> Debe tener entre 9 y 10 dígitos numéricos al final.
@@ -2062,14 +1978,14 @@ if (!rif_comuna) {
             this.submit();
         }
     });
-    
+
     obj.rif_comuna.focus();
     return false;
 } else if (!regex.test(rif_comuna)) {
     Swal.fire({
         title: 'Comuna',
         // Mensaje de error más específico
-        text: "El RIF debe comenzar **SOLO** con la letra 'C' mayúscula, seguido de 9 o 10 dígitos numéricos (ejemplo: C-123456789).", 
+        text: "El RIF debe comenzar **SOLO** con la letra 'C' mayúscula, seguido de 9 o 10 dígitos numéricos (ejemplo: C-123456789).",
         icon: 'warning',
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
@@ -2092,7 +2008,7 @@ if (rif_comuna.trim() == "") {
             this.submit();
         }
     });
-    
+
     obj.rif_comuna.focus();
     return false;
 }
@@ -2111,7 +2027,7 @@ if (rif_comuna.trim() == "") {
             this.submit();
         }
         })
-        
+
         obj.id_parroquia.focus();
         return (false);
     }
@@ -2130,7 +2046,7 @@ if (rif_comuna.trim() == "") {
             this.submit();
         }
         })
-        
+
         obj.id_consejo.focus();
         return (false);
     }
@@ -2151,7 +2067,7 @@ dire_comunasInput.onkeydown = function(e) {
 
     // Definimos una expresión regular que coincide con cualquier carácter que no sea una letra, un número, un espacio o una comilla simple.
     // Esto bloqueará puntos, comas, guiones, comillas dobles, etc.
-    var regex = /[^a-zA-Z0-9\s,']/; 
+    var regex = /[^a-zA-Z0-9\s,']/;
 
     // Obtiene el carácter de la tecla presionada.
     var caracterPresionado = String.fromCharCode(e.keyCode);
@@ -2165,7 +2081,7 @@ dire_comunasInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // Evita que el carácter se escriba en el campo.
         return false;
     }
@@ -2217,7 +2133,7 @@ else if (dire_comunas.length < 5){
             this.submit();
         }
     });
-    
+
     obj.dire_comunas.focus();
     return false;
 }
@@ -2234,7 +2150,7 @@ else if (/(\w)\2+/i.test(dire_comunas.toLowerCase())) {
             this.submit();
         }
     });
-    
+
     obj.dire_comunas.focus();
     return false;
  }
@@ -2285,7 +2201,7 @@ if (!tipo_ayuda) {
             this.submit();
         }
     });
-    
+
     obj.tipo_ayuda.focus();
     return false;
 }
@@ -2326,7 +2242,7 @@ if (descripcion.trim() === "") {
     obj.descripcion.focus();
     return false;
 
-  
+
 }
 
 // 3. Validate the minimum length (at least 5 characters).
@@ -2357,15 +2273,15 @@ var foto_ayuda_input = obj.foto_ayuda;
             icon: 'warning',
             confirmButtonColor: '#3085d6',
         });
-        
+
         foto_ayuda_input.focus();
         return false;
     }
 
     // 2. Validar el formato de los archivos seleccionados
     var allowedExtensions = /(\.pdf|\.doc|\.docx|\.jpeg|\.jpg|\.png)$/i;
-    
-    // Si el input permite múltiples archivos (aunque tu código solo usa .value, lo cual solo funciona bien para inputs de texto o select, 
+
+    // Si el input permite múltiples archivos (aunque tu código solo usa .value, lo cual solo funciona bien para inputs de texto o select,
     // pero si lo defines como <input type="file" multiple>, debes iterar. Para el ejemplo, usaremos el primer archivo si es singular).
 
     for (var i = 0; i < archivos.length; i++) {
@@ -2383,7 +2299,7 @@ var foto_ayuda_input = obj.foto_ayuda;
         }
     }
 
- }   
+ }
 // Validar Proyecto
 function Proyectos(obj) {
 
@@ -2401,7 +2317,7 @@ function Proyectos(obj) {
             this.submit();
         }
         })
-        
+
         obj.id_parroquia.focus();
         return (false);
     }
@@ -2504,10 +2420,10 @@ if (!descripcion_pro.trim() === "") {
             this.submit();
         }
         })
-        
+
         obj.tipo_pro.focus();
     return false;
-        
+
     }
 
     var actividades = obj.actividades.value;
@@ -2590,10 +2506,10 @@ var cantidad_bene = obj.cantidad_bene.value;
             this.submit();
         }
         })
-        
+
         obj.id_ayuda.focus();
     return false;
-        
+
     }
 
     var prioridad = obj.prioridad.value;
@@ -2610,10 +2526,10 @@ var cantidad_bene = obj.cantidad_bene.value;
             this.submit();
         }
         })
-        
+
         obj.prioridad.focus();
     return false;
-        
+
     }
 var acta_conformidad_input = obj.acta_conformidad;
 var acta_archivos = acta_conformidad_input.files; // Accedemos a la lista de archivos
@@ -2626,7 +2542,7 @@ if (acta_archivos.length === 0) {
         icon: 'warning',
         confirmButtonColor: '#3085d6',
     });
-    
+
     acta_conformidad_input.focus();
     return false;
 }
@@ -2650,7 +2566,7 @@ for (var i = 0; i < acta_archivos.length; i++) {
         acta_conformidad_input.focus();
         return false;
     }
-    
+
 }
     var fecha_inicial = obj.fecha_inicial.value;
     if (!fecha_inicial){
@@ -2666,16 +2582,16 @@ for (var i = 0; i < acta_archivos.length; i++) {
             this.submit();
         }
         })
-        
+
         obj.fecha_inicial.focus();
         return (false);
     }
-    
+
 
      var fechaInicialObj = parseDateInput(fecha_inicial);
     var hoy = new Date();
     // Normalizar a medianoche para solo comparar la fecha y no la hora
-    hoy.setHours(0, 0, 0, 0); 
+    hoy.setHours(0, 0, 0, 0);
     // fechaInicialObj ya fue normalizada en parseDateInput
 
     if (!fechaInicialObj < hoy) {
@@ -2688,7 +2604,7 @@ for (var i = 0; i < acta_archivos.length; i++) {
         obj.fecha_inicial.focus();
         return false;
     }
-  
+
     var fecha_final = obj.fecha_final.value;
     if (!fecha_final){
         Swal.fire({
@@ -2706,7 +2622,7 @@ for (var i = 0; i < acta_archivos.length; i++) {
         obj.fecha_final.focus();
         return (false);
     }
-       
+
 }
 
 
@@ -2759,7 +2675,7 @@ if (!cedula) {
         this.submit();
     }
     })
-    
+
     obj.cedula.focus();
     return (false);
     }
@@ -2774,7 +2690,7 @@ nombreInput.onkeydown = function(e) {
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -2785,7 +2701,7 @@ nombreInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -2811,7 +2727,7 @@ if (!nombre) {
 
     obj.nombre.focus();
     return false;
-} 
+}
 // 2. Validar que el campo no contenga los caracteres especiales
 else if (/[.*\/]/.test(nombre)) {
     Swal.fire({
@@ -2838,7 +2754,7 @@ var nombre = obj.nombre.value;
            this.submit();
        }
        })
-       
+
        obj.nombre.focus();
        return (false);
    }
@@ -2856,7 +2772,7 @@ var nombre = obj.nombre.value;
            this.submit();
        }
        })
-       
+
        obj.nombre.focus();
        return false;
    }
@@ -2869,7 +2785,7 @@ apellido.onkeydown = function(e) {
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -2880,7 +2796,7 @@ apellido.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -2901,7 +2817,7 @@ if (!apellido) {
 
     obj.apellido.focus();
     return false;
-} 
+}
 // 2. Validar que no contenga los caracteres especiales
 else if (/[.*\/]/.test(apellido)) {
     Swal.fire({
@@ -2930,7 +2846,7 @@ else if (apellido.length < 4){
 
     obj.apellido.focus();
     return false;
-} 
+}
 
  var id_cargo  = obj.id_cargo.value;
     if (!id_cargo ){
@@ -2946,10 +2862,10 @@ else if (apellido.length < 4){
             this.submit();
         }
         })
-        
+
         obj.id_cargo .focus();
     return false;
-        
+
     }
 
 }
@@ -2970,11 +2886,11 @@ function  Visita(obj) {
             this.submit();
         }
         })
-        
+
         obj.id_parroquia.focus();
         return (false);
     }
-    
+
        var id_comunidad = obj.id_comunidad.value;
     if (!id_comunidad){
         Swal.fire({
@@ -2989,11 +2905,11 @@ function  Visita(obj) {
             this.submit();
         }
         })
-        
+
         obj.id_comunidad.focus();
         return (false);
     }
-    
+
 
 
   // Obtén el campo de nombre para aplicar la validación en tiempo real
@@ -3005,7 +2921,7 @@ visitaInput.onkeydown = function(e) {
     // Código del punto '.' es 190
     // Código del asterisco '*' es 56 (cuando se usa la tecla Shift)
     // Código del slash '/' es 191
-    var caracteresProhibidos = [190, 191, 56]; 
+    var caracteresProhibidos = [190, 191, 56];
 
     // Si el código de la tecla presionada está en nuestra lista de prohibidos...
     if (caracteresProhibidos.includes(e.keyCode)) {
@@ -3016,7 +2932,7 @@ visitaInput.onkeydown = function(e) {
             icon: 'error',
             confirmButtonColor: '#d33',
         });
-        
+
         // ¡Importante! Devuelve `false` para evitar que el carácter se escriba en el campo
         return false;
     }
@@ -3042,7 +2958,7 @@ if (!visita) {
 
     obj.visita.focus();
     return false;
-} 
+}
 // 2. Validar que el campo no contenga los caracteres especiales
 else if (/[.*\/]/.test(visita)) {
     Swal.fire({
@@ -3069,7 +2985,7 @@ var visita = obj.visita.value;
            this.submit();
        }
        })
-       
+
        obj.visita.focus();
        return (false);
    }
@@ -3087,7 +3003,7 @@ var visita = obj.visita.value;
            this.submit();
        }
        })
-       
+
        obj.visita.focus();
        return false;
    }
@@ -3157,7 +3073,7 @@ if (descripcion_vis.length < 5) {
             icon: 'warning',
             confirmButtonColor: '#3085d6',
         });
-        
+
         evidencia_input.focus();
         return false;
     }
@@ -3178,10 +3094,10 @@ if (descripcion_vis.length < 5) {
             evidencia_input.focus();
             return false;
         }
-        
+
     }
 
-      
+
 }
 
 // Validar Evaluacion
@@ -3200,9 +3116,9 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.id_proyecto.focus();
-    return false;   
+    return false;
     }
 
     var id_resposanble = obj.id_resposanble.value;
@@ -3219,12 +3135,12 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.id_resposanble.focus();
     return false;
     }
 
-    
+
     var observaciones = obj.observaciones.value;
     if (!observaciones) {
         Swal.fire({
@@ -3275,7 +3191,7 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-       
+
         obj.observaciones.focus();
         return (false);
     }
@@ -3294,7 +3210,7 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.viabilidad.focus();
         return (false);
     }
@@ -3313,7 +3229,7 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj. fecha_evalu.focus();
         return (false);
     }
@@ -3332,7 +3248,7 @@ function Evaluaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.estatus.focus();
         return (false);
     }
@@ -3355,7 +3271,7 @@ function Asignaciones (obj) {
                     this.submit();
                 }
                 })
-                
+
                obj.id_vocero.focus();
                return (false);
             }
@@ -3374,7 +3290,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.id_comunidad.focus();
         return (false);
     }
@@ -3392,7 +3308,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.id_ayuda.focus();
         return (false);
     }
@@ -3408,7 +3324,7 @@ function Asignaciones (obj) {
             // Nota: Aquí no llamamos a this.submit() porque necesitamos archivos.
             // Si el usuario presiona 'OK', simplemente lo dejamos en la página.
         });
-        
+       
         obj.imagenes.focus();
         return false;
      }
@@ -3463,7 +3379,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.descri_alcance.focus();
         return false;
     }
@@ -3481,7 +3397,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-       
+
         obj.descri_alcance.focus();
         return (false);
     }
@@ -3536,7 +3452,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-        
+
         obj.presupuesto.focus();
         return false;
     }
@@ -3554,7 +3470,7 @@ function Asignaciones (obj) {
             this.submit();
         }
         })
-       
+
         obj.presupuesto.focus();
         return (false);
     }
@@ -3609,7 +3525,7 @@ var latitud = obj.latitud.value;
             this.submit();
         }
         })
-       
+
         obj.latitud.focus();
         return (false);
     }
@@ -3664,7 +3580,7 @@ var latitud = obj.latitud.value;
             this.submit();
         }
         })
-       
+
         obj.longitud.focus();
         return (false);
     }
@@ -3686,7 +3602,7 @@ var latitud = obj.latitud.value;
 
         return false; // Detener el envío del formulario
     }
-    
+
     var impacto_social = document.querySelector('input[name="impacto_social"]:checked');
     if (!impacto_social) {
         Swal.fire({
@@ -3755,7 +3671,7 @@ var latitud = obj.latitud.value;
             this.submit();
         }
         })
-        
+
         obj.direccion.focus();
         return false;
     }
@@ -3773,7 +3689,7 @@ var latitud = obj.latitud.value;
             this.submit();
         }
         })
-       
+
         obj.direccion.focus();
         return (false);
     }
@@ -3792,7 +3708,7 @@ var fecha_inicio = obj.fecha_inicio.value;
             this.submit();
         }
         })
-        
+
         return (false);
     }
 
@@ -3800,7 +3716,7 @@ var fecha_inicio = obj.fecha_inicio.value;
 
 // Validar SEGUIMIENTO
 function Seguimiento (obj) {
-    
+
  var responsable_segui = obj.responsable_segui.value;
    if (!responsable_segui) {
        Swal.fire({
@@ -3890,7 +3806,7 @@ function Seguimiento (obj) {
             this.submit();
         }
         })
-       
+
         obj.detalle_segui.focus();
         return (false);
     }
@@ -3909,7 +3825,7 @@ function Seguimiento (obj) {
             this.submit();
         }
         })
-        
+
         obj.fecha_hor.focus();
         return (false);
     }
@@ -3932,7 +3848,7 @@ function Seguimiento (obj) {
         obj.gasto.focus();
         return false;
     }
-    
+
     var moneda = obj.moneda.value;
     if (!moneda) {
        Swal.fire({
@@ -3964,7 +3880,7 @@ if (archivos.length === 0) {
         icon: 'warning',
         confirmButtonColor: '#3085d6',
     });
-    
+
     evidencia_segui_input.focus();
     return false;
 }
@@ -3985,7 +3901,7 @@ for (var i = 0; i < archivos.length; i++) {
         evidencia_segui_input.focus();
         return false;
     }
-    
+
     // Validar Tamaño (Añadido para consistencia)
     if (file.size > maxSize) {
          Swal.fire({
@@ -4037,7 +3953,7 @@ for (var i = 0; i < archivos.length; i++) {
     }
 
 
-      
+
 }
 
 // Fin de la validación del Sistema Minas //
@@ -4046,7 +3962,7 @@ for (var i = 0; i < archivos.length; i++) {
 
 function soloLetras(e){
     var tecla = (document.all) ? e.keyCode : e.which;
-    //Tecla de retroceso para borrar, siempre la permite 
+    //Tecla de retroceso para borrar, siempre la permite
     if (tecla==8){
         return true;
     }
@@ -4057,14 +3973,14 @@ function soloLetras(e){
 patron =/[a-zA-ZÑñáéíóú .*/]/;
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
-    
+
 }
 
 
 //Validacion de no permitir letras en los campos de texto de solo numeros
 function solonum(e){
     var tecla = (document.all) ? e.keyCode : e.which;
-    //Tecla de retroceso para borrar, siempre la permite 
+    //Tecla de retroceso para borrar, siempre la permite
     if (tecla==8){
         return true;
     }
@@ -4080,7 +3996,7 @@ function solonum(e){
 /*--------------Validacion de no permitir espacios en los campos de texto de usuario y clave del registro de Usuarios-----------------*/
 function sinespacios(e){
     var tecla = (document.all) ? e.keyCode : e.which;
-    //Tecla de retroceso para borrar, siempre la permite 
+    //Tecla de retroceso para borrar, siempre la permite
     if (tecla==8){
         return true;
     }

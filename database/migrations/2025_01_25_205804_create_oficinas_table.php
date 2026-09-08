@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('oficinas', function (Blueprint $table) {
             $table->id();
+            $table->string('encargado_cedula')->unique();
+            $table->string('nombre_encargado');
             $table->string('nombre_oficina');
             $table->timestamps();
         });

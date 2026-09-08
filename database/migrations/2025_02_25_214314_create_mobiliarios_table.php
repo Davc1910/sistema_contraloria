@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('mobiliarios', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('articulo_id');
+            $table->string('codigo_mobiliario');
             $table->string('tipo_mobiliario');
             $table->string('altura');
             $table->string('anchura');
             $table->string('serial')->unique(); // Mantenemos tu restricción de valor único
+            $table->text('descripcion_mobiliario');
 
             $table->timestamps();
 

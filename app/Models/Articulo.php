@@ -12,19 +12,7 @@ class Articulo extends Model
     protected $table = 'articulos';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = ['articulo_especifico_id', 'articulo_especifico_type', 'id_marca', 'id_modelo', 'tipo_biene'];
-
-    public function marca()
-    {
-        return $this->belongsTo(Marcas::class, 'id_marca');
-    }
-
-
-    public function modelo()
-    {
-        return $this->belongsTo(Modelos::class, 'id_modelo');
-    }
-
+    protected $fillable = ['articulo_especifico_id', 'articulo_especifico_type', 'tipo_biene'];
 
     public function articuloEspecifico()
     {

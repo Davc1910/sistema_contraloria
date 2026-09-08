@@ -56,7 +56,8 @@
                                     <select class="form-select" id="id_oficina" name="id_oficina">
                                         <option value="">Seleccione una Oficina</option>
                                         @foreach($oficinas as $oficina)
-                                            <option value="{{ $oficina->id }}" {{ $persona->id_oficina == $oficina->id ? 'selected' : '' }}> {{ $oficina->nombre_oficina }} </option>
+                                            <option value="{{ $oficina->id }}" {{ $persona->id_oficina == $oficina->id ? 'selected' : '' }}> {{ $oficina->encargado_cedula }}
+                                                {{ $oficina->nombre_encargado }} / {{ $oficina->nombre_oficina }}  </option>
                                         @endforeach
                                     </select>
                                 </div>
