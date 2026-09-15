@@ -28,7 +28,7 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Cedula</label>
-                                    <input type="text" class="form-control" id="cedula" name="cedula" style="background: white;" value="{{ $persona->cedula }}" placeholder="Ingrese la Cedula" oninput="capitalizarInput('cedula')" autocomplete="off" onkeypress="return solonum(event);">
+                                    <input type="text" class="form-control" id="cedula" name="cedula" style="background: white;" value="{{ $persona->cedula }}" placeholder="Ingrese la Cedula" autocomplete="off" onkeypress="return solonum(event);">
                                 </div>
 
                                 <div class="col-4">

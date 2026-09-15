@@ -34,6 +34,14 @@ class MarcaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(
+            [
+            'nombre_marca' => 'unique:marcas,nombre_marca'
+            ],
+            [
+            'nombre_marca.unique' => 'Está marca ya existe en la base de datos.'
+            ]
+        );
 
         $marcas = new Marcas();
         $marcas->nombre_marca = $request->input('nombre_marca');
@@ -62,6 +70,14 @@ class MarcaController extends Controller
 
     public function update(Request $request, $id)
     {
+         $request->validate(
+            [
+            'nombre_marca' => 'unique:marcas,nombre_marca,' . $id,
+            ],
+            [
+            'nombre_marca.unique' => 'Está marca ya existe en la base de datos.'
+            ]
+        );
 
         // Obtener La Comuna por ID
         $marca =  Marcas::find($id);

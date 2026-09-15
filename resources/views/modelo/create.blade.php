@@ -27,7 +27,7 @@
 
                                     <div class="col-4">
                                         <label  class="font-weight-bold text-dark">Nombre del Modelo</label>
-                                        <input type="text" class="form-control" id="nombre_modelo" name="nombre_modelo" style="background: white;" value="" placeholder="Ingrese El nombre del modelo" autocomplete="off" oninput="capitalizarInput('nombre modelo')" onkeypress="return soloLetrasNumero(event);">
+                                        <input type="text" class="form-control" id="nombre_modelo" name="nombre_modelo" style="background: white;" value="" placeholder="Ingrese El nombre del modelo" autocomplete="off" oninput="capitalizarInput('nombre_modelo')" onkeypress="return soloLetrasNumero(event);">
                                     </div>
 
                                 </div>
@@ -57,6 +57,35 @@
             </div>
         </div>
     </div>
+
+    @if ($errors->any())
+        <script>
+            var errors = @json($errors->all());
+            errors.forEach(function(error) {
+                    Swal.fire({
+                        title: 'Modelo',
+                        text: error,
+                        icon: 'warning',
+                        showConfimButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ok',
+                    });
+                });
+        </script>
+    @endif
+
+     {{-- ? FUNCIÓN PARA CONVERTIR UNA LETRA EN MAYÚSCULAS Y LOS DEMAS EN MINÚSCULAS --}}
+
+    <script>
+        function capitalizarPrimeraLetra(texto) {
+            return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+        }
+
+        function capitalizarInput(idInput) {
+            const inputElement = document.getElementById(idInput);
+            inputElement.value = capitalizarPrimeraLetra(inputElement.value);
+        }
+    </script>
 
 @endsection
 

@@ -37,10 +37,18 @@ class PersonaController extends Controller
 
     public function store(Request $request)
     {
-        // $request->merge([
-        //     'fecha_inicial' => trim($request->input('fecha_inicial')),
-        //     'fecha_final' => trim($request->input('fecha_final')),
-        // ]);
+        $request->validate(
+            [
+            'cedula' => 'unique:personas,cedula',
+            'telefono' => 'unique:personas,telefono',
+            'email' => 'unique:personas,email',
+            ],
+            [
+            'cedula.unique' => 'La cédula ya existe en la base de datos.',
+            'telefono.unique' => 'El teléfono ya existe en la base de datos.',
+            'email.unique' => 'El correo electrónico ya existe en la base de datos.'
+            ]
+        );
 
         $personas = new Personas();
         $personas->cedula = $request->input('cedula');
@@ -98,15 +106,18 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request->validate([
-        //     'nombre_pro' => 'required|string|max:150',
-        //     'descripcion_pro' => 'nullable|string',
-        //     'tipo_pro' => 'required|in:Infraestructura,Social,Educativo,Salud,Ambiental,Otro',
-        //     'fecha_inicial' => 'required|date_format:d/m/Y',
-        //     'fecha_final' => 'required|date_format:d/m/Y|after_or_equal:fecha_inicial',
-        //     'prioridad' => 'required|in:Alta,Media,Baja',
-
-        // ]);
+        $request->validate(
+            [
+            'cedula' => 'unique:personas,cedula,' . $id,
+            'telefono' => 'unique:personas,telefono,' . $id,
+            'email' => 'unique:personas,email,' . $id,
+            ],
+            [
+            'cedula.unique' => 'La cédula ya existe en la base de datos.',
+            'telefono.unique' => 'El teléfono ya existe en la base de datos.',
+            'email.unique' => 'El correo electrónico ya existe en la base de datos.'
+            ]
+        );
 
         $persona = Personas::find($id);
         $persona->cedula = $request->input('cedula');

@@ -57,6 +57,24 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <script>
+            var errors = @json($errors->all());
+            errors.forEach(function(error) {
+                    Swal.fire({
+                        title: 'Tipo de Periférico',
+                        text: error,
+                        icon: 'warning',
+                        showConfimButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ok',
+                    });
+                });
+        </script>
+    @endif
+
+     {{-- ? FUNCIÓN PARA CONVERTIR UNA LETRA EN MAYÚSCULAS Y LOS DEMAS EN MINÚSCULAS --}}
+
     <script>
         function capitalizarPrimeraLetra(texto) {
             return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
@@ -66,7 +84,6 @@
             const inputElement = document.getElementById(idInput);
             inputElement.value = capitalizarPrimeraLetra(inputElement.value);
         }
-
     </script>
 
 @endsection

@@ -25,7 +25,7 @@
                     <div class="card-body">
 
                         <div class="row">
-                            
+
                             <div class="col-4">
                                 <label class="font-weight-bold text-dark">Tipo de Periférico</label>
                                 <select class="form-select" id="id_tipo" name="id_tipo">
@@ -58,7 +58,7 @@
 
                             <div class="col-4">
                                 <label  class="font-weight-bold text-dark">Serial</label>
-                                <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese el serial del mobiliario" autocomplete="off">
+                                <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese el serial del mobiliario" autocomplete="off" oninput="capitalizarInput('serial')" onkeypress="return soloLetrasNumero(event);">
                             </div>
 
                         </div>

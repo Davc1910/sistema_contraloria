@@ -32,6 +32,14 @@ class ModeloController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(
+            [
+            'nombre_modelo' => 'unique:modelos,nombre_modelo'
+            ],
+            [
+            'nombre_modelo.unique' => 'Esté modelo ya existe en la base de datos.'
+            ]
+        );
 
         $modelos = new Modelos();
 
@@ -61,6 +69,14 @@ class ModeloController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+            'nombre_modelo' => 'unique:modelos,nombre_modelo,' . $id,
+            ],
+            [
+            'nombre_modelo.unique' => 'Esté modelo ya existe en la base de datos.'
+            ]
+        );
 
         $modelo = Modelos::find($id);
 

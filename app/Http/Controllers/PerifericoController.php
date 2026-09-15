@@ -40,19 +40,22 @@ class PerifericoController extends Controller
 
     public function store(Request $request)
     {
-        /* $request->validate([
-            'cedula_voce' => 'required|unique:consejo_comunals,cedula_voce',
-        ], [
-            'cedula_voce.unique' => 'Esta cédula ya existe.',
-        ]); */
+        $request->validate(
+            [
+            'serial' => 'unique:perifericos,serial',
+            ],
+            [
+            'serial.unique' => 'Este serial ya existe en la base de datos.'
+            ]
+        );
 
-        $periferico = new Perifericos();
-        $periferico->id_tipo = $request->input('id_tipo');
-        $periferico->id_marca = $request->input('id_marca');
-        $periferico->id_modelo = $request->input('id_modelo');
-        $periferico->serial = $request->input('serial');
+        $perifericos = new Perifericos();
+        $perifericos->id_tipo = $request->input('id_tipo');
+        $perifericos->id_marca = $request->input('id_marca');
+        $perifericos->id_modelo = $request->input('id_modelo');
+        $perifericos->serial = $request->input('serial');
 
-        $periferico->save();
+        $perifericos->save();
 
         $bitacora = new BitacoraController();
         $bitacora->update();
@@ -76,6 +79,15 @@ class PerifericoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+            'serial' => 'unique:perifericos,serial,' . $id,
+            ],
+            [
+            'serial.unique' => 'Este serial ya existe en la base de datos.'
+            ]
+        );
+
         $periferico = Perifericos::find($id);
 
         $periferico->id_tipo = $request->input('id_tipo');

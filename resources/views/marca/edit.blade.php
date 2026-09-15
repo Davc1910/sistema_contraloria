@@ -30,7 +30,7 @@
 
                                 <div class="col-4">
                                     <label class="font-weight-bold text-dark">Nombre Marca</label>
-                                    <input type="text" class="form-control" id="nombre_marca" name="nombre_marca" style="background: white;" value="{{ $marca->nombre_marca }}" placeholder="Ingrese el nombre de la marca" autocomplete="off">
+                                    <input type="text" class="form-control" id="nombre_marca" name="nombre_marca" style="background: white;" value="{{ $marca->nombre_marca }}" placeholder="Ingrese el nombre de la marca" autocomplete="off" oninput="capitalizarInput('nombre_marca')" onkeypress="return soloLetras(event);">
                                 </div>
 
                             </div>
@@ -57,23 +57,34 @@
         </div>
     </div>
 
-    <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
-
     @if ($errors->any())
         <script>
             var errors = @json($errors->all());
             errors.forEach(function(error) {
-                Swal.fire({
-                    title: 'Comuna',
-                    text: error,
-                    icon: 'warning',
-                    showConfimButton: true,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Ok',
+                    Swal.fire({
+                        title: 'Marca',
+                        text: error,
+                        icon: 'warning',
+                        showConfimButton: true,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Ok',
+                    });
                 });
-            });
         </script>
     @endif
+
+    {{-- ? FUNCIÓN PARA CONVERTIR UNA LETRA EN MAYÚSCULAS Y LOS DEMAS EN MINÚSCULAS --}}
+
+    <script>
+        function capitalizarPrimeraLetra(texto) {
+            return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+        }
+
+        function capitalizarInput(idInput) {
+            const inputElement = document.getElementById(idInput);
+            inputElement.value = capitalizarPrimeraLetra(inputElement.value);
+        }
+    </script>
 
 @endsection
 

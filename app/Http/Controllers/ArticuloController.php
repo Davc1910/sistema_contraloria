@@ -64,13 +64,7 @@ class ArticuloController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // Validar el artículo común y el camino de herencia a seguir
-        // $request->validate([
-        //     'id_marca'      => 'required|exists:marcas,id',
-        //     'id_modelo'     => 'required|exists:modelos,id',
-        //     'tipo' => 'required|in:equipo,mobiliario',
-        // ]);
+
         $request->validate(
             [
             'serial' => 'unique:mobiliarios,serial',
@@ -237,28 +231,6 @@ class ArticuloController extends Controller
         $articulo = Articulo::with('articuloEspecifico')->findOrFail($id);
         $articuloEspecifico = $articulo->articuloEspecifico;
 
-        if ($request->tipo_biene == 'Mobiliario') {
-            $request->validate([
-                'tipo_mobiliario' => 'required|string|max:15',
-                'codigo_mobiliario' => 'required|string',
-                'serial' => ['nullable', Rule::unique('mobiliarios', 'serial')->ignore($articuloEspecifico instanceof Mobiliarios ? $articuloEspecifico->id : null)],
-            ], [
-                'tipo_mobiliario.required' => 'El tipo de mobiliario es obligatorio.',
-                'codigo_mobiliario.required' => 'El código del mobiliario es obligatorio.',
-                'serial.unique' => 'Este serial de mobiliario ya existe en la base de datos.',
-            ]);
-        } elseif ($request->tipo_biene == 'Equipo') {
-            $request->validate([
-                'codigo_equipo' => 'required|string',
-                'cpu' => 'required|string',
-                'serial' => ['nullable', Rule::unique('equipos', 'serial')->ignore($articuloEspecifico instanceof Equipo ? $articuloEspecifico->id : null)],
-            ], [
-                'codigo_equipo.required' => 'El código del equipo es obligatorio.',
-                'cpu.required' => 'La CPU es obligatoria.',
-                'serial.unique' => 'Este serial de equipo ya existe en la base de datos.',
-            ]);
-        }
-
         $articulo->tipo_biene = $request->tipo_biene;
         $articulo->save();
 
@@ -309,5 +281,37 @@ class ArticuloController extends Controller
     public function destroy(Articulo $articulo)
     {
         //
+        try {
+            // Busca el Solicitante con el ID proporcionado en la base de datos
+            $articulo = Articulo::find($id);
+
+            if ($articulo) {
+                // Verifica si hay alguna solicitud asociada al articulo
+                $solicitudes = Solicitud::where('id_articulo', $id)->count();
+
+                if ($solicitudes === 0) {
+
+                    if ($articulo->articuloEspecifico !== null) {
+                        $articulo->articuloEspecifico->delete();
+                    }
+                    $articulo->delete();
+                    $bitacora = new BitacoraController;
+                    $bitacora->update();
+                    return redirect('articulo')->with('eliminar', 'ok');
+                } else {
+                    // Si hay solicitudes de recaudos, muestra un mensaje de advertencia
+                    $errorMessage = 'Advertencia: El articulo está asociado a una solicitud. No se puede eliminar.';
+                    return redirect()->back()->withErrors($errorMessage);
+                }
+            } else {
+                // El articulo no existe, muestra un mensaje de error
+                $errorMessage = 'Error: No se encontró el articulo con el ID proporcionado.';
+                return redirect()->back()->withErrors($errorMessage);
+            }
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar el articulo debido a que tiene otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
+
     }
 }

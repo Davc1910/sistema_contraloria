@@ -35,6 +35,14 @@ class OficinaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate(
+            [
+            'encargado_cedula' => 'unique:oficinas,encargado_cedula'
+            ],
+            [
+            'encargado_cedula.unique' => 'Está cedula ya existe en la base de datos.'
+            ]
+        );
 
         $oficinas = new Oficinas();
         $oficinas->nombre_encargado = $request->input('nombre_encargado');
@@ -65,6 +73,15 @@ class OficinaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+            'encargado_cedula' => 'unique:oficinas,encargado_cedula,' . $id
+            ],
+            [
+            'encargado_cedula.unique' => 'Está cedula ya existe en la base de datos.'
+            ]
+        );
+
         $oficina = Oficinas::find($id);
         $oficina->nombre_encargado = $request->input('nombre_encargado');
         $oficina->encargado_cedula = $request->input('encargado_cedula');

@@ -35,6 +35,15 @@ class TipoPerifericoController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate(
+            [
+            'tipo' => 'unique:tipo_perifericos,tipo'
+            ],
+            [
+            'tipo.unique' => 'Esté tipo de periférico ya existe en la base de datos.'
+            ]
+        );
+
         $tipos_perifericos = new TipoPerifericos();
         $tipos_perifericos->tipo = $request->input('tipo');
 
@@ -60,6 +69,15 @@ class TipoPerifericoController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+            'tipo' => 'unique:tipo_perifericos,tipo,' . $id,
+            ],
+            [
+            'tipo.unique' => 'Esté tipo de periférico ya existe en la base de datos.'
+            ]
+        );
+
         $tipo_periferico = TipoPerifericos::find($id);
         $tipo_periferico->tipo = $request->input('tipo');
 

@@ -27,17 +27,17 @@
 
                                 <div class="col-4">
                                     <label class="font-weight-bold text-dark">Cedula de El Encargado</label>
-                                    <input type="text" class="form-control" id="encargado_cedula" name="encargado_cedula" style="background: white;" value="" placeholder="Ingrese la cedula del encargado" autocomplete="off" oninput="capitalizarInput('encargado cedula')">
+                                    <input type="text" class="form-control" id="encargado_cedula" name="encargado_cedula" style="background: white;" value="" placeholder="Ingrese la cedula del encargado" autocomplete="off" onkeypress="return solonum(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label class="font-weight-bold text-dark">Nombre del Encargado</label>
-                                    <input type="text" class="form-control" id="nombre_encargado" name="nombre_encargado" style="background: white;" value="" placeholder="Ingrese el nombre del encargado" autocomplete="off" oninput="capitalizarInput('nombre encargado')">
+                                    <input type="text" class="form-control" id="nombre_encargado" name="nombre_encargado" style="background: white;" value="" placeholder="Ingrese el nombre del encargado" autocomplete="off" oninput="capitalizarInput('nombre_encargado')" onkeypress="return soloLetras(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label class="font-weight-bold text-dark">Nombre de la Oficina</label>
-                                    <input type="text" class="form-control" id="nombre_oficina" name="nombre_oficina" style="background: white;" value="" placeholder="Ingrese El nombre de la oficina" autocomplete="off" oninput="capitalizarInput('nombre oficina')">
+                                    <input type="text" class="form-control" id="nombre_oficina" name="nombre_oficina" style="background: white;" value="" placeholder="Ingrese El nombre de la oficina" autocomplete="off" oninput="capitalizarInput('nombre_oficina')" onkeypress="return soloLetras(event);">
                                 </div>
 
                             </div>
@@ -79,6 +79,19 @@
                 });
         </script>
     @endif
+
+     {{-- ? FUNCIÓN PARA CONVERTIR UNA LETRA EN MAYÚSCULAS Y LOS DEMAS EN MINÚSCULAS --}}
+
+    <script>
+        function capitalizarPrimeraLetra(texto) {
+            return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+        }
+
+        function capitalizarInput(idInput) {
+            const inputElement = document.getElementById(idInput);
+            inputElement.value = capitalizarPrimeraLetra(inputElement.value);
+        }
+    </script>
 
 @endsection
 

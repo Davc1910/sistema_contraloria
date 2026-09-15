@@ -59,7 +59,7 @@
 
                             <div class="col-4">
                                 <label  class="font-weight-bold text-dark">Serial</label>
-                                <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="{{ $periferico->serial }}" placeholder="Ingrese el serial del mobiliario" autocomplete="off">
+                                <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="{{ $periferico->serial }}" placeholder="Ingrese el serial del mobiliario" autocomplete="off" oninput="capitalizarInput('serial')" onkeypress="return soloLetrasNumero(event);">
                             </div>
 
                         </div>

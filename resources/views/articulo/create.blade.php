@@ -58,32 +58,32 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Codigo Mobiliario</label>
-                                    <input type="text" class="form-control" id="codigo_mobiliario" name="codigo_mobiliario" value="{{ $codigo_mobiliario }}" oninput="capitalizarInput('')" readonly></input>
+                                    <input type="text" class="form-control" id="codigo_mobiliario" name="codigo_mobiliario" value="{{ $codigo_mobiliario }}" readonly></input>
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Tipo de Mobiliario </label>
-                                    <input type="text" class="form-control" id="tipo_mobiliario" name="tipo_mobiliario" maxlength="15" style="background: white;" value="" placeholder="Ingrese el nombre del mobiliario" autocomplete="off" onkeypress="return soloLetras(event);">
+                                    <input type="text" class="form-control" id="tipo_mobiliario" name="tipo_mobiliario" maxlength="15" style="background: white;" value="" placeholder="Ingrese el nombre del mobiliario" autocomplete="off" oninput="capitalizarInput('tipo_mobiliario')" onkeypress="return soloLetras(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Altura de Mobiliario</label>
-                                    <input type="text" class="form-control" id="altura" name="altura" style="background: white;" value="" placeholder="Ingrese la altura del mobiliario" autocomplete="off" oninput="capitalizarInput('nombre')" >
+                                    <input type="text" class="form-control" id="altura" name="altura" style="background: white;" value="" placeholder="Ingrese la altura del mobiliario" autocomplete="off" onkeypress="return solonum(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Anchura de Mobiliario</label>
-                                    <input type="text" class="form-control" id="anchura" name="anchura" style="background: white;" value="" placeholder="Ingrese la anchura del mobiliario" autocomplete="off" oninput="capitalizarInput('apellido')">
+                                    <input type="text" class="form-control" id="anchura" name="anchura" style="background: white;" value="" placeholder="Ingrese la anchura del mobiliario" autocomplete="off" onkeypress="return solonum(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Serial de Mobiliario</label>
-                                    <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese el serial del mobiliario" autocomplete="off" oninput="capitalizarInput('apellido')">
+                                    <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese el serial del mobiliario" autocomplete="off" oninput="capitalizarInput('serial')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Descripcion de Mobiliario</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion_mobiliario" style="background: white;" value="" placeholder="Ingrese la descripcion del mobiliario" autocomplete="off" oninput="capitalizarInput('apellido')"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion_mobiliario" style="background: white;" value="" placeholder="Ingrese la descripcion del mobiliario" autocomplete="off" oninput="capitalizarInput('descripcion')" onkeypress="return soloLetrasNumero(event);"></textarea>
                                 </div>
 
                             </div>
@@ -117,32 +117,32 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Codigo Equipo</label>
-                                    <input type="text" class="form-control" id="codigo_equipo" name="codigo_equipo" value="{{ $codigo_equipo }}" oninput="capitalizarInput('')" readonly></input>
+                                    <input type="text" class="form-control" id="codigo_equipo" name="codigo_equipo" value="{{ $codigo_equipo }}" readonly></input>
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">CPU</label>
-                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="" maxlength="12" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('rif')">
+                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="" maxlength="12" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('cpu')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Ram</label>
-                                    <input type="text" class="form-control" id="ram" name="ram" style="background: white;" value="" placeholder="Ingrese la cantidad de RAM" autocomplete="off" oninput="capitalizarInput('nombre_empresa')">
+                                    <input type="text" class="form-control" id="ram" name="ram" style="background: white;" value="" placeholder="Ingrese la cantidad de RAM" autocomplete="off" oninput="capitalizarInput('ram')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Disco Duro</label>
-                                    <input type="text" class="form-control" id="disco_duro" name="disco_duro" style="background: white;" value="" placeholder="Ingrese la capacidad del Disco" autocomplete="off">
+                                    <input type="text" class="form-control" id="disco_duro" name="disco_duro" style="background: white;" value="" placeholder="Ingrese la capacidad del Disco" autocomplete="off" oninput="capitalizarInput('disco_duro')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Sistema Operativos</label>
-                                    <input type="text" class="form-control" id="sistema_operativo" name="sistema_operativo" style="background: white;" value="" placeholder="Ingrese el Sistema Operativo" autocomplete="off">
+                                    <input type="text" class="form-control" id="sistema_operativo" name="sistema_operativo" style="background: white;" value="" placeholder="Ingrese el Sistema Operativo" autocomplete="off" oninput="capitalizarInput('sistema_operativo')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Serial</label>
-                                    <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese El Serial" autocomplete="off">
+                                    <input type="text" class="form-control" id="serial" name="serial" style="background: white;" value="" placeholder="Ingrese El Serial" autocomplete="off" oninput="capitalizarInput('serial')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
@@ -157,7 +157,7 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Descripcion del Equipo</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion_equipo" style="background: white;" value="" placeholder="Ingrese la descripcion del equipo" autocomplete="off" oninput="capitalizarInput('apellido')"></textarea>
+                                    <textarea class="form-control" id="descripcion" name="descripcion_equipo" style="background: white;" value="" placeholder="Ingrese la descripcion del equipo" autocomplete="off" oninput="capitalizarInput('descripcion')"></textarea>
                                 </div>
 
                             </div>
@@ -250,15 +250,7 @@
 
     <script>
         function capitalizarPrimeraLetra(texto) {
-            // Si el texto está vacío, retornamos vacío
-            if (!texto) return '';
-
-            // Separamos la primera letra y el resto del texto
-            const primeraLetra = texto.charAt(0).toUpperCase();
-            const restoDelTexto = texto.slice(1);
-
-            // Combinamos la primera letra en mayúscula con el resto sin modificar
-            return primeraLetra + restoDelTexto;
+            return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
         }
 
         function capitalizarInput(idInput) {
@@ -269,21 +261,17 @@
 
     @if ($errors->any())
         <script>
-            var errorMessage = @json($errors->first());
-            Swal.fire({
+            var errors = @json($errors->all());
+            errors.forEach(function(error) {
+                Swal.fire({
                     title: 'Articulo',
-                    text: " Esta Cédula/Rif Ya Existe.",
+                    text: error,
                     icon: 'warning',
-                    showconfirmButton: true,
+                    showConfirmButton: true,
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: '¡OK!',
-
-                    }).then((result) => {
-                if (result.isConfirmed) {
-
-                    this.submit();
-                }
-                })
+                });
+            });
         </script>
     @endif
 
