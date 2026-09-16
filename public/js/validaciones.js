@@ -1134,16 +1134,16 @@ function articulo_equipo(obj) {
     if (!validarCampoArticulo(codigo, 'El código del equipo es obligatorio.', 100)) {
         return false;
     }
-    if (!validarCampoArticulo(cpu, 'Ingrese el CPU del equipo.', 12)) {
+    if (!validarCampoArticulo(cpu, 'Ingrese el CPU del equipo.', 20)) {
         return false;
     }
-    if (!validarCampoArticulo(ram, 'Ingrese la memoria RAM del equipo.', 100)) {
+    if (!validarCampoArticulo(ram, 'Ingrese la memoria RAM del equipo.', 20)) {
         return false;
     }
-    if (!validarCampoArticulo(disco, 'Ingrese la capacidad del disco duro.', 100)) {
+    if (!validarCampoArticulo(disco, 'Ingrese la capacidad del disco duro.', 20)) {
         return false;
     }
-    if (!validarCampoArticulo(sistema, 'Ingrese el sistema operativo.', 100)) {
+    if (!validarCampoArticulo(sistema, 'Ingrese el sistema operativo.', 20)) {
         return false;
     }
     if (!validarCampoArticulo(serial, 'Ingrese un serial de equipo válido.', 50, /^[\p{L}\p{N}][\p{L}\p{N} .\/_-]*$/u)) {

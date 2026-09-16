@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-<title>@yield('title') Asignar Equipo</title>
+<title>@yield('title') Actualizar Solicitud</title>
 <script src="{{ asset('js/validaciones.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

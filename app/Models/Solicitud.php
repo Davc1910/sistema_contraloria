@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Asignaciones extends Model
+class Solicitud extends Model
 {
     use HasFactory;
 
-    protected $table = 'asignaciones';
+    protected $table = 'solicitudes';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = [ 'id_persona','id_mobiliario','id_periferico', 'fecha',];
+    protected $fillable = [ 'id_persona','id_articulo', 'fecha', 'descripcion'];
 
     // // Relaciones (si es necesario)
     public function persona()
@@ -20,24 +20,9 @@ class Asignaciones extends Model
         return $this->belongsTo(Personas::class, 'id_persona');
     }
 
-    public function mobiliario()
+    public function articulo()
     {
-        return $this->belongsTo(Mobiliarios::class, 'id_mobiliario');
+        return $this->belongsTo(Articulo::class, 'id_articulo');
     }
-
-    public function periferico()
-    {
-        return $this->belongsTo(Perifericos::class, 'id_periferico');
-    }
-
-     public function incorporar()
-    {
-        return $this->hasMany(Incorporar::class, 'id_asignacion');
-    }
-
-    // public function control_seguimiento()
-    // {
-    //     return $this->belongsToMany(ControlSeguimientos::class, 'id_seguimiento', 'id', 'id_asignacion');
-    // }
 
 }

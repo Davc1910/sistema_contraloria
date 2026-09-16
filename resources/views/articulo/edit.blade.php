@@ -124,7 +124,7 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">CPU</label>
-                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="{{ $cpu }}" maxlength="12" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('rif')">
+                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="{{ $cpu }}" maxlength="20" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('rif')">
                                 </div>
 
                                 <div class="col-4">

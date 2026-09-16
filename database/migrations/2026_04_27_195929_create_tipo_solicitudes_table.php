@@ -15,17 +15,13 @@ return new class extends Migration
     {
         Schema::create('tipo_solicitudes', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('id_asignacion');
-            // // $table->unsignedBigInteger('id_mobiliario');
-            // // $table->unsignedBigInteger('id_periferico');
-            // // $table->date('fecha');
-
-            // // // Establecer relaciones con las tablas correspondientes
-            // $table->foreign('id_asignacion')->references('id')->on('asignaciones');
-
-            // $table->foreign('id_mobiliario')->references('id')->on('mobiliarios');
-
-            // $table->foreign('id_periferico')->references('id')->on('perifericos');
+            $table->unsignedBigInteger('id_solicitud');
+            $table->string('estatus');
+            $table->date('fecha');
+            $table->text('descripcion');
+            
+            // // Establecer relaciones con las tablas correspondientes
+            $table->foreign('id_solicitud')->references('id')->on('solicitudes');
 
             $table->timestamps();
         });

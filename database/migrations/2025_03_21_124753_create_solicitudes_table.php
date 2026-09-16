@@ -15,17 +15,15 @@ return new class extends Migration
     {
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_');
-            $table->unsignedBigInteger('id_mobiliario');
-            $table->unsignedBigInteger('id_periferico');
+            $table->unsignedBigInteger('id_persona');
+            $table->unsignedBigInteger('id_articulo');
             $table->date('fecha');
+            $table->text('descripcion');
 
             // Establecer relaciones con las tablas correspondientes
             $table->foreign('id_persona')->references('id')->on('personas');
 
-            $table->foreign('id_mobiliario')->references('id')->on('mobiliarios');
-
-            $table->foreign('id_periferico')->references('id')->on('perifericos');
+            $table->foreign('id_articulo')->references('id')->on('articulos');
 
             $table->timestamps();
         });

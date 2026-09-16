@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Incorporar;
-use App\Models\Asignaciones;
+use App\Models\TipoSolicitud;
+use App\Models\Solicitud;
+use App\Models\Articulo;
+use App\Models\Personas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BitacoraController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-class IncorporarController extends Controller
+class TipoSolicitudController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +23,18 @@ class IncorporarController extends Controller
      */
     public function index()
     {
-        $asignaciones = Asignaciones::all();
-        return view('incorporar.index', compact('asignaciones'));
+        // Obtener todas las solicitudes y cargar relaciones
+        $solicitudes = Solicitud::with('persona', 'articulo')->get();
+
+        // Iterar sobre cada solicitud para verificar si está planificada
+            $solicitudes->each(function ($solicitud) {
+                // Buscar en la tabla TipoSolicitud si existe una tipo de solicitud para esta solicitud
+                $solicitud->yaSolicitada = TipoSolicitud::where('id_solicitud', $solicitud->id)->exists();
+            });
+
+        // $recaudos = Recaudos::all();
+
+        return view('tipo_solicitud.index', compact('solicitudes'));
     }
 
     /**

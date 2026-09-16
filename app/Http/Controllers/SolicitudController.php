@@ -4,50 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Asignaciones;
+use App\Models\Solicitud;
 use App\Models\Personas;
-use App\Models\Mobiliarios;
-use App\Models\Perifericos;
+use App\Models\Articulo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BitacoraController;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class AsignacionesController extends Controller
+class SolicitudController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-asignacion|crear-asignacion|editar-asignacion|', ['only' => ['index']]);
-        $this->middleware('permission:crear-asignacion', ['only' => ['create','store']]);
-        $this->middleware('permission:editar-asignacion', ['only' => ['edit','update']]);
+        $this->middleware('permission:ver-solicitud|crear-solicitud|editar-solicitud|', ['only' => ['index']]);
+        $this->middleware('permission:crear-solicitud', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-solicitud', ['only' => ['edit','update']]);
 
     }
 
     public function create()
     {
         $personas = Personas::all();
-        $mobiliarios = Mobiliarios::all();
-        $perifericos = Perifericos::all();
-        return view('asignacion.create', compact('personas','mobiliarios', 'perifericos'));
+        $articulos = Articulo::all();
+        return view('solicitud.create', compact('personas','articulos'));
     }
 
     public function store(Request $request)
     {
 
-        $asignaciones = new Asignaciones();
-        $asignaciones->id_persona = $request->input('id_persona');
-        $asignaciones->id_mobiliario = $request->input('id_mobiliario');
-        $asignaciones->id_periferico = $request->input('id_periferico');
-        $asignaciones->fecha = $request->input('fecha');
+        $solicitudes = new Solicitud();
+        $solicitudes->id_persona = $request->input('id_persona');
+        $solicitudes->id_articulo = $request->input('id_articulo');
+        $solicitudes->fecha = $request->input('fecha');
+        $solicitudes->descripcion = $request->input('descripcion');
 
-        $asignaciones->save();
+        $solicitudes->save();
 
         $bitacora = new BitacoraController();
         $bitacora->update();
 
         try {
-           return redirect()->route('incorporar.index')->with('success', '✅ La asignación ha sido Guardada exitosamente.');
+           return redirect()->route('tipo_solicitud.index')->with('success', '✅ La solicitud ha sido Guardada exitosamente.');
         } catch (QueryException $exception) {
             $errorMessage = 'Error: ' . $exception->getMessage();
             return redirect()->back()->withErrors($errorMessage);
@@ -56,29 +54,28 @@ class AsignacionesController extends Controller
 
     public function edit($id)
     {
-        $asignacion = Asignaciones::find($id);
+        $solicitud = Solicitud::find($id);
         $personas = Personas::all();
-        $mobiliarios = Mobiliarios::all();
-        $perifericos = Perifericos::all();
-        return view('asignacion.edit', compact('asignacion','personas','mobiliarios', 'perifericos'));
+        $articulos = Articulos::all();
+        return view('solicitud.edit', compact('solicitud','personas','articulos'));
     }
 
     public function update(Request $request, $id)
     {
 
-        $asignacion = Asignaciones::findOrFail($id);
-        $asignacion->id_persona = $request->input('id_persona');
-        $asignacion->id_mobiliario = $request->input('id_mobiliario');
-        $asignacion->id_periferico = $request->input('id_periferico');
-        $asignacion->fecha = $request->input('fecha');
+        $solicitud = Solicitud::findOrFail($id);
+        $solicitud->id_persona = $request->input('id_persona');
+        $solicitud->id_articulo = $request->input('id_articulo');
+        $solicitud->fecha = $request->input('fecha');
+        $solicitud->descripcion = $request->input('descripcion');
 
-        $asignacion->save();
+        $solicitud->save();
 
         $bitacora = new BitacoraController();
         $bitacora->update();
 
         try {
-            return redirect('incorporar')->with('success', '✅ La asignación ha sido Actualizada exitosamente.');
+            return redirect('incorporar')->with('success', '✅ La solicitud ha sido Actualizada exitosamente.');
         } catch (QueryException $exception) {
             $errorMessage = 'Error: ' . $exception->getMessage();
             return redirect()->back()->withErrors($errorMessage);

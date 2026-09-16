@@ -127,9 +127,9 @@ Route::get('/solicitud/pdf',  [SolicitudController::class,'pdf'])->name('solicit
 Route::resource('solicitud', SolicitudController::class)->middleware('auth');
 
 /* Ruta Tipo de Solicitud */
-Route::get('/incorporar', [Controller::class, 'index'])->name('incorporar')->middleware('auth');
-Route::get('/incorporar/create', [IncorporarController::class, 'create'])->name('incorporar.create')->middleware('auth');
-Route::resource('incorporar', IncorporarController::class)->middleware('auth');
+Route::get('/tipo_solicitud', [TipoSolicitudController::class, 'index'])->name('tipo_solicitud')->middleware('auth');
+Route::get('/tipo_solicitud/create', [TipoSolicitudController::class, 'create'])->name('tipo_solicitud.create')->middleware('auth');
+Route::resource('tipo_solicitud', TipoSolicitudController::class)->middleware('auth');
 
 // /* Ruta Estadistica*/
 // Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');

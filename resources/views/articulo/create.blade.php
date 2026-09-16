@@ -122,7 +122,7 @@
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">CPU</label>
-                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="" maxlength="12" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('cpu')" onkeypress="return soloLetrasNumero(event);">
+                                    <input type="text" class="form-control" id="cpu" name="cpu" style="background: white;" value="" maxlength="20" placeholder="Ingrese el nombre del CPU" autocomplete="off" oninput="capitalizarInput('cpu')" onkeypress="return soloLetrasNumero(event);">
                                 </div>
 
                                 <div class="col-4">
