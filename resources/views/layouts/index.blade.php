@@ -299,7 +299,7 @@
                             </a>
                         @endif
 
-                        <a class="btn btn-outline-primary mx-3 mt-2 d-block" href="/logout">Cerrar Sension</a>
+                        <a class="btn btn-outline-primary mx-3 mt-2 d-block" href="/logout">Cerrar Sesión</a>
 
                       </li>
                     </div>
