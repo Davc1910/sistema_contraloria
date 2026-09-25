@@ -84,6 +84,15 @@ class SeederTablaPermisos extends Seeder
             'crear-tipo_solicitud',
             'editar-tipo_solicitud',
 
+            //Operaciones sobre tabla Valoracion Tecnicas
+            'ver-valoracion_tecnica',
+            'crear-valoracion_tecnica',
+            'editar-valoracion_tecnica',
+
+            //Operaciones sobre tabla Valoracion Tecnicas
+            'ver-control_tecnica',
+
+
         ];
 
         foreach($permisos as $permiso) {

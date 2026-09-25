@@ -23,6 +23,8 @@ use App\Http\Controllers\PerifericoController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\TipoSolicitudController;
+use App\Http\Controllers\ValoracionTecnicaController;
+use App\Http\Controllers\ControlTecnicaController;
 use App\Http\Controllers\ReporteController;
 
 
@@ -129,7 +131,21 @@ Route::resource('solicitud', SolicitudController::class)->middleware('auth');
 /* Ruta Tipo de Solicitud */
 Route::get('/tipo_solicitud', [TipoSolicitudController::class, 'index'])->name('tipo_solicitud')->middleware('auth');
 Route::get('/tipo_solicitud/create', [TipoSolicitudController::class, 'create'])->name('tipo_solicitud.create')->middleware('auth');
+Route::get('/tipo_solicitud/create/{id}', [TipoSolicitudController::class,'create'])->name('tipo_solicitud.create')->middleware('auth');
+Route::get('/tipo_solicitud/{id}/detalles', [TipoSolicitudController::class, 'getSolicitudDetalles'])->name('tipo_solicitud.detalles')->middleware('auth');
 Route::resource('tipo_solicitud', TipoSolicitudController::class)->middleware('auth');
+Route::post('/actualizar-estatus-tipo_solicitud/{id}', [TipoSolicitudController::class, 'actualizarEstatusTipoSolicitud']);
+
+/* Ruta Valoración Técnica */
+Route::get('/valoracion_tecnica', [ValoracionTecnicaController::class, 'index'])->name('valoracion_tecnica')->middleware('auth');
+Route::get('/valoracion_tecnica/create', [ValoracionTecnicaController::class, 'create'])->name('valoracion_tecnica.create')->middleware('auth');
+Route::get('/valoracion_tecnica/create/{id}', [ValoracionTecnicaController::class,'create'])->name('valoracion_tecnica.create')->middleware('auth');
+Route::get('/valoracion_tecnica/pdf', [ValoracionTecnicaController::class, 'pdf'])->name('valoracion_tecnica.pdf')->middleware('auth');
+Route::resource('valoracion_tecnica', ValoracionTecnicaController::class)->middleware('auth');
+
+
+/* Ruta Control Técnica */
+Route::get('/control_tecnica', [ControlTecnicaController::class, 'index'])->name('control_tecnica')->middleware('auth');
 
 // /* Ruta Estadistica*/
 // Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');

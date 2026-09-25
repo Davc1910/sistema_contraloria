@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('solicitudes', function (Blueprint $table) {
+        Schema::create('valoracion_tecnicas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_persona');
-            $table->unsignedBigInteger('id_articulo')->nullable();
-            $table->date('fecha');
+            $table->unsignedBigInteger('id_tipo_solicitud');
+            $table->string('desincorporar');
             $table->text('descripcion');
+            $table->date('fecha');
 
-            // Establecer relaciones con las tablas correspondientes
-            $table->foreign('id_persona')->references('id')->on('personas');
-
-            $table->foreign('id_articulo')->references('id')->on('articulos');
-
+            // // Establecer relaciones con las tablas correspondientes
+            $table->foreign('id_tipo_solicitud')->references('id')->on('tipo_solicitudes');
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solicitudes');
+        Schema::dropIfExists('valoracion_tecnicas');
     }
 };

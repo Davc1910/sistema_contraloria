@@ -4,20 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ControlSeguimientos;
-use App\Models\Seguimientos;
-use App\Models\Resposanbles;
+use App\Models\ValoracionTecnicas;
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\BitacoraController;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
-class ControlSeguimientosController extends Controller
+class ControlTecnicaController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:ver-controlseguimiento|crear-controlseguimiento', ['only' => ['index']]);
-        $this->middleware('permission:crear-controlseguimiento', ['only' => ['create', 'store']]);
+        $this->middleware('permission:ver-control_tecnica|crear-control_tecnica', ['only' => ['index']]);
+
     }
 
     /**
@@ -27,15 +25,15 @@ class ControlSeguimientosController extends Controller
      */
     public function index()
     {
-        $seguimientos = Seguimientos::all();
-        return view('controlseguimiento.index', compact('seguimientos'));
+        $valoracion_tecnicas = ValoracionTecnicas::all();
+        return view('control_tecnica.index', compact('valoracion_tecnicas'));
     }
 
      public function pdf(Request $request)
     {
-        
+
         $search = $request->input('search');
-    
+
         if ($search) {
             // Filtrar los bancos según la consulta de búsqueda
              $seguimientos = Seguimientos::orWhereHas('visitas', function ($query) use ($search){
@@ -49,11 +47,11 @@ class ControlSeguimientosController extends Controller
                            ->get();
         } else {
             // Obtener todos los bancos si no hay término de búsqueda
-             
+
              $seguimientos = Seguimientos::with('visita')->get();
-            
+
         }
-    
+
         $pdf = Pdf::loadView('controlseguimiento.pdf', compact('seguimientos'));
         return $pdf->stream('controlseguimiento.pdf');
     }
@@ -72,10 +70,10 @@ class ControlSeguimientosController extends Controller
     //     return response()->json([
     //         'impacto_ambiental' => $planificacion->impacto_ambiental,
     //         'impacto_social' => $planificacion->impacto_social,
-            
+
     //         // 'documentos' => $proyecto->documentos,
     //     ]);
- 
+
     // }
 
     /**
@@ -85,6 +83,6 @@ class ControlSeguimientosController extends Controller
      */
     public function create()
     {
-        
+
     }
 }

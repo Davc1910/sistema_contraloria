@@ -15,6 +15,21 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
 
                     <h2 class="font-weight-bold text-dark">Registrar Solicitud</h2>
+
+                </div>
+
+                <div class="row justify-content-center my-4">
+
+                    <div class="custom-control custom-radio col-auto mx-4 py-2" style="transform: scale(1.3); transform-origin: center; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="tipo_articulo" id="articulo_simple" value="simple" checked>
+                        <label class="form-check-label" for="articulo_simple">Simple</label>
+                    </div>
+
+                    <div class="custom-control custom-radio col-auto mx-4 py-2" style="transform: scale(1.3); transform-origin: center; cursor: pointer;">
+                        <input class="form-check-input" type="radio" name="tipo_articulo" id="articulo_compuesto" value="compuesta">
+                        <label class="form-check-label" for="articulo_compuesto">Compuesta</label>
+                    </div>
+
                 </div>
 
                 <form method="post" action="{{ route('solicitud.store') }}" enctype="multipart/form-data" onsubmit="return Solicitudes(this)">
@@ -37,38 +52,68 @@
                                 </div>
 
                                 <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Artículo Asignado</label>
-                                    <select class="form-select" id="id_articulo" name="id_articulo">
-                                        <option value="">Seleccione un artículo</option>
-                                        @foreach($articulos as $articulo)
-                                            <option value="{{ $articulo->id }}"> {{ $articulo->tipo_biene }}
-                                                @if($articulo->articuloEspecifico)
-                                                @if($articulo->tipo_biene === 'Mobiliario')
-                                                    {{-- DETALLES ESPECÍFICOS DE MOBILIARIO --}}
-                                                    {{ $articulo->articuloEspecifico->tipo_mobiliario ?? 'N/A' }} {{ $articulo->articuloEspecifico->serial }}
-                                                    {{ $articulo->articuloEspecifico->altura }} {{ $articulo->articuloEspecifico->anchura }}
-                                                @elseif($articulo->tipo_biene === 'Equipo')
-                                                    {{-- DETALLES ESPECÍFICOS DE EQUIPO --}}
-                                                    {{ $articulo->articuloEspecifico->cpu }} {{ $articulo->articuloEspecifico->ram }}
-                                                    {{ $articulo->articuloEspecifico->disco_duro }} {{ $articulo->articuloEspecifico->sistema_operativo }}
-                                                    {{ $articulo->articuloEspecifico->serial }} {{ $articulo->articuloEspecifico->perifericos->tipo_periferico->tipo ?? 'Ninguno' }}
+                                    <label class="font-weight-bold text-dark">Artículo Registrado</label>
+                                    <div id="articulo-simple-container" class="mt-2">
+                                        <label for="id_articulo" class="sr-only">Seleccione un artículo</label>
+                                        <select class="form-select" id="id_articulo" name="id_articulo">
+                                            <option value="">Seleccione un artículo</option>
+                                            @foreach($articulos as $articulo)
+                                                <option value="{{ $articulo->id }}"> {{ $articulo->tipo_biene }}
+                                                    @if($articulo->articuloEspecifico)
+                                                    @if($articulo->tipo_biene === 'Mobiliario')
+                                                        {{-- DETALLES ESPECÍFICOS DE MOBILIARIO --}}
+                                                        {{ $articulo->articuloEspecifico->tipo_mobiliario ?? 'N/A' }} {{ $articulo->articuloEspecifico->serial }}
+                                                        {{ $articulo->articuloEspecifico->altura }} {{ $articulo->articuloEspecifico->anchura }}
+                                                    @elseif($articulo->tipo_biene === 'Equipo')
+                                                        {{-- DETALLES ESPECÍFICOS DE EQUIPO --}}
+                                                        {{ $articulo->articuloEspecifico->cpu }} {{ $articulo->articuloEspecifico->ram }}
+                                                        {{ $articulo->articuloEspecifico->disco_duro }} {{ $articulo->articuloEspecifico->sistema_operativo }}
+                                                        {{ $articulo->articuloEspecifico->serial }} {{ $articulo->articuloEspecifico->perifericos->tipo_periferico->tipo ?? 'Ninguno' }}
+                                                    @endif
+                                                @else
+                                                    <span class="text-muted">Detalles no disponibles</span>
                                                 @endif
-                                            @else
-                                                <span class="text-muted">Detalles no disponibles</span>
-                                            @endif
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                <div class="col-4">
-                                    <label class="font-weight-bold text-dark">Fecha de Asignación</label>
-                                    <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>">
+                                    <div id="articulo-compuesto-container" class="mt-2" style="display: none;">
+                                        <label for="articulos-compuestos" class="d-block mb-1">Seleccione uno o más artículos</label>
+                                        <div id="articulos-compuestos" class="border rounded p-2" style="height: 130px; overflow-y: auto; background-color: #fff;">
+                                            @foreach($articulos as $articulo)
+                                                <div class="form-check">
+                                                    <input class="form-check-input articulo-compuesto" type="checkbox" name="articulos[]" value="{{ $articulo->id }}" id="articulo_{{ $articulo->id }}" disabled>
+                                                    <label class="form-check-label" for="articulo_{{ $articulo->id }}">
+                                                    @if($articulo->articuloEspecifico)
+                                                        @if($articulo->tipo_biene === 'Mobiliario')
+                                                            {{-- DETALLES ESPECÍFICOS DE MOBILIARIO --}}
+                                                            {{ $articulo->articuloEspecifico->tipo_mobiliario ?? 'N/A' }} {{ $articulo->articuloEspecifico->serial }}
+                                                            {{ $articulo->articuloEspecifico->altura }} {{ $articulo->articuloEspecifico->anchura }}
+                                                        @elseif($articulo->tipo_biene === 'Equipo')
+                                                            {{-- DETALLES ESPECÍFICOS DE EQUIPO --}}
+                                                            {{ $articulo->articuloEspecifico->cpu }} {{ $articulo->articuloEspecifico->ram }}
+                                                            {{ $articulo->articuloEspecifico->disco_duro }} {{ $articulo->articuloEspecifico->sistema_operativo }}
+                                                            {{ $articulo->articuloEspecifico->serial }} {{ $articulo->articuloEspecifico->perifericos->tipo_periferico->tipo ?? 'Ninguno' }}
+                                                        @endif
+                                                    @else
+                                                        <span class="text-muted">Detalles no disponibles</span>
+                                                    @endif
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-4">
                                     <label  class="font-weight-bold text-dark">Descripcion de la Solicitud</label>
                                     <textarea class="form-control" id="descripcion" name="descripcion" style="background: white;" value="" placeholder="Ingrese la descripcion de la solicitud++++++++++++++" autocomplete="off" oninput="capitalizarInput('descripcion')"></textarea>
+                                </div>
+
+                                <div class="col-4">
+                                    <label class="font-weight-bold text-dark">Fecha de Asignación</label>
+                                    <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>">
                                 </div>
 
                             </div>
@@ -117,6 +162,27 @@
     @endif
 
      <script>
+        const radioSimple = document.getElementById('articulo_simple');
+        const radioCompuesta = document.getElementById('articulo_compuesto');
+        const simpleContainer = document.getElementById('articulo-simple-container');
+        const compuestaContainer = document.getElementById('articulo-compuesto-container');
+        const articuloSimple = document.getElementById('id_articulo');
+        const articulosCompuestos = document.querySelectorAll('.articulo-compuesto');
+
+        function alternarTipoArticulo() {
+            const esCompuesta = radioCompuesta.checked;
+            simpleContainer.style.display = esCompuesta ? 'none' : 'block';
+            compuestaContainer.style.display = esCompuesta ? 'block' : 'none';
+            articuloSimple.disabled = esCompuesta;
+            articuloSimple.required = !esCompuesta;
+            articulosCompuestos.forEach(function (articulo) {
+                articulo.disabled = !esCompuesta;
+            });
+        }
+
+        radioSimple.addEventListener('change', alternarTipoArticulo);
+        radioCompuesta.addEventListener('change', alternarTipoArticulo);
+
         function capitalizarPrimeraLetra(texto) {
             return texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
         }

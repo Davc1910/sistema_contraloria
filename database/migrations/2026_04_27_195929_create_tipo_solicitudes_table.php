@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_solicitud');
             $table->string('estatus');
+            $table->string('estatus_resp')->nullable();
             $table->date('fecha');
             $table->text('descripcion');
-            
+
             // // Establecer relaciones con las tablas correspondientes
             $table->foreign('id_solicitud')->references('id')->on('solicitudes');
 

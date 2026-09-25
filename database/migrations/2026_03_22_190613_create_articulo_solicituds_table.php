@@ -13,18 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('solicitudes', function (Blueprint $table) {
+        Schema::create('articulo_solicituds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_persona');
-            $table->unsignedBigInteger('id_articulo')->nullable();
-            $table->date('fecha');
-            $table->text('descripcion');
+            $table->unsignedBigInteger('id_solicitud'); // Agregar columna de clave foránea
+            $table->unsignedBigInteger('id_articulo'); // Agregar columna de clave foránea
 
-            // Establecer relaciones con las tablas correspondientes
-            $table->foreign('id_persona')->references('id')->on('personas');
+            // Establecer relación con la tabla de solicitudes
+            $table->foreign('id_solicitud')->references('id')->on('solicitudes');
 
+            // Establecer relación con la tabla de artículos
             $table->foreign('id_articulo')->references('id')->on('articulos');
-
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solicitudes');
+        Schema::dropIfExists('articulo_solicituds');
     }
 };

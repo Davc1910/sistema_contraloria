@@ -20,9 +20,14 @@ class Solicitud extends Model
         return $this->belongsTo(Personas::class, 'id_persona');
     }
 
-    public function articulo()
+    public function articulos()
     {
-        return $this->belongsTo(Articulo::class, 'id_articulo');
+        return $this->belongsToMany(Articulo::class, 'articulo_solicituds', 'id_solicitud', 'id_articulo');
+    }
+
+    public function articulosSolicitud()
+    {
+        return $this->hasMany(ArticuloSolicitud::class, 'id_solicitud', 'id');
     }
 
 }

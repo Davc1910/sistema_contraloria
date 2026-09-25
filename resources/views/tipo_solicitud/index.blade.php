@@ -25,9 +25,9 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="font-weight-bold text-dark">Persona Asignada</th>
-                                <th class="font-weight-bold text-dark">Articulo Asignado</th>
-                                <th class="font-weight-bold text-dark">Fecha de Asignación</th>
+                                {{-- <th class="font-weight-bold text-dark">Articulo Solicitado</th> --}}
                                 <th class="font-weight-bold text-dark">Descripción</th>
+                                <th class="font-weight-bold text-dark">Fecha de Asignación</th>
                                 <th class="font-weight-bold text-dark"><center>Acciones</center></th>
                             </tr>
                         </thead>
@@ -35,14 +35,12 @@
                                 @foreach ($solicitudes as $solicitud)
                                     <tr>
                                         <td class="font-weight-bold text-dark">{{ $solicitud->persona->cedula }} - {{ $solicitud->persona->nombre }} {{ $solicitud->persona->apellido }}</td>
-                                            {{ $solicitud->persona->oficina->nombre_oficina }}
+                                            {{ $solicitud->persona->oficina->nombre_oficina }} -  {{ $solicitud->persona->oficina->nombre_encargado }}
                                         </td>
 
-                                        <td class="font-weight-bold text-dark">{{ $solicitud->articulo->tipo_biene }}</td>
+                                        <td class="font-weight-bold text-dark">{{ $solicitud->descripcion }}</td>
 
                                         <td class="font-weight-bold text-dark">{{ date('d/m/Y', strtotime($solicitud->fecha)) }}</td>
-
-                                        <td class="font-weight-bold text-dark">{{ $solicitud->descripcion }}</td>
 
                                          <td>
 
@@ -63,10 +61,12 @@
                                                 </svg></a>
                                                 @endcan
 
-                                                <a class="btn btn-info btn-sm" style="margin: 0 1px;" title="Ver Detalles" data-solicitud-id='{{ $solicitud->id }}' class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable" id="#modalScroll"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-text-window-reverse" viewBox="0 0 16 16"  style="color: #ffff; cursor: pointer;">
-                                                    <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
-                                                    <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zM2 1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zM1 4v10a1 1 0 0 0 1 1h2V4zm4 0v11h9a1 1 0 0 0 1-1V4z"/>
-                                                </svg></a>
+                                                <button type="button" class="btn btn-info btn-sm btn-detalle-solicitud" style="margin: 0 1px;" title="Ver Detalles" data-solicitud-id="{{ $solicitud->id }}" data-toggle="modal" data-target="#exampleModalScrollable">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-text-window-reverse" viewBox="0 0 16 16" style="color: #ffff; cursor: pointer;">
+                                                        <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                                        <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zM2 1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1zM1 4v10a1 1 0 0 0 1 1h2V4zm4 0v11h9a1 1 0 0 0 1-1V4z"/>
+                                                    </svg>
+                                                </button>
                                             </div>
 
                                         </td>
@@ -78,12 +78,30 @@
             </div>
         </div>
     </div>
+
+      <!-- MODAL PARA VER DETALLES -->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="modal-body-content">
+                    {{-- ! DATOS CARGADOS POR JS/AJAX --}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('datatable')
-    <script src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#dataTable').DataTable({
@@ -154,5 +172,81 @@
             });
         </script>
     @endif
-    
+
+     {{-- * FUNCIÓN PARA MOSTRAR DATOS DE LOS ARTICULOS DE EQUIPOS Y MOBILIARIOS EN EL MODAL --}}
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '[data-bs-dismiss="modal"], [data-dismiss="modal"]', function () {
+                const modal = $(this).closest('.modal');
+                if (modal.length) {
+                    modal.modal('hide');
+                }
+            });
+
+            $('.btn-detalle-solicitud').on('click', function (event) {
+                event.preventDefault();
+                const solicitudId = $(this).data('solicitud-id');
+
+                $.ajax({
+                    url: '/tipo_solicitud/' + solicitudId + '/detalles',
+                    type: 'GET',
+                    success: function (data) {
+                        const articulos = data.articulos || [];
+                        const tipoLabel = data.tipo === 'compuesta' ? 'Compuesta' : 'Simple';
+
+                        let articulosHtml = '<ul>';
+                        articulos.forEach(function (articulo) {
+                            if (articulo.tipo_biene === 'Equipo') {
+                                articulosHtml += `
+                                    <li>
+                                        <strong>Equipo</strong><br>
+                                        <b>CPU:</b> ${articulo.cpu}<br>
+                                        <b>RAM:</b> ${articulo.ram}<br>
+                                        <b>Disco Duro:</b> ${articulo.disco_duro}<br>
+                                        <b>Sistema Operativo:</b> ${articulo.sistema_operativo}<br>
+                                        <b>Periférico:</b> ${articulo.periferico}<br>
+                                        <b>Serial:</b> ${articulo.serial}
+                                    </li>
+                                `;
+                            } else if (articulo.tipo_biene === 'Mobiliario') {
+                                articulosHtml += `
+                                    <li>
+                                        <strong>Mobiliario</strong><br>
+                                        <b>Tipo:</b> ${articulo.tipo_mobiliario}<br>
+                                        <b>Altura:</b> ${articulo.altura}<br>
+                                        <b>Anchura:</b> ${articulo.anchura}<br>
+                                        <b>Serial:</b> ${articulo.serial}
+                                    </li>
+                                `;
+                            } else {
+                                articulosHtml += `<li><strong>${articulo.tipo_biene || 'Artículo'}</strong> - ${articulo.descripcion}</li>`;
+                            }
+                        });
+                        articulosHtml += '</ul>';
+
+                        $('#exampleModalScrollable .modal-body').html(`
+                            <h5 class="font-weight-bold text-primary" style="text-align: center">Detalles de la Solicitud</h5>
+                            <p><b>Tipo de Artículo:</b> ${tipoLabel}</p>
+                            <p><b>Artículo(s):</b></p>
+                            ${articulosHtml}
+                        `);
+
+                        $('#exampleModalScrollable').modal('show');
+                    },
+                    error: function (error) {
+                        console.error('Error al obtener los detalles de la solicitud:', error);
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'No se pudieron cargar los detalles del artículo.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+
 @endsection

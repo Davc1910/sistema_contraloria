@@ -159,6 +159,20 @@
                       </a>
                       @endcan
                     </li>
+                    <li>
+                      @can('ver-valoracion_tecnica')
+                      <a class="sidebar-link"  href="{{ url('valoracion_tecnica') }}" aria-expanded="false">
+                        <span class="sub-item">Valoración Tecnicas</span>
+                      </a>
+                      @endcan
+                    </li>
+                    <li>
+                      @can('ver-control_tecnica')
+                      <a class="sidebar-link"  href="{{ url('control_tecnica') }}" aria-expanded="false">
+                        <span class="sub-item">Control Tecnicas</span>
+                      </a>
+                      @endcan
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -529,7 +543,7 @@
 
     <!-- Datatables -->
     {{-- <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script> --}}
-    <script src="{{ asset ('assets/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset ('assets/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset ('assets/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset ('assets/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
