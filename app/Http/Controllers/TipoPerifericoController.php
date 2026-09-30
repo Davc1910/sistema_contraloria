@@ -27,6 +27,24 @@ class TipoPerifericoController extends Controller
         return view('tipo_periferico.index', compact('tipos_perifericos'));
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $tipos_perifericos = TipoPerifericos::where('tipo', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $tipos_perifericos = TipoPerifericos::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('tipo_periferico.pdf', compact('tipos_perifericos'));
+        return $pdf->stream('tipo_periferico.pdf');
+    }
+
     public function create()
     {
         return view('tipo_periferico.create');
@@ -96,9 +114,17 @@ class TipoPerifericoController extends Controller
 
     public function destroy($id)
     {
-       TipoPerifericos::find($id)->delete();
-        $bitacora = new BitacoraController();
-        $bitacora->update();
-        return redirect()->route('tipo_periferico.index')->with('eliminar', 'ok');
+       try {
+            $tipo_periferico = TipoPerifericos::findOrFail($id);
+
+            $tipo_periferico->delete();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
+            return redirect('tipo_periferico')->with('eliminar', 'ok');
+
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar el tipo de periférico debido a que está asociado a otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 }

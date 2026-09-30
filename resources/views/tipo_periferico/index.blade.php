@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-                            <a href="{{ url('tipoperiferico/pdf') }}" class="btn btn-sm btn-danger" target="_blank" id="pdfButton">
+                            <a href="{{ url('tipo_periferico/pdf') }}" class="btn btn-sm btn-danger" target="_blank" id="pdfButton">
                                 {{ ('PDF') }}
                             </a>
 
@@ -130,14 +130,14 @@
 
             function updatePdfLink() {
                 var searchTerm = table.search();
-                var pdfUrl = `{{ url('tipoperiferico/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
+                var pdfUrl = `{{ url('tipo_periferico/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
                 $('#pdfButton').attr('href', pdfUrl);
             }
 
             table.on('search.dt', function () {
                 var searchTerm = table.search();
                 $.ajax({
-                    url: "{{ url('tipoperiferico/pdf') }}",
+                    url: "{{ url('tipo_periferico/pdf') }}",
                     method: 'GET',
                     data: { search: searchTerm },
                     success: function(response) {
@@ -219,6 +219,21 @@
 
 
             </script>
-
+            
+            @if ($errors->any())
+        <script>
+            var errors = @json($errors->all());
+            errors.forEach(function(error) {
+                Swal.fire({
+                    title: 'Tipo de Periférico',
+                    text: error,
+                    icon: 'warning',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: '¡OK!',
+                });
+            });
+        </script>
+    @endif
 
 @endsection

@@ -225,7 +225,7 @@
             var errors = @json($errors->all());
             errors.forEach(function(error) {
                 Swal.fire({
-                    title: 'Ayudas',
+                    title: 'Oficina',
                     text: error,
                     icon: 'warning',
                     showConfirmButton: true,

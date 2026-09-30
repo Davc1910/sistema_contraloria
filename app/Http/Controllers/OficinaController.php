@@ -28,6 +28,26 @@ class OficinaController extends Controller
         return view('oficina.index', compact('oficinas'));
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $oficinas = Oficinas::where('encargado_cedula', 'LIKE', '%' . $search . '%')
+                           ->orWhere('nombre_encargado', 'LIKE', '%' . $search . '%')
+                           ->orWhere('nombre_oficina', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $oficinas = Oficinas::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('oficina.pdf', compact('oficinas'));
+        return $pdf->stream('oficina.pdf');
+    } 
+
     public function create()
     {
         return view('oficina.create');
@@ -104,10 +124,18 @@ class OficinaController extends Controller
 
     public function destroy($id)
     {
-        Oficinas::find($id)->delete();
-        $bitacora = new BitacoraController();
-        $bitacora->update();
-        return redirect('oficina')->with('eliminar', 'ok');
+        try {
+            $oficina = Oficinas::findOrFail($id);
+        
+            $oficina->delete();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
+            return redirect('oficina')->with('eliminar', 'ok');
+
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar la Oficina debido a que está asociado a otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 }
 

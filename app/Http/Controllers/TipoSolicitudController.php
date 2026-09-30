@@ -47,87 +47,102 @@ class TipoSolicitudController extends Controller
         return view('tipo_solicitud.index', compact('solicitudes'));
     }
 
-    public function getSolicitudDetalles($id)
+   public function getSolicitudDetalles($id)
     {
-        $solicitud = Solicitud::with([
-            'persona.oficina',
-            'articulo.articuloEspecifico',
-            'articulos.articuloEspecifico'
-        ])->findOrFail($id);
+        try {
+            // Cargar únicamente las relaciones válidas definidas en Solicitud
+            $solicitud = Solicitud::with([
+                'persona.oficina',
+                'articulos.articuloEspecifico'
+            ])->findOrFail($id);
 
-        $articulos = $solicitud->articulos()->with('articuloEspecifico')->get();
+            $articulos = $solicitud->articulos;
 
-        if ($articulos->isEmpty() && $solicitud->articulo) {
-            $articulos = collect([$solicitud->articulo]);
+            if ($articulos->isEmpty()) {
+                return response()->json([
+                    'solicitud' => [
+                        'id' => $solicitud->id,
+                        'descripcion' => $solicitud->descripcion,
+                        'fecha' => $solicitud->fecha,
+                    ],
+                    'tipo' => 'simple',
+                    'articulos' => []
+                ], 200);
+            }
+
+            $detalleArticulos = $articulos->map(function ($articulo) {
+                $tipo = $articulo->tipo_biene ?? $articulo->tipo_bien ?? 'Artículo';
+                $especifico = $articulo->articuloEspecifico;
+
+                if ($tipo === 'Mobiliario' && $especifico) {
+                    return [
+                        'id' => $articulo->id,
+                        'tipo_biene' => $tipo,
+                        'tipo_mobiliario' => $especifico->tipo_mobiliario ?? 'N/A',
+                        'altura' => $especifico->altura ?? 'N/A',
+                        'anchura' => $especifico->anchura ?? 'N/A',
+                        'serial' => $especifico->serial ?? 'N/A',
+                        'descripcion' => trim(
+                            ($especifico->tipo_mobiliario ?? 'N/A') . ' ' .
+                            ($especifico->serial ?? '') . ' ' .
+                            ($especifico->altura ?? '') . ' ' .
+                            ($especifico->anchura ?? '')
+                        ),
+                    ];
+                }
+
+                if ($tipo === 'Equipo' && $especifico) {
+                    $periferico = 'Ninguno';
+                    if (isset($especifico->perifericos) && $especifico->perifericos && isset($especifico->perifericos->tipo_periferico)) {
+                        $periferico = $especifico->perifericos->tipo_periferico->tipo ?? 'Ninguno';
+                    }
+
+                    return [
+                        'id' => $articulo->id,
+                        'tipo_biene' => $tipo,
+                        'cpu' => $especifico->cpu ?? 'N/A',
+                        'ram' => $especifico->ram ?? 'N/A',
+                        'disco_duro' => $especifico->disco_duro ?? 'N/A',
+                        'sistema_operativo' => $especifico->sistema_operativo ?? 'N/A',
+                        'serial' => $especifico->serial ?? 'N/A',
+                        'periferico' => $periferico,
+                        'descripcion' => trim(
+                            ($especifico->cpu ?? '') . ' ' .
+                            ($especifico->ram ?? '') . ' ' .
+                            ($especifico->disco_duro ?? '') . ' ' .
+                            ($especifico->sistema_operativo ?? '') . ' ' .
+                            ($especifico->serial ?? '') . ' ' .
+                            $periferico
+                        ),
+                    ];
+                }
+
+                return [
+                    'id' => $articulo->id,
+                    'tipo_biene' => $tipo,
+                    'descripcion' => $articulo->descripcion ?? 'Sin detalles disponibles',
+                ];
+            })->values();
+
+            return response()->json([
+                'solicitud' => [
+                    'id' => $solicitud->id,
+                    'descripcion' => $solicitud->descripcion,
+                    'fecha' => $solicitud->fecha,
+                    'persona' => $solicitud->persona ? $solicitud->persona->nombre . ' ' . $solicitud->persona->apellido : null,
+                    'cedula' => $solicitud->persona ? $solicitud->persona->cedula : null,
+                    'oficina' => $solicitud->persona && $solicitud->persona->oficina ? $solicitud->persona->oficina->nombre_oficina : null,
+                ],
+                'tipo' => $detalleArticulos->count() > 1 ? 'compuesta' : 'simple',
+                'articulos' => $detalleArticulos,
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $detalleArticulos = $articulos->map(function ($articulo) {
-            $tipo = $articulo->tipo_biene;
-            $especifico = $articulo->articuloEspecifico;
-
-            if ($tipo === 'Mobiliario' && $especifico) {
-                return [
-                    'id' => $articulo->id,
-                    'tipo_biene' => $tipo,
-                    'tipo_mobiliario' => $especifico->tipo_mobiliario ?? 'N/A',
-                    'altura' => $especifico->altura ?? 'N/A',
-                    'anchura' => $especifico->anchura ?? 'N/A',
-                    'serial' => $especifico->serial ?? 'N/A',
-                    'descripcion' => trim(
-                        ($especifico->tipo_mobiliario ?? 'N/A') . ' ' .
-                        ($especifico->serial ?? '') . ' ' .
-                        ($especifico->altura ?? '') . ' ' .
-                        ($especifico->anchura ?? '')
-                    ),
-                ];
-            }
-
-            if ($tipo === 'Equipo' && $especifico) {
-                $periferico = $especifico->perifericos && $especifico->perifericos->tipo_periferico
-                    ? $especifico->perifericos->tipo_periferico->tipo
-                    : 'Ninguno';
-
-                return [
-                    'id' => $articulo->id,
-                    'tipo_biene' => $tipo,
-                    'cpu' => $especifico->cpu ?? 'N/A',
-                    'ram' => $especifico->ram ?? 'N/A',
-                    'disco_duro' => $especifico->disco_duro ?? 'N/A',
-                    'sistema_operativo' => $especifico->sistema_operativo ?? 'N/A',
-                    'serial' => $especifico->serial ?? 'N/A',
-                    'periferico' => $periferico,
-                    'descripcion' => trim(
-                        ($especifico->cpu ?? '') . ' ' .
-                        ($especifico->ram ?? '') . ' ' .
-                        ($especifico->disco_duro ?? '') . ' ' .
-                        ($especifico->sistema_operativo ?? '') . ' ' .
-                        ($especifico->serial ?? '') . ' ' .
-                        $periferico
-                    ),
-                ];
-            }
-
-            return [
-                'id' => $articulo->id,
-                'tipo_biene' => $tipo,
-                'descripcion' => 'Sin detalles disponibles',
-            ];
-        })->values();
-
-        return response()->json([
-            'solicitud' => [
-                'id' => $solicitud->id,
-                'descripcion' => $solicitud->descripcion,
-                'fecha' => $solicitud->fecha,
-                'persona' => $solicitud->persona ? $solicitud->persona->nombre . ' ' . $solicitud->persona->apellido : null,
-                'cedula' => $solicitud->persona ? $solicitud->persona->cedula : null,
-                'oficina' => $solicitud->persona && $solicitud->persona->oficina ? $solicitud->persona->oficina->nombre_oficina : null,
-            ],
-            'tipo' => $detalleArticulos->count() > 1 ? 'compuesta' : 'simple',
-            'articulos' => $detalleArticulos,
-        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *

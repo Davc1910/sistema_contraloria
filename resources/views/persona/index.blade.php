@@ -52,12 +52,6 @@
                                 <tbody>
                                     @foreach ($personas as $persona)
                                         <tr>
-                                            {{-- <td class="font-weight-bold text-dark">
-                                                @if ($proyecto->parroquia)
-                                                    {{$proyecto->parroquia->nom_parroquia }} @else
-                                                @endif
-                                            </td> --}}
-
                                             <td class="font-weight-bold text-dark">{{ $persona->cedula }}</td>
                                             <td class="font-weight-bold text-dark">{{ $persona->nombre }}</td>
                                             <td class="font-weight-bold text-dark">{{ $persona->apellido }}</td>
@@ -228,7 +222,7 @@
             var errors = @json($errors->all());
             errors.forEach(function(error) {
                 Swal.fire({
-                    title: 'Proyecto',
+                    title: 'Persona',
                     text: error,
                     icon: 'warning',
                     showConfirmButton: true,

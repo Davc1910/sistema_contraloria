@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Reporte de Ayudas Sociales</title>
+    <title>Reporte de Oficinas</title>
 
 <style>
     body{
@@ -68,70 +68,32 @@
 <body>
     <div class="row">
         {{-- Encabezado: Usar Base64 para asegurar que se muestre --}}
-        <img class="centro" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/portada2.png'))) }}" alt="Encabezado">
+        
     </div>
 
-    <h1>Reporte de Ayudas Sociales</h1>
+    <h1>Reporte de las Oficinas</h1>
 
     <table class="table" cellpadding="1" cellspacing="1" width="100%" style="padding-bottom:0.4rem;font-size:0.6rem !important">
         <thead class="header">
             <tr>
-                <th>Nombre Ayuda</th>
-                <th>Tipo de Ayuda</th>
-                <th>Descripción</th>
-                <th>Comprobante(s)</th> {{-- Nueva columna para las imágenes --}}
+                <th>Cédula Encargado</th>
+                <th>Nombre Encargado</th>
+                <th>Nombre Oficina</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($ayudas as $ayuda)
+            @foreach ($oficinas as $oficina)
                 <tr>
-                    <td>{{ $ayuda->nombre_ayuda }}</td>
-                    <td>{{ $ayuda->tipo_ayuda }}</td>
-                    <td>{{ Str::limit($ayuda->descripcion, 50) }}</td>
-                    <td>
-                        {{-- Mostrar las imágenes si existen --}}
-                        @if ($ayuda->foto_ayuda)
-                            @php
-                                $fotos = json_decode($ayuda->foto_ayuda); // Decodifica el JSON
-                            @endphp
-                            @if (is_array($fotos))
-                                @foreach ($fotos as $foto)
-                                    @php
-                                        $imagePath = public_path('foto_ayuda/ayudas/' . $foto);
-                                    @endphp
-                                    @if (file_exists($imagePath))
-                                        <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents($imagePath)) }}" 
-                                             alt="Comprobante" 
-                                             style="max-width: 100px; height: auto; margin-bottom: 5px;"> 
-                                        {{-- Ajusta max-width según tus necesidades --}}
-                                    @else
-                                        <p>Imagen no encontrada: {{ $foto }}</p>
-                                    @endif
-                                @endforeach
-                            @else
-                                {{-- Si 'foto_ayuda' no es un JSON array pero existe un solo nombre de archivo --}}
-                                @php
-                                    $imagePath = public_path('foto_ayuda/ayudas/' . $ayuda->foto_ayuda);
-                                @endphp
-                                @if (file_exists($imagePath))
-                                    <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents($imagePath)) }}" 
-                                         alt="Comprobante" 
-                                         style="max-width: 100px; height: auto;">
-                                @else
-                                    <p>Imagen no encontrada: {{ $ayuda->foto_ayuda }}</p>
-                                @endif
-                            @endif
-                        @else
-                            No disponible
-                        @endif
-                    </td>
+                    <td>{{ $oficina->encargado_cedula }}</td>
+                    <td>{{ $oficina->nombre_encargado }}</td>
+                    <td>{{ $oficina->nombre_oficina }}</td>
                 </tr>
-            @endforeach  
+            @endforeach 
         </tbody>
     </table>
     <div class="row">
         {{-- Pie de página: Asegúrate de usar Base64 también aquí --}}
-        <img class="footer-image" src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('img/portada2.png'))) }}" alt="Pie de Página">
+       
     </div>
 </body>
 </html>

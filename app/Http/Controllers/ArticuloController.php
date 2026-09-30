@@ -6,6 +6,7 @@ use App\Models\Articulo;
 use App\Models\Equipo;
 use App\Models\Mobiliarios;
 use App\Models\Perifericos;
+use App\Models\Solicitud;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,48 @@ class ArticuloController extends Controller
         // Usamos Eager Loading para evitar el problema de consultas N+1
         $articulos = Articulo::with(['articuloEspecifico'])->get();
         return view('articulo.index', compact('articulos'));
+    }
+
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        $articulos = Articulo::leftJoin('equipos', function ($join) {
+                    $join->on('articulos.articulo_especifico_id', '=', 'equipos.id')
+                        ->where('articulos.articulo_especifico_type', '=', 'App\\Models\\Equipo');
+                })
+                ->leftJoin('mobiliarios', function ($join) {
+                    $join->on('articulos.articulo_especifico_id', '=', 'mobiliarios.id')
+                        ->where('articulos.articulo_especifico_type', '=', 'App\\Models\\Mobiliario');
+                })
+                ->select('articulos.*','equipos.codigo_equipo', 'equipos.cpu', 'equipos.ram', 'equipos.disco_duro', 'equipos.sistema_operativo', 'equipos.serial',
+                'equipos.id_periferico','equipos.descripcion_equipo', 'mobiliarios.codigo_mobiliario','mobiliarios.tipo_mobiliario', 'mobiliarios.altura', 'mobiliarios.anchura',
+                'mobiliarios.descripcion_mobiliario');
+    
+        if ($search) {
+            // Filtrar los articulos según la consulta de búsqueda
+            $articulos = $articulos->where(function($query) use ($search) {
+                $query->where('equipos.codigo_equipo', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.cpu', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.ram', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.disco_duro', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.sistema_operativo', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.serial', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.id_periferico', 'LIKE', '%' . $search . '%')
+                      ->orWhere('equipos.descripcion_equipo', 'LIKE', '%' . $search . '%')
+                      ->orWhere('mobiliarios.codigo_mobiliario', 'LIKE', '%' . $search . '%')
+                      ->orWhere('mobiliarios.altura', 'LIKE', '%' . $search . '%')
+                      ->orWhere('mobiliarios.anchura', 'LIKE', '%' . $search . '%')
+                      ->orWhere('mobiliarios.descripcion_mobiliario', 'LIKE', '%' . $search . '%');
+                      
+            });
+        }
+    
+        $articulos = $articulos->get();
+    
+        // Generar el PDF, incluso si no se encuentran articulos
+        $pdf = Pdf::loadView('articulo.pdf', compact('articulos'));
+        return $pdf->stream('articulo.pdf');
     }
 
     /**
@@ -278,7 +321,7 @@ class ArticuloController extends Controller
      * @param  \App\Models\Articulo  $articulo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articulo $articulo)
+    public function destroy($id)
     {
         //
         try {

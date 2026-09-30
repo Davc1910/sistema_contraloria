@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
-                            <a href="{{ url('periferico/pdf') }}" class="btn btn-sm btn-danger" target="_blank" id="pdfButton">
+                            <a href="{{ url('articulo/pdf') }}" class="btn btn-sm btn-danger" target="_blank" id="pdfButton">
                                 {{ ('PDF') }}
                             </a>
 
@@ -198,14 +198,14 @@
 
             function updatePdfLink() {
                 var searchTerm = table.search();
-                var pdfUrl = `{{ url('periferico/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
+                var pdfUrl = `{{ url('articulo/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
                 $('#pdfButton').attr('href', pdfUrl);
             }
 
             table.on('search.dt', function () {
                 var searchTerm = table.search();
                 $.ajax({
-                    url: "{{ url('periferico/pdf') }}",
+                    url: "{{ url('articulo/pdf') }}",
                     method: 'GET',
                     data: { search: searchTerm },
                     success: function(response) {
@@ -291,7 +291,7 @@
             var errors = @json($errors->all());
             errors.forEach(function(error) {
                 Swal.fire({
-                    title: 'Periférico',
+                    title: 'Articulo',
                     text: error,
                     icon: 'warning',
                     showConfirmButton: true,

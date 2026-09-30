@@ -26,6 +26,25 @@ class MarcaController extends Controller
         return view('marca.index', compact('marcas'));
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $marcas = Marcas::where('nombre_marca', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $marcas = Marcas::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('marca.pdf', compact('marcas'));
+        return $pdf->stream('marca.pdf');
+    } 
+
+
     public function create()
     {
         return view('marca.create');
@@ -104,9 +123,17 @@ class MarcaController extends Controller
 
     public function destroy($id)
     {
-        Marcas::find($id)->delete();
-        $bitacora = new BitacoraController;
-        $bitacora->update();
-        return redirect('marca.index')->with('eliminar', 'ok');
+        try {
+            $marca = Marcas::findOrFail($id);
+
+            $marca->delete();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
+            return redirect('marca')->with('eliminar', 'ok');
+
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar la marca debido a que está asociada a otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 }

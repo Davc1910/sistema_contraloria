@@ -22,6 +22,27 @@ class PerifericoController extends Controller
         $this->middleware('permission:borrar-periferico', ['only' => ['destroy']]);
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $perifericos = Perifericos::where('serial', 'LIKE', '%' . $search . '%')
+                           ->orWhere('id_tipo', 'LIKE', '%' . $search . '%')
+                           ->orWhere('id_marca', 'LIKE', '%' . $search . '%')
+                           ->orWhere('id_modelo', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $perifericos = Perifericos::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('periferico.pdf', compact('perifericos'));
+        return $pdf->stream('periferico.pdf');
+    }
+
     public function index()
     {
         $perifericos = Perifericos::with('marca')->get();
@@ -110,9 +131,17 @@ class PerifericoController extends Controller
 
     public function destroy($id)
     {
-        Perifericos::find($id)->delete();
-        $bitacora = new BitacoraController();
-        $bitacora->update();
-        return redirect()->route('periferico.index')->with('eliminar', 'ok');
+        try {
+            $periferico = Perifericos::findOrFail($id);
+
+            $periferico->delete();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
+            return redirect('periferico')->with('eliminar', 'ok');
+
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar periférico debido a que está asociado a otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 }

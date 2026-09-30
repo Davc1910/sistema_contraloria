@@ -25,6 +25,24 @@ class ModeloController extends Controller
         return view('modelo.index', compact('modelos'));
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $modelos = Modelos::where('nombre_modelo', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $modelos = Modelos::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('modelo.pdf', compact('modelos'));
+        return $pdf->stream('modelo.pdf');
+    } 
+
     public function create()
     {
         return view('modelo.create');
@@ -105,9 +123,17 @@ class ModeloController extends Controller
     */
     public function destroy($id)
     {
-        Modelos::find($id)->delete();
-        $bitacora = new BitacoraController;
-        $bitacora->update();
-        return redirect()->route('modelo.index')->with('eliminar', 'ok');
+        try {
+            $modelo = Modelos::findOrFail($id);
+
+            $modelo->delete();
+            $bitacora = new BitacoraController;
+            $bitacora->update();
+            return redirect('modelo')->with('eliminar', 'ok');
+
+        } catch (QueryException $exception) {
+            $errorMessage = 'Error: No se puede eliminar el modelo debido a que está asociado a otros registros.';
+            return redirect()->back()->withErrors($errorMessage);
+        }
     }
 }

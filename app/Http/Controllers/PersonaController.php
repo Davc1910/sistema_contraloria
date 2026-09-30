@@ -29,6 +29,29 @@ class PersonaController extends Controller
         return view('persona.index', compact('personas'));
     }
 
+    public function pdf(Request $request)
+    {
+        $search = $request->input('search');
+    
+        if ($search) {
+            // Filtrar los bancos según la consulta de búsqueda
+            $personas = Personas::where('cedula', 'LIKE', '%' . $search . '%')
+                           ->orWhere('nombre', 'LIKE', '%' . $search . '%')
+                           ->orWhere('apellido', 'LIKE', '%' . $search . '%')
+                           ->orWhere('email', 'LIKE', '%' . $search . '%')
+                           ->orWhere('telefono', 'LIKE', '%' . $search . '%')
+                           ->orWhere('id_oficina', 'LIKE', '%' . $search . '%')
+                           ->get();
+        } else {
+            // Obtener todos los bancos si no hay término de búsqueda
+            $personas = Personas::all();
+        }
+    
+        // Generar el PDF, incluso si no se encuentran bancos
+        $pdf = Pdf::loadView('persona.pdf', compact('personas'));
+        return $pdf->stream('persona.pdf');
+    }
+
     public function create()
     {
         $oficinas = Oficinas::all();
