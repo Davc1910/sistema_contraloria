@@ -25,6 +25,7 @@ use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\TipoSolicitudController;
 use App\Http\Controllers\ValoracionTecnicaController;
 use App\Http\Controllers\ControlTecnicaController;
+use App\Http\Controllers\EstadisticaController;
 use App\Http\Controllers\ReporteController;
 
 
@@ -33,9 +34,9 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
-// Route::get('/reset-password/{token}/{email}', function ($token, $email) {
-//     return view('reset-password-confirm', ['token' => $token, 'email' => $email]);
-// })->name('password.reset');
+Route::get('/reset-password/{token}/{email}', function ($token, $email) {
+    return view('auth.reset-password-confirm', ['token' => $token, 'email' => $email]);
+})->name('password.reset');
 
 Route::post('/reset-password', [PasswordResetController::class, 'sendEmail'])->name('password.email');
 
@@ -148,14 +149,14 @@ Route::resource('valoracion_tecnica', ValoracionTecnicaController::class)->middl
 Route::get('/control_tecnica', [ControlTecnicaController::class, 'index'])->name('control_tecnica')->middleware('auth');
 
 // /* Ruta Estadistica*/
-// Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');
+Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');
 
 /* Ruta Bitacora*/
 Route::get('bitacora', [ReporteController::class, 'bitacora'])->name('bitacora')->middleware('auth');
 
 /* Ruta Reporte*/
-// Route::get('reporte', [ReporteController::class, 'index'])->name('index')->middleware('auth');
-// Route::get('/reporte/pdf',  [ReporteController::class,'generarPDF'])->name('reporte')->middleware('auth');
+Route::get('reporte', [ReporteController::class, 'index'])->name('index')->middleware('auth');
+Route::get('/reporte/pdf',  [ReporteController::class,'generarPDF'])->name('reporte')->middleware('auth');
 
 /* Ruta Reporte*/
 // Route::get('especifico', [EspecificosController ::class, 'index'])->name('index')->middleware('auth');

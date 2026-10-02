@@ -129,47 +129,27 @@
     <table class="table">
         <thead class="header">
             <tr>
-                <th>Vocero Asignado</th>
-                <th>Proyecto Asigando y Tipo</th>
-                <th>Fecha Inicial y Final del Proyecto</th>
-                <th>Ayuda Asignado y Tipo</th>
-                <th> Estatus de la Evaluacion </th>
-                <th>Presupuesto y moneda de la Asignacion </th>
+                <th>Persona</th>
+                <th>Solicitud</th>
+                <th>Fecha</th>
+                <th>Estatus del tipo</th>
+                <th>Estatus de aprobación</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($resultados as $resultado)  
+            @forelse ($solicitudes as $solicitud)
+                <tr>
+                    <td>{{ $solicitud->persona ? $solicitud->persona->cedula . ' - ' . $solicitud->persona->nombre . ' ' . $solicitud->persona->apellido : 'N/A' }}</td>
+                    <td>{{ $solicitud->descripcion }}</td>
+                    <td>{{ date('d/m/Y', strtotime($solicitud->fecha)) }}</td>
+                    <td>{{ $solicitud->tipoSolicitud->estatus ?? 'Pendiente' }}</td>
+                    <td>{{ $solicitud->tipoSolicitud->estatus_resp ?? 'Pendiente' }}</td>
                 </tr>
-                    <td>{{ $resultado->cedula}}
-                        {{ $resultado->nombre}} {{ $resultado->apellido}}
-                    </td>
-
-                    <td>
-                        {{ $resultado->nombre_pro}}
-                        {{ $resultado->tipo_pro}} 
-                    </td>
-
-                    <td>
-                        {{ $resultado->fecha_inicial}}
-                        {{ $resultado->fecha_final}}
-                    </td>
-                    
-                    <td>
-                        {{ $resultado->nombre_ayuda }}
-                        {{ $resultado->tipo_ayuda}} 
-                    </td>
-
-                    <td>{{ $resultado->viabilidad}}
-                        {{ $resultado->estatus_resp }}
-                    </td>
-
-                    <td>
-                        {{ $resultado->presupuesto}}
-                        {{ $resultado->moneda_presu}}
-                    </td>
-                    
+            @empty
+                <tr>
+                    <td colspan="5" class="text-center">No hay solicitudes registradas.</td>
                 </tr>
-            @endforeach 
+            @endforelse
         </tbody>
     </table>
     <div class="row">

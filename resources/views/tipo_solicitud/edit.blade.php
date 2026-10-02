@@ -18,7 +18,7 @@
 
                 </div>
 
-                <form method="post" action="{{ route('tipo_solicitud.update', $tipo_solicitud->id) }}" enctype="multipart/form-data" onsubmit="return Solicitudes(this)">
+                <form method="post" action="{{ route('tipo_solicitud.update', $tipo_solicitud->id) }}" enctype="multipart/form-data" onsubmit="return TipoSolicitud(this)">
                     @csrf
                     @method('PUT')
 

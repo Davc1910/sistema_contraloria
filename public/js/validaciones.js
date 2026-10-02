@@ -1103,7 +1103,7 @@ function articulo(obj) {
 
     tipo.value = 'Mobiliario';
 
-    if (!validarCampoArticulo(tipoMobiliario, 'Ingrese el tipo de mobiliario.', 15, /^[\p{L}\p{N}][\p{L}\p{N} .-]*$/u)) {
+    if (!validarCampoArticulo(tipoMobiliario, 'Ingrese el tipo de mobiliario.', 50, /^[\p{L}\p{N}][\p{L}\p{N} .-]*$/u)) {
         return false;
     }
     if (!validarCampoArticulo(altura, 'Ingrese la altura del mobiliario.', 50, /^[\p{L}\p{N} .,/()-]+$/u)) {
@@ -1153,6 +1153,143 @@ function articulo_equipo(obj) {
         return mostrarErrorArticulo(periferico, 'Debe seleccionar un periférico.');
     }
     return validarCampoArticulo(descripcion, 'Ingrese la descripción del equipo.', 1000);
+}
+
+
+function Solicitudes(form) {
+    if (!form.elements.id_persona) {
+        return validarTipoSolicitud(form);
+    }
+
+    var persona = form.elements.id_persona;
+    var descripcion = form.elements.descripcion;
+    var fecha = form.elements.fecha;
+    var esCompuesta = document.getElementById('articulo_compuesto').checked;
+    var articulo = esCompuesta
+        ? form.querySelector('input[name="articulos[]"]:checked')
+        : form.elements.id_articulo;
+    var mensaje = '';
+    var campo = null;
+
+    if (!persona.value) {
+        mensaje = 'Debe seleccionar una persona asignada.';
+        campo = persona;
+    } else if (!articulo || (!esCompuesta && !articulo.value)) {
+        mensaje = esCompuesta
+            ? 'Debe seleccionar al menos un artículo.'
+            : 'Debe seleccionar un artículo.';
+        campo = esCompuesta
+            ? form.querySelector('input[name="articulos[]"]')
+            : articulo;
+    } else if (!descripcion.value.trim()) {
+        mensaje = 'Debe ingresar la descripción de la solicitud.';
+        campo = descripcion;
+    } else if (!fecha.value) {
+        mensaje = 'Debe seleccionar la fecha de asignación.';
+        campo = fecha;
+    }
+
+    if (mensaje) {
+        Swal.fire({
+            title: 'Solicitud',
+            text: mensaje,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '¡OK!'
+        }).then(function () {
+            if (campo) {
+                campo.focus();
+            }
+        });
+        return false;
+    }
+
+    return true;
+}
+
+function TipoSolicitud(form) {
+    var solicitud = form.elements.id_solicitud;
+    var estatus = form.elements.estatus;
+    var descripcion = form.elements.descripcion;
+    var fecha = form.elements.fecha;
+    var respuesta = form.querySelector('input[name="estatus_resp"]:checked');
+    var respuestas = form.querySelectorAll('input[type="radio"][name="estatus_resp"]');
+    var mensaje = '';
+    var campo = null;
+
+    if (solicitud && !solicitud.value) {
+        mensaje = 'No se encontró la solicitud asociada.';
+        campo = estatus || descripcion;
+    } else if (estatus && !estatus.value) {
+        mensaje = 'Debe seleccionar un estatus.';
+        campo = estatus;
+    } else if (estatus && estatus.value === 'Aprobado' && respuestas.length && !respuesta) {
+        mensaje = 'Debe seleccionar el estatus de aprobación.';
+        campo = respuestas[0];
+    } else if (!descripcion.value.trim()) {
+        mensaje = 'Debe ingresar la descripción.';
+        campo = descripcion;
+    } else if (!fecha.value) {
+        mensaje = 'Debe seleccionar la fecha de asignación.';
+        campo = fecha;
+    }
+
+    if (mensaje) {
+        Swal.fire({
+            title: 'Tipo de Solicitud',
+            text: mensaje,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '¡OK!'
+        }).then(function () {
+            if (campo) {
+                campo.focus();
+            }
+        });
+        return false;
+    }
+
+    return true;
+}
+
+function Valoracion(form) {
+    var tipoSolicitud = form.elements.id_tipo_solicitud;
+    var desincorporar = form.elements.desincorporar;
+    var descripcion = form.elements.descripcion;
+    var fecha = form.elements.fecha;
+    var mensaje = '';
+    var campo = null;
+
+    if (!tipoSolicitud || !tipoSolicitud.value) {
+        mensaje = 'No se encontró el tipo de solicitud asociado.';
+        campo = desincorporar;
+    } else if (!desincorporar.value) {
+        mensaje = 'Debe seleccionar un estatus de desincorporación.';
+        campo = desincorporar;
+    } else if (!descripcion.value.trim()) {
+        mensaje = 'Debe ingresar la descripción de la valoración técnica.';
+        campo = descripcion;
+    } else if (!fecha.value) {
+        mensaje = 'Debe seleccionar la fecha de la valoración técnica.';
+        campo = fecha;
+    }
+
+    if (mensaje) {
+        Swal.fire({
+            title: 'Valoración Técnica',
+            text: mensaje,
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '¡OK!'
+        }).then(function () {
+            if (campo) {
+                campo.focus();
+            }
+        });
+        return false;
+    }
+
+    return true;
 }
 
 // Fin de la validación del Sistema Contraloria //

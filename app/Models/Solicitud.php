@@ -30,4 +30,9 @@ class Solicitud extends Model
         return $this->hasMany(ArticuloSolicitud::class, 'id_solicitud', 'id');
     }
 
+    public function tipoSolicitud()
+    {
+        return $this->hasOne(TipoSolicitud::class, 'id_solicitud', 'id');
+    }
+
 }

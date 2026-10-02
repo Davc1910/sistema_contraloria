@@ -8,14 +8,13 @@ use App\Models\Oficinas;
 use App\Models\Personas;
 use App\Models\Modelos;
 use App\Models\Marcas;
-use App\Models\Mobiliarios;
-use App\Models\perifericos;
+use App\Models\TipoPerifericos;
+use App\Models\Perifericos;
 use App\Models\Articulo;
 use App\Models\Equipo;
+use App\Models\Mobiliarios;
 use App\Models\Solicitud;
-use App\Models\tipoSolicitud;
-use App\Models\TipoPerifericos;
-
+use App\Models\TipoSolicitud;
 
 
 class homeController extends Controller
@@ -43,7 +42,7 @@ class homeController extends Controller
         $count_tipoperiferico = DB::table('tipo_perifericos')
         ->count();
 
-        $perifericos = perifericos::all();
+        $perifericos = Perifericos::all();
         $count_periferico = DB::table('perifericos')
         ->count();
 

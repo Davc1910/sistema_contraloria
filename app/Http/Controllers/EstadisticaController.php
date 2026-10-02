@@ -16,43 +16,43 @@ class EstadisticaController extends Controller
     public function index()
     {
         // 1. OBTENER DATOS DE EVALUACIONES (Total por mes)
-        $evaluaciones_total = DB::table('evaluaciones')
+        $solicitudes_total = DB::table('solicitudes')
         ->select(DB::raw('count(*) as total'), DB::raw('EXTRACT(MONTH FROM created_at) as mes'))
         ->whereYear('created_at', date('Y'))
         ->groupBy(DB::raw('EXTRACT(MONTH FROM created_at)'))
         ->get();
 
         // Llamada a la función única, pasando la etiqueta del gráfico
-        $data_evaluacion = $this->preprareChartData($evaluaciones_total, 'Número de evaluaciones');
+        $data_solicitud = $this->preprareChartData($solicitudes_total, 'Número de solicitudes');
 
-        // 2. OBTENER DATOS DE EVALUACIONES (Estatus Aprobado/Negado)
-        $evaluaciones_estatus = DB::table('evaluaciones')
-        ->select(DB::raw('count(*) as total'), DB::raw('EXTRACT(MONTH FROM fecha_evalu) as mes'), 'estatus')
-        ->whereYear('fecha_evalu', date('Y'))
-        ->groupBy('estatus', DB::raw('EXTRACT(MONTH FROM fecha_evalu)'))
+        // // 2. OBTENER DATOS DE EVALUACIONES (Estatus Aprobado/Negado)
+        $tipo_solicitudes_estatus = DB::table('tipo_solicitudes')
+        ->select(DB::raw('count(*) as total'), DB::raw('EXTRACT(MONTH FROM fecha) as mes'), 'estatus')
+        ->whereYear('fecha', date('Y'))
+        ->groupBy('estatus', DB::raw('EXTRACT(MONTH FROM fecha)'))
         ->get();
 
-        $data_aprobado = $this->preparePieChartData($evaluaciones_estatus);
+        $data_aprobado = $this->preparePieChartData($tipo_solicitudes_estatus);
 
-        // 3. OBTENER DATOS DE SEGUIMIENTOS (Total por mes) - MOVIDO ANTES DEL RETURN
-        $seguimientos = DB::table('seguimientos')
-        ->select(DB::raw('count(*) as total'), DB::raw('EXTRACT(MONTH FROM created_at) as mes'))
-        ->whereYear('created_at', date('Y'))
-        ->groupBy(DB::raw('EXTRACT(MONTH FROM created_at)'))
-        ->get();
+        // // 3. OBTENER DATOS DE SEGUIMIENTOS (Total por mes) - MOVIDO ANTES DEL RETURN
+        // $seguimientos = DB::table('seguimientos')
+        // ->select(DB::raw('count(*) as total'), DB::raw('EXTRACT(MONTH FROM created_at) as mes'))
+        // ->whereYear('created_at', date('Y'))
+        // ->groupBy(DB::raw('EXTRACT(MONTH FROM created_at)'))
+        // ->get();
 
-        // Llamada a la función única, pasando la etiqueta de "Seguimientos"
-        $data_seguimiento = $this->prepraChartData($seguimientos, 'Número de seguimientos');
+        // // Llamada a la función única, pasando la etiqueta de "Seguimientos"
+        // $data_seguimiento = $this->prepraChartData($seguimientos, 'Número de seguimientos');
 
         // Retorna la vista con TODAS las variables
-        return view('estadistica.index', compact('data_evaluacion', 'data_aprobado', 'data_seguimiento'));
+        return view('estadistica.index', compact('data_solicitud', 'data_aprobado'));
     }
 
     // --------------------------------------------------------------------------------------------------
     // FUNCIÓN DE PREPARACIÓN DE GRÁFICOS (ÚNICA DEFINICIÓN)
     // Usada para Evaluaciones y Seguimientos.
     // --------------------------------------------------------------------------------------------------
-    private function preprareChartData($dataCollection, $label) 
+    private function preprareChartData($dataCollection, $label)
     {
         $labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         $dataset = array_fill(0, 12, 0);
@@ -79,7 +79,7 @@ class EstadisticaController extends Controller
     private function preparePieChartData($evaluaciones)
     {
         $labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-        
+
         $aprobadas = array_fill(0, 12, 0);
         $negados = array_fill(0, 12, 0);
 
@@ -112,7 +112,7 @@ class EstadisticaController extends Controller
         ];
     }
 
-    private function prepraChartData($dataCollection, $label) 
+    private function prepraChartData($dataCollection, $label)
     {
         $labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
         $dataset = array_fill(0, 12, 0);

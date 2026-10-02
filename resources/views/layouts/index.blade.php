@@ -202,6 +202,11 @@
                             </a>
                         @endif
                     </li>
+                    <li>
+                      <a href="{{ url('estadistica')}}">
+                        <span class="sub-item">Estadísticas</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -222,11 +227,6 @@
                     <li>
                       <a href="{{ url('reporte')}}">
                         <span class="sub-item">Reporte General</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{ url('especifico')}}">
-                        <span class="sub-item">Reporte Especifico</span>
                       </a>
                     </li>
                   </ul>

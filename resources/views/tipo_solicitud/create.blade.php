@@ -18,7 +18,7 @@
 
                 </div>
 
-                <form method="post" action="{{ route('tipo_solicitud.store') }}" enctype="multipart/form-data" onsubmit="return Solicitudes(this)">
+                <form method="post" action="{{ route('tipo_solicitud.store') }}" enctype="multipart/form-data" onsubmit="return TipoSolicitud(this)">
                     @csrf
 
                         <div class="card-body">

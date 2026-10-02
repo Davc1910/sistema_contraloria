@@ -6,6 +6,7 @@
         <link href="{{ asset ('assets/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
+
 @section('content')
 
     <div class="container">
@@ -14,53 +15,38 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <a href="{{ route('reporte') }}" class="btn btn-sm btn-danger" target="_blank">PDF</a>
+                            <h2 class="font-weight-bold text-dark">Reporte General</h2>
+                            <span></span>
 
-                            <a href="{{ url('reporte/pdf') }}" class="btn btn-sm btn-danger" target="_blank" id="pdfButton">
-                                {{ ('PDF') }}
-                            </a>
-
-                            <h2 class="font-weight-bold text-dark" style="margin-right: 45%">Reporte General</h2>
                         </div>
-                        
-                        <div class="card-body">
+
+                    <div class="card-body">
                         <div class="table-responsive p-3">
                     <table class="table align-items-center table-flush" id="dataTable">
                         <thead class="thead-light">
                                     <tr>
-                                        <th class="font-weight-bold text-dark">Vocero Asignado</th>
-                                        <th class="font-weight-bold text-dark">Proyecto Asigando y Tipo</th>
-                                        <th class="font-weight-bold text-dark">Fecha Inicial y Final del Proyecto</th>
-                                        <th class="font-weight-bold text-dark">Ayuda Asignado y Tipo</th>
-                                        <th class="font-weight-bold text-dark">Estatus de la Evaluacion</th>
-                                        <th class="font-weight-bold text-dark">Presupuesto y moneda de la Asignacion</th>
+                                        <th class="font-weight-bold text-dark">Persona</th>
+                                        <th class="font-weight-bold text-dark">Solicitud</th>
+                                        <th class="font-weight-bold text-dark">Fecha</th>
+                                        <th class="font-weight-bold text-dark">Estatus del tipo</th>
+                                        <th class="font-weight-bold text-dark">Estatus de aprobación</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($resultados as $resultado)
+                                    @forelse ($solicitudes as $solicitud)
                                         <tr>
-                                            <td class="font-weight-bold text-dark">{{ $resultado->cedula}}
-                                                {{ $resultado->nombre}} {{ $resultado->apellido}}
-                                            </td>
-
-                                            <td class="font-weight-bold text-dark">{{ $resultado->nombre_pro}}
-                                                {{ $resultado->tipo_pro}} 
-                                            </td>
-
-                                            <td class="font-weight-bold text-dark">{{ date('d/m/Y', strtotime( $resultado->fecha_inicial)) }} {{ date('d/m/Y', strtotime($resultado->fecha_final)) }}</td>
-                                            
-                                            <td class="font-weight-bold text-dark">{{ $resultado->nombre_ayuda }}
-                                                {{ $resultado->tipo_ayuda}} 
-                                            </td>
-
-                                            <td class="font-weight-bold text-dark">{{ $resultado->viabilidad}}
-                                                {{ $resultado->estatus_resp }}  
-                                            </td>
-
-                                            <td class="font-weight-bold text-dark">{{ $resultado->presupuesto}}
-                                                 {{ $resultado->moneda_presu}} 
-                                            </td>
+                                            <td>{{ $solicitud->persona ? $solicitud->persona->cedula . ' - ' . $solicitud->persona->nombre . ' ' . $solicitud->persona->apellido : 'N/A' }}</td>
+                                            <td>{{ $solicitud->descripcion }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($solicitud->fecha)) }}</td>
+                                            <td>{{ $solicitud->tipoSolicitud->estatus ?? 'Pendiente' }}</td>
+                                            <td>{{ $solicitud->tipoSolicitud->estatus_resp ?? 'Pendiente' }}</td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">No hay solicitudes registradas.</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -69,7 +55,7 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 
 @section('datatable')
@@ -79,11 +65,11 @@
 
     <script>
         $(document).ready(function () {
-            var table = $('#dataTable').DataTable({
+            $('#dataTable').DataTable({
                 responsive: true,
                 autoWidth: false,
-                "language": {       
-                    "lengthMenu": "Mostrar " + 
+                "language": {
+                    "lengthMenu": "Mostrar " +
                                     `<select class='form-select'>
                                         <option value='5'>5</option>
                                         <option value='10'>10</option>
@@ -107,19 +93,7 @@
                     thousands: '.',
                 },
             });
-            
-             function updatePdfLink() {
-                var searchTerm = table.search();
-                var pdfUrl = `{{ url('reporte/pdf') }}?search=${encodeURIComponent(searchTerm)}`;
-                $('#pdfButton').attr('href', pdfUrl);
-                console.log('PDF URL actualizada:', pdfUrl);
-            }
-
-            table.on('search.dt', function() {
-                updatePdfLink();
-            });
-
-            updatePdfLink();
         });
     </script>
+
 @endsection
