@@ -141,12 +141,15 @@ Route::post('/actualizar-estatus-tipo_solicitud/{id}', [TipoSolicitudController:
 Route::get('/valoracion_tecnica', [ValoracionTecnicaController::class, 'index'])->name('valoracion_tecnica')->middleware('auth');
 Route::get('/valoracion_tecnica/create', [ValoracionTecnicaController::class, 'create'])->name('valoracion_tecnica.create')->middleware('auth');
 Route::get('/valoracion_tecnica/create/{id}', [ValoracionTecnicaController::class,'create'])->name('valoracion_tecnica.create')->middleware('auth');
+// Route::get('/valoracion_tecnica/{id}/detalles', [ValoracionTecnicaController::class, 'getValoracionTecnicaDetalles'])->name('valoracion_tecnica.detalles')->middleware('auth');
 Route::get('/valoracion_tecnica/pdf', [ValoracionTecnicaController::class, 'pdf'])->name('valoracion_tecnica.pdf')->middleware('auth');
 Route::resource('valoracion_tecnica', ValoracionTecnicaController::class)->middleware('auth');
 
 
 /* Ruta Control Técnica */
 Route::get('/control_tecnica', [ControlTecnicaController::class, 'index'])->name('control_tecnica')->middleware('auth');
+Route::get('/valoracion_tecnica/{id}/detalles', [ControlTecnicaController::class, 'getValoracionTecnicaDetalles'])->name('valoracion_tecnica.detalles')->middleware('auth');
+
 
 // /* Ruta Estadistica*/
 Route::get('estadistica', [EstadisticaController::class, 'index'])->name('estadistica')->middleware('auth');

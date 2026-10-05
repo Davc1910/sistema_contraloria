@@ -45,6 +45,18 @@
                                                     </svg></a>
                                                 @endcan
 
+                                                <!-- Botón en la tabla/vista para abrir los detalles -->
+                                                <button type="button"
+                                                        class="btn btn-info btn-sm btn-detalle-valoracion_tecnica"
+                                                        style="margin: 0 1px;"
+                                                        title="Ver Detalles"
+                                                        data-valoracion_tecnica-id="{{ $valoracion_tecnica->id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-text-window-reverse" viewBox="0 0 16 16" style="color: #ffff; cursor: pointer;">
+                                                        <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5m-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1z"/>
+                                                        <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zm0 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                                                    </svg>
+                                                </button>
+
                                             </div>
 
                                         </td>
@@ -55,6 +67,26 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Estructura del Modal -->
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalScrollableTitle">Detalles de la Valoración Técnica</h5>
+            <button type="button" class="btn-close close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- El contenido AJAX se cargará aquí -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
     </div>
 
 @endsection
@@ -123,69 +155,6 @@
 
         });
     </script>
-    {{-- ! FUNCION PARA MOSTRAR ERRORES --}}
-
-    @if ($errors->any())
-        <script>
-            // ... (Tu código de SweetAlert para errores)
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: '¡Guardado Exitoso!',
-                text: '{{ session('success') }}',
-                icon: 'success', // Icono de éxito
-                timer: 5000, // Opcional: la alerta se cierra automáticamente después de 3 segundos
-                timerProgressBar: true,
-                showConfirmButton: false // No mostramos el botón si usamos timer
-            });
-        </script>
-    @endif
-
-@endsection
-
-@section('sweetalert')
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-        @if (session('eliminar') == 'ok')
-
-            <script>
-                Swal.fire(
-                '¡Eliminado!',
-                'Se Eliminó Con Éxito.',
-                'success'
-                )
-            </script>
-
-        @endif
-
-            <script>
-
-                $('.sweetalert').submit(function(e){
-                    e.preventDefault();
-
-                            Swal.fire({
-                            title: '¿Estás Seguro?',
-                            text: "Al Hacer Estó Se Eliminará Definitivamente!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: '¡Si, Eliminar!',
-                            cancelButtonText: 'Cancelar',
-                            }).then((result) => {
-                        if (result.isConfirmed) {
-
-                            this.submit();
-                        }
-                        })
-                });
-
-
-            </script>
 
     @if ($errors->any())
         <script>
@@ -202,6 +171,65 @@
             });
         </script>
     @endif
+
+    {{-- * FUNCIÓN PARA MOSTRAR LOS DETALLES Y LAS FOTOS DE LA VALORACIÓN TÉCNICA --}}
+    <script>
+        $(document).ready(function () {
+
+            // Evento de cierre manual (funciona para ambas versiones de Bootstrap)
+            $(document).on('click', '[data-bs-dismiss="modal"], [data-dismiss="modal"]', function () {
+                $('#exampleModalScrollable').modal('hide');
+            });
+
+            // Petición AJAX al hacer clic en el botón de ver detalles
+            $('.btn-detalle-valoracion_tecnica').on('click', function (event) {
+                event.preventDefault();
+
+                const valoracionTecnicaId = $(this).data('valoracion_tecnica-id');
+
+                if (!valoracionTecnicaId) {
+                    console.error("El ID de la valoración técnica no está definido.");
+                    return;
+                }
+
+                $.ajax({
+                    url: '/valoracion_tecnica/' + valoracionTecnicaId + '/detalles',
+                    type: 'GET',
+                    success: function (data) {
+                        let valoracionTecnicaHtml = '<main><p><b>Fotos:</b></p><div style="display: flex; flex-wrap: wrap; gap: 10px;">';
+
+                        // Determina si res_fotos necesita JSON.parse o ya es un objeto/array
+                        let fotos = typeof data.res_fotos === 'string' ? JSON.parse(data.res_fotos) : data.res_fotos;
+
+                        if (Array.isArray(fotos)) {
+                            fotos.forEach(function (foto) {
+                                valoracionTecnicaHtml += `<img src="/imagen/${foto}" width="60%" style="width: calc(50% - 10px); margin-bottom: 10px;">`;
+                            });
+                        }
+
+                        valoracionTecnicaHtml += '</div></main>';
+
+                        // Renderiza el contenido en el modal
+                        $('#exampleModalScrollable .modal-body').html(valoracionTecnicaHtml);
+
+                        // Abre el modal usando Bootstrap o la API de jQuery
+                        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+                            const modalEl = document.getElementById('exampleModalScrollable');
+                            const modalObj = bootstrap.Modal.getOrCreateInstance(modalEl);
+                            modalObj.show();
+                        } else {
+                            $('#exampleModalScrollable').modal('show');
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error al obtener los datos:", error);
+                        alert("Error al cargar los recaudos. Por favor, inténtalo de nuevo.");
+                    }
+                });
+            });
+
+        });
+    </script>
 
 
 @endsection

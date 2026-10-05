@@ -11,7 +11,7 @@ class ValoracionTecnicas extends Model
     protected $table = 'valoracion_tecnicas';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    protected $fillable = [ 'id_tipo_solicitud', 'desincorpar', 'fecha', 'descripcion'];
+    protected $fillable = [ 'id_tipo_solicitud', 'desincorporar', 'res_fotos', 'fecha', 'descripcion'];
 
     public function tipoSolicitud()
     {

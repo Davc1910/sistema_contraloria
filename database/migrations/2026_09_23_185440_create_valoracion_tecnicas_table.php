@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_tipo_solicitud');
             $table->string('desincorporar');
+            $table->json('res_fotos')->nullable(); 
             $table->text('descripcion');
             $table->date('fecha');
 

@@ -100,6 +100,16 @@
                                     </select>
                                 </div>
 
+                                <div class="grid grid-cols-1 mt-5 mx-7">
+                                    <img id="miniaturas">
+                                </div>
+
+                                <div class="col-4">
+                                    <label  class="font-weight-bold text-primary">Reseña Fotográfica</label>
+                                    <input type="file" id="res_fotos" name="res_fotos[]" multiple value="{{ $res_fotos }}" class="btn btn-outline-info">
+                                        <div id="foto_container" style="margin-top: 3%; display: flex; flex-wrap: wrap;"></div>
+                                </div>
+
                                 <div class="col-4">
                                     <label class="font-weight-bold text-dark">Descripción</label>
                                     <textarea class="form-control" id="descripcion" name="descripcion" style="background: white;" placeholder="Ingrese la descripción de la valoración técnica" autocomplete="off" oninput="capitalizarInput('descripcion')">{{ old('descripcion', $valoracion_tecnica->descripcion) }}</textarea>
@@ -158,6 +168,75 @@
             const inputElement = document.getElementById(idInput);
             inputElement.value = capitalizarPrimeraLetra(inputElement.value);
         }
+    </script>
+
+    {{-- * FUNCION PARA MOSTRAR LA FOTO --}}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            const fotos = JSON.parse(@json($res_fotos)); // Decodifica el JSON de las fotos
+            const fotoContainer = document.getElementById('foto_container');
+
+            // Función para crear una imagen con botón de eliminación
+            function createImageElement(src) {
+                const div = document.createElement('div');
+                div.style.position = 'relative';
+                div.style.display = 'inline-block';
+                div.style.margin = '5px';
+                div.style.width = 'calc(50% - 10px)'; // Ajusta el ancho para dos columnas
+                div.style.boxSizing = 'border-box'; // Asegura que el margen no afecte el ancho total
+
+                const img = document.createElement('img');
+                img.src = src;
+                img.style.width = '100%'; // Asegura que la imagen ocupe todo el div
+                img.style.height = 'auto'; // Mantiene la proporción de la imagen
+                img.style.display = 'block';
+
+                const btn = document.createElement('button');
+                btn.innerText = 'X';
+                // btn.classList.add('btn btn-danger btn-sm');
+                btn.style.position = 'absolute';
+                btn.style.top = '0';
+                btn.style.right = '0';
+                btn.style.backgroundColor = 'black';
+                btn.style.color = 'white';
+                btn.style.border = 'none';
+                btn.style.borderRadius = '50%';
+                btn.style.cursor = 'pointer';
+                btn.style.transform = 'translate(-15%, 15%)';
+                btn.style.width = '20px';  // Ancho del botón
+                btn.style.height = '20px'; // Alto del botón
+                btn.style.fontSize = '12px';
+
+                btn.addEventListener('click', () => {
+                    fotoContainer.removeChild(div);
+                });
+
+                div.appendChild(img);
+                div.appendChild(btn);
+                return div;
+            }
+
+            // Muestra las fotos registradas
+            fotos.forEach(foto => {
+                const imgElement = createImageElement(`{{ asset('imagen/') }}/${foto}`);
+                fotoContainer.appendChild(imgElement);
+            });
+
+            // Agrega nuevas fotos seleccionadas por el usuario
+            $('#res_fotos').change(function () {
+                for (const file of this.files) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const imgElement = createImageElement(e.target.result);
+                        fotoContainer.appendChild(imgElement);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
     </script>
 
 @endsection

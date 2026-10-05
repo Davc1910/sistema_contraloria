@@ -61,6 +61,25 @@ class ValoracionTecnicaController extends Controller
             $valoracion_tecnicas = new ValoracionTecnicas();
             $valoracion_tecnicas->id_tipo_solicitud = $request->input('id_tipo_solicitud');
             $valoracion_tecnicas->desincorporar = $request->input('desincorporar');
+
+            // Verificar si se han cargado archivos
+            if ($request->hasFile('res_fotos')) {
+                $rutaGuardarImg = 'imagen/';
+                $nombresImagenes = [];
+
+                foreach ($request->file('res_fotos') as $foto) {
+                    $imagenValoracion = date('YmdHis') . '_' . uniqid() . '_' . pathinfo($foto->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $foto->getClientOriginalExtension();
+                    $foto->move(public_path($rutaGuardarImg), $imagenValoracion);
+                    $nombresImagenes[] = $imagenValoracion;
+                }
+
+
+                $valoracion_tecnicas->res_fotos = json_encode($nombresImagenes);
+            } else {
+                $valoracion_tecnicas->res_fotos = '[]'; // null
+
+            }
+
             $valoracion_tecnicas->descripcion = $request->input('descripcion');
             $valoracion_tecnicas->fecha = $request->input('fecha');
 
@@ -89,7 +108,8 @@ class ValoracionTecnicaController extends Controller
     {
         $valoracion_tecnica = ValoracionTecnicas::findOrFail($id);
         $fecha = date('d/m/Y', strtotime($valoracion_tecnica->fecha));
-        return view('valoracion_tecnica.edit', compact('valoracion_tecnica','fecha'));
+        $res_fotos = $valoracion_tecnica->res_fotos;
+        return view('valoracion_tecnica.edit', compact('valoracion_tecnica','fecha','res_fotos'));
     }
 
     /**
@@ -104,6 +124,22 @@ class ValoracionTecnicaController extends Controller
             $valoracion_tecnica = ValoracionTecnicas::findOrFail($id);
             $valoracion_tecnica ->id_tipo_solicitud = $request->input('id_tipo_solicitud');
             $valoracion_tecnica->desincorporar = $request->input('desincorporar');
+
+            // Verificar si se han cargado nuevos archivos
+            if ($request->hasFile('res_fotos')) {
+                $rutaGuardarImg = 'imagen/';
+                $nombresImagenes = [];
+
+                foreach ($request->file('res_fotos') as $foto) {
+                    $imagenValoracion = date('YmdHis') . '_' . uniqid() . '_' . pathinfo($foto->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $foto->getClientOriginalExtension();
+                    $foto->move(public_path($rutaGuardarImg), $imagenValoracion);
+                    $nombresImagenes[] = $imagenValoracion;
+                }
+
+                // Actualizar las imágenes
+                $valoracion_tecnica->res_fotos = json_encode($nombresImagenes);
+            }
+
             $valoracion_tecnica ->descripcion = $request->input('descripcion');
             $valoracion_tecnica ->fecha = $request->input('fecha');
 
